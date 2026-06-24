@@ -238,6 +238,6 @@ The transition is **necessary** (obsolescence, ~2030 supplier exit, capability c
 - **EU-Rail / FRMCS Deployment Group** — migration scenarios; coexistence to ~2030+, GSM-R switch-off around 2030 or shortly after.
 - **Projects** — 5GRail (Horizon 2020), MORANE2 / "Destination 2" (2024–2027), 5G-RACOM (Franco-German), Digitale Schiene Deutschland / Kontron–DB FRMCS MCX design.
 - **Vendor architecture material** — Ericsson (FRMCS/5G integration; radio planning), Nokia (1900 MHz n101 live test-track call), ANDREW (RF foundation, site-sharing filters).
-- **National programmes** — SNCF Réseau (2028–2035, commercial from 2032; Kontron lifecycle contract); Deutsche Bahn / DB Infrago early-mover trials.
+- **National programmes** — SNCF Réseau (2028–2035, commercial from 2032; Kontron lifecycle contract); Deutsche Bahn / DB Infrago early-mover trials; DE national GSM-R switch-off planned **2035**, ~16,000–21,000 vehicles, €1.2–2.4bn retrofit, no EU legal mandate yet (Sektorinitiative FRMCS-Fahrzeugmigration — E-2026-06-24-11).
 
 *Note: ADR number, deciders and status are placeholders — renumber to fit your sequence (e.g. for github.com/vpnetconsult/ibn-core) before circulating.*

@@ -1,7 +1,7 @@
 # ADR-003: EU AI Act classification & compliance posture
 
-**Status:** Pending
-**Date:** 2026-06-24
+**Status:** Pending — classification **verified** 2026-06-24 (see *Verification findings*); compliance posture awaiting ARB/NSA ratification
+**Date:** 2026-06-24 (verification added 2026-06-24)
 **Deciders:** Architecture Review Board · NSA / safety authority liaison · Vpnet engagement lead
 **Depends on:** ADR-002 (agentic decision & oversight layer)
 **Affects requirements:** R10 (human oversight proportional to risk), with bearing on R9 (autonomy as a separate layer) and R11 (certified SIL-4 kernel)
@@ -22,6 +22,25 @@ Per project policy (CLAUDE.md): **do not assert high-risk classification as fact
 ## Decision
 
 **Proposed (pending verification):** Confirm whether the agentic oversight system is EU AI Act **high-risk**, by verifying its status against **Annex I** (and the Article 6 conformity-assessment test) **and** the **CCS TSI interface** boundary. Until that verification is complete and evidenced to A-tier (primary) sources, the classification remains a `watch` item and high-risk is **not** asserted as fact. The compliance posture (oversight obligations, conformity route, documentation) is then set to match the verified classification.
+
+## Verification findings (2026-06-24)
+
+Verified against the primary text of the EU AI Act (Regulation (EU) 2024/1689) and the rail interoperability / CCS TSI framework. **Sources are A-tier (primary law).** The classification is **conditional, not automatic** — it turns on a single test, the "safety component" question.
+
+**Headline:** As architected in ADR-002 — autonomous **oversight, not control**; advises around a deterministic SIL-4 kernel; never actuates safety-critical functions; human-in-command retained (R9, R11) — the agentic layer sits **outside** the EU AI Act high-risk perimeter. It is **not** high-risk *as designed*. High-risk would be triggered only if the layer became a *safety component* of the rail control-command system.
+
+The four legal pillars checked:
+
+1. **Article 6(1) two-part test.** An AI system is high-risk only where **(a)** it is a safety component of, or is itself, a product covered by Annex I harmonisation legislation, **and (b)** that product must undergo third-party conformity assessment. *Both* limbs must hold. (AI Act Art 6(1)(a),(b).)
+2. **Annex I — rail is in scope (limb b satisfied for CCS).** Directive (EU) 2016/797 (interoperability of the rail system) is listed in **Annex I Section B, item 17**. Under that Directive and the CCS TSI (Implementing Regulation (EU) 2023/1695, successor to 2016/919), CCS subsystems and interoperability constituents undergo **Notified Body (third-party) EC verification**. So Article 6(1)(b) is met for the CCS product. The live variable is therefore **only Article 6(1)(a)** — is *our* layer a safety component?
+3. **Article 3(14) "safety component" — the decisive test (limb a).** Defined as a component that "fulfils a safety function … or the failure or malfunctioning of which endangers the health and safety of persons or property." The ADR-002 design is built to fall outside this: the SIL-4 kernel and human command remain the safety authority; the agent cannot actuate, and its outputs are advisory, so its failure does not itself endanger safety. **On that design, limb (a) is not satisfied → not high-risk via the Annex I route.** This is a design-dependent, not a permanent, conclusion (see consequences).
+4. **Annex III does not independently catch it.** The critical-infrastructure high-risk category, Annex III(2), covers "critical digital infrastructure, **road traffic**, or … water, gas, heating or electricity" — **rail traffic is not listed.** No independent Annex III trigger applies to rail management here.
+
+**Secondary point — even if it *were* high-risk:** for Section B products, **Article 2(2)** provides that *only* Article 6(1), Articles 102–109 and Article 112 of the AI Act apply directly. The substantive high-risk obligations (Chapter III Section 2 — risk management, data governance, technical documentation, Art 14 human oversight) are **deferred to integration into the rail sectoral framework** (CCS TSI / CSM-RA), not imposed directly by the AI Act. So a high-risk finding would route compliance through rail safety law, not a parallel AI Act regime.
+
+**Net:** classification verified as **conditionally not high-risk**. The architectural guardrail (oversight-not-control, certified kernel untouched, no actuation) is what keeps it out of scope — so the guardrail is now a **compliance control**, not just a safety one. Any drift that lets the agent perform, or be relied upon for, a safety function — or whose failure could endanger safety — re-triggers Annex I Section B high-risk.
+
+*Sources:* EU AI Act (Reg (EU) 2024/1689) Arts 2(2), 3(1), 3(14), 6(1), Annex I §B item 17, Annex III(2) — artificialintelligenceact.eu / EUR-Lex; CCS TSI Implementing Reg (EU) 2023/1695 under Dir (EU) 2016/797 — EUR-Lex. Logged as `E-2026-06-24-07` (tier A).
 
 ## Options considered
 
@@ -56,9 +75,9 @@ The key trade is **evidential integrity vs speed of closure on R10.** Option B c
 - **To revisit:** On verification, update `E-2026-06-24-05` from `watch` to `revise`/`validate`, move R10's status in the traceability matrix, and flip this ADR's status from Pending to Accepted (or amend the decision to match the verified finding).
 
 ## Action items
-1. [ ] Verify the system against **Annex I** + **Article 6** conformity-assessment test — is the agentic layer a safety component of a product under rail Union harmonisation legislation requiring third-party assessment?
-2. [ ] Verify against the **CCS TSI interface** — does the oversight layer cross the certified control-command boundary, or does the R11 SIL-4 separation place it outside the safety-component perimeter?
-3. [ ] Check applicability of **Annex III** high-risk use cases independently of the Annex I route.
-4. [ ] Record findings to A-tier (primary) sources in the evidence log; update `E-2026-06-24-05` accordingly.
-5. [ ] On a confirmed classification, set the compliance posture (oversight obligations, conformity route, technical documentation) and flip this ADR to Accepted.
-6. [ ] Until all above complete, keep classification a `watch` item — **do not assert high-risk as fact.**
+1. [x] Verify the system against **Annex I** + **Article 6** conformity-assessment test — *done 2026-06-24.* Rail Dir (EU) 2016/797 is Annex I §B item 17; CCS requires NoBo third-party assessment, so Art 6(1)(b) is met. The open limb is Art 6(1)(a) — safety-component status.
+2. [x] Verify against the **CCS TSI interface** — *done 2026-06-24.* The R11 SIL-4 separation (oversight-not-control, no actuation) places the layer outside the Art 3(14) safety-component perimeter as designed → not high-risk via Annex I.
+3. [x] Check applicability of **Annex III** high-risk use cases — *done 2026-06-24.* Annex III(2) critical-infrastructure covers road traffic, not rail; no independent trigger.
+4. [x] Record findings to A-tier (primary) sources in the evidence log — *done 2026-06-24.* `E-2026-06-24-05` revised; `E-2026-06-24-07` added (tier A).
+5. [ ] **Carry the safety-component boundary as a verified design constraint** — detailed design must keep the agentic layer non-actuating and advisory so Art 6(1)(a) stays unsatisfied; any change re-opens this ADR (link to ADR-004 SIL-4 boundary).
+6. [ ] ARB + NSA to ratify the compliance posture (not-high-risk, conditional) and flip this ADR to **Accepted**.
