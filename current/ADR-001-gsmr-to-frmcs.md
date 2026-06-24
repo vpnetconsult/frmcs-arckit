@@ -178,7 +178,7 @@ A structured, viewpoint-by-viewpoint evaluation supporting the ADR. Read as the 
 
 ### 1.7 Coexistence & fallback
 **Target:** GSM-R and FRMCS parallel for a decade+; hybrid cab radios and dispatchers; defined GSM-R↔FRMCS handover at coverage boundaries; fallback to public 5G (MOCN/national roaming) and, where justified, satellite; FRMCS-T guideline for constrained networks.
-**Gap:** Boundary handover continuity for safety services; border-crossing interoperability.
+**Gap:** Boundary handover continuity for safety services; border-crossing interoperability. **Caveat (public-network fallback ≠ safety-critical substitute):** today's GSM-R rulebook (Ril 481.0205 §5/§9, in force 14.12.2025 — E-2026-06-24-18) confirms the public network (P-GSM D) cannot carry Notruf or group calls; any FRMCS public-5G/national-roaming fallback must therefore re-provide mission-critical functions (MCPTT group/emergency), not merely IP connectivity, or it is not a safety-critical fallback.
 **Risk:** High — coexistence is the dominant programme-risk surface.
 
 ### 1.8 Security
