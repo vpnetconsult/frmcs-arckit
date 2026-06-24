@@ -1,0 +1,37 @@
+# Evidence log
+
+The running record of evidence (news, feedback, primary documents) as it arrives. Append a row each time something lands; tie it to the requirement(s) it affects, give it a trust tier, and note the action taken (revise / validate / no-change). The daily baseline freezes this file, so the evolution of the evidence base is visible across days.
+
+**ID convention:** `E-YYYY-MM-DD-NN` (NN = sequence within the day).
+**Trust tiers:** A = primary/authoritative · B = vendor-primary (true but promotional) · C = specialist trade press · D = secondary/aggregator. (See ADR-001 source-trust assessment.)
+**Action:** `revise` (changed a decision/status) · `validate` (confirmed an existing one) · `watch` (noted, no change yet).
+
+| ID | Date | Item | Type | Source | Tier | Affects | Action | Note |
+|---|---|---|---|---|---|---|---|---|
+| E-2026-06-24-01 | 2026-06-24 | DB GSM-R nationwide outage, ~2h standstill 23–24 Jun | News | dpa-fed outlets; heise | A/C | R3, R4 | revise | Promoted R3/R4 from "assumed" to load-bearing-open. See incident-annex.md |
+| E-2026-06-24-02 | 2026-06-24 | Outage was known/recurring; political reaction reactive ("fassungslos") | News | heise; verkehrsrundschau | C | R12 | validate | Confirms the awareness gap thesis behind R12 |
+| E-2026-06-24-03 | 2026-06-24 | FRMCS = UIC-designated successor; 5G SA + MCX; trials 2026, V3 ~2027; GSM-R EoL ~2030 | News/standards | UIC; ERA; Ericsson/Nokia/ANDREW | A/B | R1, R2, R5, R6 | validate | Underpins the ADR-001 target decision |
+| E-2026-06-24-04 | 2026-06-24 | Vendor/RFP landscape: Nokia + Kontron lead; MORANE2 consortium; SNCF→Kontron, UK→Systra, Adif €6.78m, ProRail→Nokia; duopoly concern | Market | IRJ; RailTech; RailwayPro; EU-Rail | A/C | R7, R8 | validate | Duopoly concern (RailwayPro) is analysis, not fact. Most deals are pilots/strategy, not national rollout |
+| E-2026-06-24-05 | 2026-06-24 | EU AI Act likely high-risk for rail-control AI — needs verification vs Annex I + CCS TSI | Regulatory | (to verify) | — | R10 | revise | Superseded by verification — see E-2026-06-24-07. The "likely high-risk" framing is NOT supported: classification is conditional, not automatic |
+| E-2026-06-24-06 | 2026-06-24 | ADR-003 (EU AI Act classification & compliance posture) opened — verify high-risk vs Annex I + CCS TSI interface | Project | current/project/ADR-003-eu-ai-act-classification.md | — | R10 | watch | Status Pending; classification remains a watch item — high-risk not asserted as fact until verified to A-tier sources |
+| E-2026-06-24-07 | 2026-06-24 | EU AI Act classification VERIFIED vs primary text + CCS TSI: not automatically high-risk; conditional on Art 3(14) "safety component" test | Regulatory | AI Act Reg (EU) 2024/1689 Arts 2(2),3(14),6(1), Annex I §B item 17, Annex III(2); CCS TSI Reg (EU) 2023/1695 under Dir (EU) 2016/797 (EUR-Lex) | A | R10 | revise | As designed (oversight-not-control, SIL-4 kernel, no actuation — R9/R11) the layer sits outside the safety-component perimeter → not high-risk. Rail (Dir 2016/797) is Annex I §B item 17 & CCS needs NoBo assessment, so only the Art 6(1)(a) safety-component limb is open. If it became a CCS safety component, Art 2(2) routes obligations via rail sectoral law. Annex III(2) covers road not rail. Closes ADR-003 verification (action items 1–4) |
+| E-2026-06-24-08 | 2026-06-24 | DVF/Accenture position paper (pub. 2025-06-27) "why FRMCS must be implemented now": GSM-R obsolescence (dwindling spares, shrinking supplier base, declining expertise); only 24% of operators implementation-ready; funding + binding-timeline asks; network slicing on public 5G (Finnish model) | Position paper | verkehrsforum.de — Deutsches Verkehrsforum (industry lobby), authored by Accenture citing its own 800-respondent survey | B | R1 | validate | B-tier advocacy: survey data is real but promotional. Corroborates the obsolescence-urgency driver behind R1; gives NO explicit GSM-R EoL date, so cannot support the "~2030" claim. Slicing-on-public-5G lightly touches R4/R5 (noted, not load-bearing). No status change |
+| E-2026-06-24-09 | 2026-06-24 | SecurityAffairs recap of 23 Jun DB GSM-R outage: nationwide standstill ~22:30–01:00 CEST, CEO Palla "we don't yet know" the cause; cyberattack & physical damage ruled out | News | securityaffairs.com (Paganini) — aggregates DW / Bild / The Register | D | R12, R3 | validate | Corroborates the awareness-gap thesis (R12) and that the root cause was not publicly disclosed. D-tier aggregator, no primary/independent analysis → no status change. R3 root-cause thread stays open. Duplicate source of the 23 Jun outage already in E-2026-06-24-01/-02 (weaker tier) — no new evidentiary weight |
+| E-2026-06-24-10 | 2026-06-24 | Wikipedia "GSM-R": background on GSM-R (GSM/EIRENE-MORANE; supports ETCS/ERTMS; legacy spectrum 876–880/921–925 MHz) and FRMCS/LTE-R succession (UIC, 3GPP R15/16) | Reference (tertiary) | en.wikipedia.org/wiki/GSM-R — tertiary encyclopedia, aggregates secondary sources | D | R1 | watch | D-tier tertiary reference — orientation only, no new evidentiary weight beyond E-03. Gives NO GSM-R EoL date and NO migration timeline, so cannot support R1's "~2030" claim. Lightly documents ETCS/spectrum background (R5–R7). No status change |
+| E-2026-06-24-11 | 2026-06-24 | Sektorinitiative FRMCS-Fahrzeugmigration — Positionspapier (Zusammenfassung): DE GSM-R switch-off planned 2035; 16,000–21,000 vehicles to retrofit by 2035; cost €1.2–2.4bn (~€640m approval costs under 4th EU Railway Package); new builds FRMCS-standard ~2032 (≈5yr after binding spec); GSM-R+FRMCS must run parallel vehicle+infra during migration; NO current EU legal obligation to fit FRMCS; four asks (coordinating body, chipset supply, faster approvals, funding directive) | Position paper | Sektorinitiative FRMCS-Fahrzeugmigration (Allianz pro Schiene, BSN, DB, DVF, mofair, Die Güterbahnen, VPI, VDB, VDV); cites BMDV DKS evaluation | B | R1, R2 | revise | Strong B: 2035 is "nach aktueller Planung" (official) & FoC% is BMDV-derived → authoritative; cost/fleet are the initiative's own projections. REVISES R1 timeline (DE switch-off 2035, not "~2030"); CONFIRMS R2 parallel dual-network (vehicle+infra). Fleet-retrofit economics (€1.2–2.4bn, approval bottleneck, funding) is a major programme dimension NOT represented as a requirement — coverage gap (candidate R13) |
+
+## How to append
+
+When something arrives during the day:
+1. Add a row with the next `E-` id.
+2. Set the trust tier honestly (A–D). Discount vendor superlatives; mark opinion as opinion.
+3. Note which requirement(s) it touches and the action.
+4. If it changes a decision or status, also edit traceability-matrix.md and the relevant ADR, then note "revise" here.
+5. At end of day, run `scripts/baseline.sh` to freeze the state.
+
+## Open threads to validate (carried forward)
+
+- ~~EU AI Act high-risk classification for rail-control AI (R10) — verify against Annex I and the CCS TSI interface.~~ **Resolved 2026-06-24** (E-2026-06-24-07): conditional, not automatic high-risk. Residual: confirm the Art 3(14) safety-component boundary holds in detailed design (ADR-003 action #5, ADR-004).
+- DB root-cause mechanism for the 23–24 Jun outage — currently inference only (R3).
+- Whether Schnieder / any Land issues a statement later on 24 Jun (incident-annex.md political section).
+- Primary verification of national tenders (SNCF, Adif figures) against operator portals, not trade press (R8).
