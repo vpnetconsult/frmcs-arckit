@@ -1,16 +1,16 @@
 # Incident annex — DB GSM-R nationwide outage, 23–24 June 2026
 
-**Status:** Confirmed (root-cause mechanism not yet published by DB)
+**Status:** Confirmed; proximate cause attributed (scheduled technical-component swap, per DB InfraGO head Philipp Nagl) — cascade mechanism not yet published by DB
 **Relevance:** validation evidence for R3 (central SPOF) and R4 (fail-soft) in traceability-matrix.md
 **Last revised:** 2026-06-24
 
 ## What happened (confirmed)
 
-From late evening on Tuesday 23 June 2026, the German rail network came to a standstill. DB named the cause as a failure of the GSM-R digital train-radio system. The standstill lasted roughly two hours; the first trains moved again around 00:30 on 24 June, with residual delays into the morning rush past 06:00. It was genuinely nationwide — Stuttgart S-Bahn, metronom across Lower Saxony/Bremen/Hamburg, Berlin and Munich S-Bahn, and NRW all reported complete outages. DB stated the situation was stabilised with an emergency/backup system; a driver posting referenced a backup switchover taking ~30 minutes. DB identified the cause overnight but did not publicly explain the mechanism.
+From late evening on Tuesday 23 June 2026, the German rail network came to a standstill. DB named the cause as a failure of the GSM-R digital train-radio system. The standstill lasted roughly two hours; the first trains moved again around 00:30 on 24 June, with residual delays into the morning rush past 06:00. It was genuinely nationwide — Stuttgart S-Bahn, metronom across Lower Saxony/Bremen/Hamburg, Berlin and Munich S-Bahn, and NRW all reported complete outages. DB stated the situation was stabilised with an emergency/backup system; a driver posting referenced a backup switchover taking ~30 minutes. DB identified the cause overnight; on 24 June, DB InfraGO head **Philipp Nagl** stated the proximate cause "appeared to have been the scheduled swap of a technical component" and that DB is "analysing with the highest priority how exactly this led to the fault" (AP / Reuters). The cascade mechanism — how a scheduled component swap propagated network-wide — was not explained.
 
 ## Architectural reading
 
-A nationwide, simultaneous outage is not an RF-layer event — long-line radio faults are local. Simultaneity points to a **central component** (core / registration / a shared GSM-R platform element). This is the single-point-of-failure signature. The operational consequence — a full safety-mandated standstill rather than a degraded local mode — is the absence of a fail-soft path.
+A nationwide, simultaneous outage is not an RF-layer event — long-line radio faults are local. Simultaneity points to a **central component** (core / registration / a shared GSM-R platform element). This is the single-point-of-failure signature. The operational consequence — a full safety-mandated standstill rather than a degraded local mode — is the absence of a fail-soft path. The proximate cause now named by DB (a *scheduled* component swap cascading network-wide) is consistent with this reading: a routine maintenance action propagating to a nationwide failure points to a shared/central failure domain, so it reinforces rather than revises the SPOF signature.
 
 Two consequences for the architecture:
 - **R3 (eliminate central SPOF):** migrating to FRMCS reproduces this exact risk unless the ADR mandates it away — FRMCS centralises *more* (IMS/SIP core + MCX servers). 5G is not resilient by default.
@@ -37,5 +37,6 @@ The reaction was thin and reactive at this hour; it typically grows over the day
 | t-online / web.de / ruhrnachrichten / ZDF | News (dpa-sourced) | Med–High | Nationwide scope, Krischer, Palla |
 | heise.de | Specialist tech news | High | Recurrence ("GSM-R has repeatedly caused major disruptions") |
 | verkehrsrundschau.de | Trade press | Medium | Krischer quote, Güterbahnen reaction |
+| AP (Moulson) / Reuters (Rinke, Steitz), quoting Philipp Nagl (DB InfraGO) | News (wire) + operator statement | High | Proximate cause attribution (scheduled component swap); mechanism still open |
 
-**Scrutiny flags:** DB has not published the precise root-cause mechanism — the "central component" reading is inference from the nationwide-simultaneous signature, not a confirmed mechanism. Restart timings are journalistic. Treat the political reaction as a snapshot that will evolve.
+**Scrutiny flags:** As of 24 Jun, DB InfraGO head Philipp Nagl has attributed the **proximate** cause to a scheduled technical-component swap (AP + Reuters), but DB has **not** published the precise **cascade mechanism** — how a scheduled swap propagated network-wide remains under analysis, and no formal DB press release was located (the attribution is a brief press statement). The "central/shared component" reading is consistent with the named cause but is still inference, not a confirmed mechanism. Restart timings are journalistic. Treat the political reaction as a snapshot that will evolve.
