@@ -7,12 +7,12 @@
 
 | Field | Value |
 |---|---|
-| Document ID | ARC-FRMCS-DIAG-001-v1.0 |
+| Document ID | ARC-FRMCS-DIAG-001-v1.1 |
 | Document Type | Architecture Diagram (Sequence) |
 | Project | FRMCS arcKit — GSM-R→FRMCS transition + agentic oversight |
 | Classification | PUBLIC (repo is public; all content paraphrased from logged evidence) |
 | Status | DRAFT |
-| Version | 1.0 |
+| Version | 1.1 |
 | Created Date | 2026-07-02 |
 | Last Modified | 2026-07-02 |
 | Review Cycle | On evidence change (E-rows cited below) |
@@ -27,6 +27,7 @@
 | Version | Date | Author | Changes | Approved By | Approval Date |
 |---------|------|--------|---------|-------------|---------------|
 | 1.0 | 2026-07-02 | ArcKit AI | Initial creation from `/arckit:diagram` command (pivot thread 0 visual) | PENDING | PENDING |
+| 1.1 | 2026-07-02 | ArcKit AI | L2 mechanics corrected against DB National Values (E-2026-07-02-34): radio watchdog T_NVCONTACT 40 s → forced service brake added to red panel, legend, key statement 1 and honesty constraints | PENDING | PENDING |
 
 ---
 
@@ -55,7 +56,8 @@ sequenceDiagram
     rect rgb(255, 235, 238)
     Note over NET: 23 June, late evening — a planned component swap triggers a SILENT software fault.<br/>No alarm is raised. The automatic switch to the healthy backup never happens.<br/>(DB-confirmed, E-2026-06-27-01/-03)
     CTL--xOBU: No new permission gets through — the radio link is dead
-    OBU->>OBU: Last permission ends at the Supervised Location — SILENCE MEANS STOP
+    OBU->>OBU: Radio watchdog trips: no valid message for 40 s — FORCED SERVICE BRAKE
+    Note right of OBU: Even a train still holding a valid permission brakes<br/>within ~40 s of radio silence on ETCS L2 lines<br/>(DB national value T_NVCONTACT, E-2026-07-02-34).<br/>SILENCE MEANS STOP — and quickly.
     OBU->>Tf: Supervised braking — the train comes to a controlled stop
     Note right of Tf: Rulebook for radio failure (Ril 481.0205, E-2026-06-24-18):<br/>stop at the next station. Where any movement remains possible,<br/>dispatchers fall back to WRITTEN ORDERS — the Befehl layer<br/>(E-2026-07-02-26). Net effect: nationwide standstill.
     end
@@ -88,6 +90,7 @@ sequenceDiagram
 | Movement Authority (MA) | The digital permission slip: "you may proceed as far as point X" — issued by the control centre, carried over the radio |
 | Supervised Location (SvL) | The fail-safe boundary the onboard computer enforces braking against — always at or beyond the authorised limit, never short of safety (E-2026-07-02-33 vocabulary; normative source: ETCS Subset-026) |
 | Silent fault | A failure that raises no alarm — so monitoring stays green and automatic protections are never told to act |
+| Radio watchdog (T_NVCONTACT = 40 s) | The onboard's own supervision of the radio link: if no valid message arrives for 40 seconds, it applies the service brake — DB's published national configuration (E-2026-07-02-34); the brake releases when contact is restored |
 | Befehl (written order) | Rail's standardised human fallback: a dispatcher's written instruction replacing the technical permission when systems can't issue one (E-2026-07-02-26) |
 | Deny-by-default | The design stance: absence of permission means stop — the system never assumes safety it cannot confirm |
 
@@ -102,14 +105,15 @@ sequenceDiagram
 
 ## Key statements the diagram makes (and their evidence)
 
-1. **The safety architecture converts communication loss into standstill by design.** No new MA → onboard enforces SvL → controlled stop. (E-2026-07-02-33 vocabulary; incident outcome per E-2026-06-27-01/-03.)
+1. **The safety architecture converts communication loss into standstill by design — through two stacked mechanisms.** On ETCS L2 lines the onboard's radio watchdog forces a service brake after 40 s of silence (T_NVCONTACT/M_NVCONTACT, DB's published national values — E-2026-07-02-34), and independently no new Movement Authority can extend the last permission (SvL enforcement, E-2026-07-02-33 vocabulary). A train neither freezes instantly nor coasts to the end of its permission: it brakes within ~40 s plus braking distance. (Incident outcome per E-2026-06-27-01/-03.)
 2. **The fault was silent — that is why recovery was manual and slow.** No alarm → no automatic failover despite a functional backup → ~2 h standstill, first trains ≈00:30. (DB-confirmed, E-2026-06-27-01/-02/-03; incident-annex.md.)
 3. **The human fallback layer is what operations degrade onto.** Radio-failure rules (Ril 481.0205: stop at next station; fallback network cannot carry emergency/group calls) + the Befehl written-order layer. (E-2026-06-24-18, E-2026-07-02-26.)
 4. **Two outcomes, named separately:** SAFETY = held (deny-by-default), CONTINUITY = failed (nationwide standstill). This is the gap between fail-*safe* (proven on 23 June) and fail-*soft* (R4 — open).
 
 ## Honesty constraints (binding on any reuse)
 
-- Phrase the claim as **"loss of communication degraded to safe standstill by design"** — NOT "ETCS L2 saved the day". GSM-R serves voice/emergency-call and ETCS bearer duties; on conventional (non-ETCS-L2) lines the stop was driven by the radio-failure rulebook, not by MA enforcement. The diagram's MA/SvL lane is the ETCS-L2 mechanism; the note carries the rulebook mechanism.
+- Phrase the claim as **"loss of communication degraded to safe standstill by design"** — NOT "ETCS L2 saved the day". GSM-R serves voice/emergency-call and ETCS bearer duties; on conventional (non-ETCS-L2) lines the stop was driven by the radio-failure rulebook (Ril 481.0205: stop at the next station), not by ETCS supervision. The diagram's watchdog/MA lane is the ETCS-L2 mechanism; the note carries the rulebook mechanism.
+- Get the L2 timing right: trains neither stop instantly nor coast to the end of their last permission — the onboard **brakes ~40 s after the last valid radio message** (T_NVCONTACT = 40 s, reaction forced service brake, per DB's published national values, E-2026-07-02-34). Currency caveat: the table is Stand 27.01.2022 (pre-InfraGO renaming) — verify the current issue before print; values are DB-network-specific, not European constants.
 - Standstill duration is **~2 hours** (first trains ≈00:30, residual delays past 06:00) per the incident annex — do not use the shorter "~90 minutes" figure in public drafts.
 - The MA/SvL vocabulary currently traces to a D-tier explainer (E-2026-07-02-33). **Before print: log ETCS Subset-026 as A-tier** (flagged in pivot-notes thread 0).
 
@@ -122,7 +126,7 @@ sequenceDiagram
 | R12 | Close the awareness gap | "No alarm is raised" — the silent-fault mechanism the oversight layer exists to detect | ✅ context |
 | R11/ADR-004 | Certified vital kernel untouched by agents | The OBU's deny-by-default enforcement is the proven layer the boundary protects | ✅ context |
 
-**Evidence refs:** E-2026-06-27-01/-02/-03 (confirmed cause + countermeasures) · E-2026-06-24-18 (Ril 481.0205 fallback rules) · E-2026-07-02-26 (Befehl layer) · E-2026-07-02-33 (MA/SvL vocabulary, D-tier — Subset-026 upgrade pending) · E-2026-07-02-24 (safe-default behaviour) · incident-annex.md.
+**Evidence refs:** E-2026-06-27-01/-02/-03 (confirmed cause + countermeasures) · E-2026-06-24-18 (Ril 481.0205 fallback rules) · E-2026-07-02-34 (DB National Values — T_NVCONTACT 40 s / forced service brake, A-tier) · E-2026-07-02-26 (Befehl layer) · E-2026-07-02-33 (MA/SvL vocabulary, D-tier — Subset-026 upgrade pending) · E-2026-07-02-24 (safe-default behaviour) · incident-annex.md.
 
 ## Quality gate (Step 5d)
 
