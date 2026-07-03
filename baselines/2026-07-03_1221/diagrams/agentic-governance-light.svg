@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="680" height="624" viewBox="0 0 680 624" role="img">
+<title>Outcome-anchored agentic governance for the FRMCS transition</title>
+<desc>The outcome sits at the top as the origin. Two planes of AI agents — a decision plane governing the architecture and a runtime plane governing the live network — feed a human-in-the-loop oversight gate whose control rises with safety impact, above a deterministic SIL-4 safety kernel that agents may advise but never actuate.</desc>
+<style>
+text{font-family:'Helvetica Neue',Arial,sans-serif;}
+.th{font-size:14px;font-weight:500;}
+.ts{font-size:12px;font-weight:400;}
+</style>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#5F5E5A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></marker>
+</defs>
+
+<rect x="0" y="0" width="680" height="624" fill="#FFFFFF"/>
+
+<rect x="60" y="24" width="560" height="50" rx="10" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="th" x="340" y="44" text-anchor="middle" dominant-baseline="central" fill="#085041">Start from the outcome</text>
+<text class="ts" x="340" y="61" text-anchor="middle" dominant-baseline="central" fill="#0F6E56">safe, continuous rail operations</text>
+
+<line x1="250" y1="74" x2="188" y2="106" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="430" y1="74" x2="492" y2="106" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="48" y="108" width="288" height="250" rx="12" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text class="th" x="64" y="128" text-anchor="start" fill="#444441">Decision plane</text>
+<text class="ts" x="64" y="145" text-anchor="start" fill="#5F5E5A">govern the architecture</text>
+
+<rect x="64" y="158" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="192" y="174" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Risk sentinel</text>
+<text class="ts" x="192" y="189" text-anchor="middle" dominant-baseline="central" fill="#534AB7">watches risk continuously</text>
+
+<rect x="64" y="206" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="192" y="222" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Decision agent</text>
+<text class="ts" x="192" y="237" text-anchor="middle" dominant-baseline="central" fill="#534AB7">keeps the ADR live</text>
+
+<rect x="64" y="254" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="192" y="270" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Bid / RFP agent</text>
+<text class="ts" x="192" y="285" text-anchor="middle" dominant-baseline="central" fill="#534AB7">scores vendors, flags lock-in</text>
+
+<rect x="64" y="302" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="192" y="318" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Assurance agent</text>
+<text class="ts" x="192" y="333" text-anchor="middle" dominant-baseline="central" fill="#534AB7">maps standards + evidence</text>
+
+<rect x="344" y="108" width="288" height="250" rx="12" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text class="th" x="360" y="128" text-anchor="start" fill="#444441">Runtime plane</text>
+<text class="ts" x="360" y="145" text-anchor="start" fill="#5F5E5A">govern the live network</text>
+
+<rect x="360" y="170" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="488" y="186" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Anomaly agent</text>
+<text class="ts" x="488" y="201" text-anchor="middle" dominant-baseline="central" fill="#534AB7">detects fault signature</text>
+
+<rect x="360" y="230" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="488" y="246" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Resilience agent</text>
+<text class="ts" x="488" y="261" text-anchor="middle" dominant-baseline="central" fill="#534AB7">proposes fallback only</text>
+
+<rect x="360" y="290" width="256" height="40" rx="8" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="th" x="488" y="306" text-anchor="middle" dominant-baseline="central" fill="#3C3489">Intent agents</text>
+<text class="ts" x="488" y="321" text-anchor="middle" dominant-baseline="central" fill="#534AB7">BIA / SIA / RIA</text>
+
+<line x1="188" y1="358" x2="188" y2="382" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+<line x1="492" y1="358" x2="492" y2="382" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="48" y="384" width="584" height="110" rx="12" fill="none" stroke="#888780" stroke-width="0.5" stroke-dasharray="4 4"/>
+<text class="th" x="64" y="404" text-anchor="start" fill="#444441">Human-in-the-loop gate</text>
+<text class="ts" x="64" y="421" text-anchor="start" fill="#5F5E5A">control rises left to right with safety impact</text>
+
+<rect x="64" y="434" width="130" height="46" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="129" y="451" text-anchor="middle" dominant-baseline="central" fill="#633806">Audit</text>
+<text class="ts" x="129" y="467" text-anchor="middle" dominant-baseline="central" fill="#854F0B">automatic</text>
+
+<rect x="210" y="434" width="130" height="46" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="275" y="451" text-anchor="middle" dominant-baseline="central" fill="#633806">Supervise</text>
+<text class="ts" x="275" y="467" text-anchor="middle" dominant-baseline="central" fill="#854F0B">can intervene</text>
+
+<rect x="356" y="434" width="130" height="46" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="421" y="451" text-anchor="middle" dominant-baseline="central" fill="#633806">Approve</text>
+<text class="ts" x="421" y="467" text-anchor="middle" dominant-baseline="central" fill="#854F0B">sign-off first</text>
+
+<rect x="502" y="434" width="130" height="46" rx="8" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="th" x="567" y="451" text-anchor="middle" dominant-baseline="central" fill="#633806">Command</text>
+<text class="ts" x="567" y="467" text-anchor="middle" dominant-baseline="central" fill="#854F0B">human-led</text>
+
+<line x1="340" y1="494" x2="340" y2="518" stroke="#5F5E5A" stroke-width="1.5" marker-end="url(#arrow)"/>
+
+<rect x="120" y="520" width="440" height="54" rx="10" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="th" x="340" y="541" text-anchor="middle" dominant-baseline="central" fill="#2C2C2A">Deterministic SIL-4 safety kernel</text>
+<text class="ts" x="340" y="558" text-anchor="middle" dominant-baseline="central" fill="#5F5E5A">agents advise, never actuate</text>
+
+<rect x="60" y="592" width="12" height="12" rx="2" fill="#E1F5EE" stroke="#0F6E56" stroke-width="0.5"/>
+<text class="ts" x="78" y="602" text-anchor="start" fill="#5F5E5A">outcome</text>
+<rect x="150" y="592" width="12" height="12" rx="2" fill="#EEEDFE" stroke="#534AB7" stroke-width="0.5"/>
+<text class="ts" x="168" y="602" text-anchor="start" fill="#5F5E5A">AI agents</text>
+<rect x="262" y="592" width="12" height="12" rx="2" fill="#FAEEDA" stroke="#854F0B" stroke-width="0.5"/>
+<text class="ts" x="280" y="602" text-anchor="start" fill="#5F5E5A">human oversight</text>
+<rect x="412" y="592" width="12" height="12" rx="2" fill="#F1EFE8" stroke="#5F5E5A" stroke-width="0.5"/>
+<text class="ts" x="430" y="602" text-anchor="start" fill="#5F5E5A">safety core</text>
+</svg>
