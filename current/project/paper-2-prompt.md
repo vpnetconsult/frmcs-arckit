@@ -1,7 +1,7 @@
 # Paper 2 — cowork drafting prompt
 
 **Paper:** 2 of the series · "The backup that was never asked — anatomy of a silent fault" (pivot thread 1)
-**Date:** 2026-07-03, updated 2026-07-05 / v1.3 (standards-lineage timeline E-2026-07-05-03…-08; CSM safety-gated/continuity-gap point E-2026-06-28-06 + E-2026-07-05-09; current-edition check resolved E-2026-07-05-10) · **Owner:** Vpnet engagement lead · **Baseline:** frozen with `baselines/2026-07-03`; 05-Jul rows frozen with `baselines/2026-07-05*`
+**Date:** 2026-07-03, updated 2026-07-11 / v1.4 (Telstra 08.07.2026 public-network instance added to point 9 as a bounded framing instance, E-2026-07-11-07; prior v1.3 2026-07-05: standards-lineage timeline E-2026-07-05-03…-08; CSM safety-gated/continuity-gap point E-2026-06-28-06 + E-2026-07-05-09; current-edition check resolved E-2026-07-05-10) · **Owner:** Vpnet engagement lead · **Baseline:** frozen with `baselines/2026-07-03`; 05-Jul rows frozen with `baselines/2026-07-05*`
 **Use:** attach this file to the Claude cowork session TOGETHER with the source files below; the fenced block is the drafting instruction.
 
 ## Attach alongside this file
@@ -10,7 +10,7 @@
 2. `current/project/diagrams/ARC-FRMCS-DIAG-002-seq-silent-fault-fix-v1.0.md` (the two-panel visual)
 3. `current/project/diagrams/ARC-FRMCS-DIAG-006-deploy-geo-redundancy-v1.0.md` (optional sidebar visual)
 4. `current/incident-annex.md`
-5. Evidence rows (or the full `current/evidence-log.md`): E-2026-06-27-01/-02/-03, E-2026-06-25-02, E-2026-06-30-03, E-2026-07-01-09, E-2026-07-02-25, E-2026-07-03-02, the standards-lineage set E-2026-07-05-03/-04/-06/-07/-08, and the CSM pair E-2026-06-28-06 + E-2026-07-05-09 (optional: E-2026-07-05-05 for the "actual signalling traffic" definition behind the independent-listener point)
+5. Evidence rows (or the full `current/evidence-log.md`): E-2026-06-27-01/-02/-03, E-2026-06-25-02, E-2026-06-30-03, E-2026-07-01-09, E-2026-07-02-25, E-2026-07-03-02, the standards-lineage set E-2026-07-05-03/-04/-06/-07/-08, and the CSM pair E-2026-06-28-06 + E-2026-07-05-09 (optional: E-2026-07-05-05 for the "actual signalling traffic" definition behind the independent-listener point; E-2026-07-11-07 for the Telstra 08.07.2026 instance in point 9 — bounded use, see constraints)
 6. Optional: `current/project/ADR-007-testing-canary-strategy.md`, `current/project/03-risk-register.md` (PR5/PR8/PR11 rows)
 
 ## Drafting prompt (paste or reference as the task instruction)
@@ -178,6 +178,19 @@ BINDING CONSTRAINTS (non-negotiable — from the source files)
 - The monoculture analogy (one bad update defeating identical systems, as in
   the 2024 CrowdStrike incident) may be used as a FRAMING ANALOGY only —
   it is explicitly not logged evidence. Mark it as an analogy.
+- The Telstra outage of 8 July 2026 (E-2026-07-11-07) MAY be used as a second,
+  cross-domain instance for point 9 — a software defect in a shared network
+  TIMING function took down a national PUBLIC mobile network, disrupting
+  regional rail services, cyberattack explicitly ruled out — with STRICT
+  bounds: the record's source is a B-tier vendor-blog relay, so (i) use it
+  only for the failure CLASS and the public-fallback common-mode warning
+  (the bearer class DB names as its fallback just failed the same way);
+  (ii) do NOT claim Telstra's failover failed to trigger or draw a "backup
+  never asked" parallel — the record does not establish Telstra's failover
+  mechanics; (iii) if the case is to carry more weight than a framing
+  instance, its facts must first be re-sourced to the Telstra statement /
+  ACMA findings (the row's flagged A-tier follow-up); (iv) one short
+  paragraph maximum, dates and scope only, no vendor-blog recommendations.
 - ETSI TS 103 147 non-conformance: state it as the record does — the standard
   requires automatic switchover and names maintenance among covered events;
   the 23 June mode (manual recovery during planned maintenance) did not meet
@@ -253,6 +266,7 @@ trace to a source.
 - [ ] VDE quoted as attributed expert analysis, advocacy interest noted
 - [ ] Common-mode critique attributed to the engagement, not to the operator's article
 - [ ] CrowdStrike used only as a marked analogy (if at all)
+- [ ] Telstra 08.07.2026 (if used): failure class + public-fallback common-mode only; no failover-not-triggered claim; one paragraph max; B-tier relay flagged unless re-sourced to Telstra/ACMA primary
 - [ ] TS 103 147 stated factually, no negligence/liability editorialising
 - [ ] CSM point framed as engagement analysis of the rulebook; DB classification stated as not public; no breach asserted or implied
 - [ ] Six criteria cited from Reg (EU) 402/2013; ERA guide named as non-binding current guidance (never revised since 2009 — sharpener, if used, marked as engagement observation)
