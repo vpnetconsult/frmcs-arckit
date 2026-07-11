@@ -5,7 +5,7 @@
 **Deciders:** Architecture Review Board · Infrastructure Manager (DB InfraGO interface) · NSA / safety authority liaison · CISO / security authority (BSI interface) · Vpnet engagement lead
 **Depends on:** ADR-001 (FRMCS transition), ADR-002 (agentic oversight layer), ADR-004 (SIL-4 boundary / freedom-from-interference), ADR-011 (migration change-control); governs R14 and risk PR16
 **Affects requirements:** R14 (cybersecurity regulatory conformance), with bearing on R7 (regulatory conformance), R8 / PR13 (vendor concentration & proprietary opacity), R10/R11 (the oversight layer is itself a PDE), R3/R4 (a security fault is an availability threat)
-**Legal basis:** EU Cyber Resilience Act — Reg (EU) 2024/2847 (cybersecurity of "products with digital elements"; **fully applies 11.12.2027**, Art 14 reporting from **11.09.2026**, Art 64 fines up to **€15M / 2.5%** worldwide turnover); NIS-2 Directive — Dir (EU) 2022/2555 (operator cyber risk-management **Art 21** + incident reporting **Art 23**; **Annex I Transport/rail**). Verified vs primary law — **E-2026-07-01-06**. Sector interfaces: TS 50701 (railway cybersecurity), IEC 62443 (SL / ZCR), BSI TR-03183, ERJU System Pillar.
+**Legal basis:** EU Cyber Resilience Act — Reg (EU) 2024/2847 (cybersecurity of "products with digital elements"; **fully applies 11.12.2027**, Art 14 reporting from **11.09.2026**, Art 64 fines up to **€15M / 2.5%** worldwide turnover); NIS-2 Directive — Dir (EU) 2022/2555 (operator cyber risk-management **Art 21** + incident reporting **Art 23**; **Annex I Transport/rail**). Verified vs primary law — **E-2026-07-01-06**; re-validated verbatim vs EUR-Lex (Ansvar gateway) — **E-2026-07-10-02**. Sector interfaces: TS 50701 (railway cybersecurity), IEC 62443 (SL / ZCR), BSI TR-03183, ERJU System Pillar.
 
 ## Context
 
@@ -80,7 +80,7 @@ The governing trade is **conformance rigour + reuse vs process overhead**. Optio
 ## Action items
 1. [ ] **CRA PDE inventory** — list every FRMCS product-with-digital-element + the oversight-layer software; class by CRA product category; map declared support periods.
 2. [ ] **Procurement clause** — manufacturer CRA evidence (SBOM, security-update + support-period commitment, CVD contact) as a bid requirement (R8 / PR13).
-3. [ ] **Extend ADR-011** change classes to cover security updates explicitly; define the **expedited-but-gated** actively-exploited-vulnerability path (CRA Art 14).
+3. [ ] **Extend ADR-011** change classes to cover security updates explicitly; define the **expedited-but-gated** actively-exploited-vulnerability path (CRA Art 14). **Clock precision (E-2026-07-10-02):** the vulnerability track runs 24 h / 72 h / final report **14 days** after a corrective measure is available (Art 14(2)(c)); the 24 h / 72 h / **1-month** cadence is the severe-*incident* track (Art 14(4)) — the expedited path must be sized to the 14-day clock.
 4. [ ] **NIS-2 Art 21/23 into the operator SMS**; align the reporting chain with CRA Art 14 (single report to the right authority; BSI / CSIRT).
 5. [ ] **Extend independent detection** (Q.752, E-2026-06-30-03) to security event detection (SIEM / IDS feed).
 6. [ ] **Close residual verification** — exact CRA recall paragraph; German NIS2UmsG in-force date (E-2026-07-01-06 gaps).

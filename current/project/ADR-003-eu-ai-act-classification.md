@@ -42,7 +42,7 @@ The four legal pillars checked:
 
 **Net:** classification verified as **conditionally not high-risk**. The architectural guardrail (oversight-not-control, certified kernel untouched, no actuation) is what keeps it out of scope — so the guardrail is now a **compliance control**, not just a safety one. Any drift that lets the agent perform, or be relied upon for, a safety function — or whose failure could endanger safety — re-triggers Annex I Section B high-risk.
 
-*Sources:* EU AI Act (Reg (EU) 2024/1689) Arts 2(2), 3(1), 3(14), 6(1), Annex I §B item 17, Annex III(2) — artificialintelligenceact.eu / EUR-Lex; CCS TSI Implementing Reg (EU) 2023/1695 under Dir (EU) 2016/797 — EUR-Lex. Logged as `E-2026-06-24-07` (tier A).
+*Sources:* EU AI Act (Reg (EU) 2024/1689) Arts 2(2), 3(1), 3(14), 6(1), Annex I §B item 17, Annex III(2) — artificialintelligenceact.eu / EUR-Lex; CCS TSI Implementing Reg (EU) 2023/1695 under Dir (EU) 2016/797 — EUR-Lex. Logged as `E-2026-06-24-07` (tier A). **Corroborated 2026-07-10** (`E-2026-07-10-02`, tier A): Arts 2(2), 3(14), 6 and Annex I §B item 17 re-retrieved verbatim from EUR-Lex via a second independent tool (Ansvar gateway) — all current, wording unchanged; Annex III(2) not re-pulled (the 2026-06-24 check stands).
 
 ## Options considered
 
