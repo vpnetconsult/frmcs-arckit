@@ -1,7 +1,7 @@
 # Paper 2 — cowork drafting prompt
 
 **Paper:** 2 of the series · "The backup that was never asked — anatomy of a silent fault" (pivot thread 1)
-**Date:** 2026-07-03, updated 2026-07-11 / v1.4 (Telstra 08.07.2026 public-network instance added to point 9 as a bounded framing instance, E-2026-07-11-07; prior v1.3 2026-07-05: standards-lineage timeline E-2026-07-05-03…-08; CSM safety-gated/continuity-gap point E-2026-06-28-06 + E-2026-07-05-09; current-edition check resolved E-2026-07-05-10) · **Owner:** Vpnet engagement lead · **Baseline:** frozen with `baselines/2026-07-03`; 05-Jul rows frozen with `baselines/2026-07-05*`
+**Date:** 2026-07-03, updated 2026-07-12 / v1.5 (Telstra/V-Line upgraded to a DOCUMENTED second instance and INTEGRATED into argument point 9 + structure hint — V/Line satellite-fallback defeat, CEO-attributed, E-2026-07-12-01; prior v1.4 2026-07-11: Telstra framing instance E-2026-07-11-07; v1.3 2026-07-05: standards-lineage timeline E-2026-07-05-03…-08; CSM safety-gated/continuity-gap point E-2026-06-28-06 + E-2026-07-05-09; current-edition check resolved E-2026-07-05-10) · **Owner:** Vpnet engagement lead · **Baseline:** frozen with `baselines/2026-07-03`; 05-Jul rows frozen with `baselines/2026-07-05*`
 **Use:** attach this file to the Claude cowork session TOGETHER with the source files below; the fenced block is the drafting instruction.
 
 ## Attach alongside this file
@@ -10,7 +10,7 @@
 2. `current/project/diagrams/ARC-FRMCS-DIAG-002-seq-silent-fault-fix-v1.0.md` (the two-panel visual)
 3. `current/project/diagrams/ARC-FRMCS-DIAG-006-deploy-geo-redundancy-v1.0.md` (optional sidebar visual)
 4. `current/incident-annex.md`
-5. Evidence rows (or the full `current/evidence-log.md`): E-2026-06-27-01/-02/-03, E-2026-06-25-02, E-2026-06-30-03, E-2026-07-01-09, E-2026-07-02-25, E-2026-07-03-02, the standards-lineage set E-2026-07-05-03/-04/-06/-07/-08, and the CSM pair E-2026-06-28-06 + E-2026-07-05-09 (optional: E-2026-07-05-05 for the "actual signalling traffic" definition behind the independent-listener point; E-2026-07-11-07 for the Telstra 08.07.2026 instance in point 9 — bounded use, see constraints)
+5. Evidence rows (or the full `current/evidence-log.md`): E-2026-06-27-01/-02/-03, E-2026-06-25-02, E-2026-06-30-03, E-2026-07-01-09, E-2026-07-02-25, E-2026-07-03-02, the standards-lineage set E-2026-07-05-03/-04/-06/-07/-08, and the CSM pair E-2026-06-28-06 + E-2026-07-05-09 (optional: E-2026-07-05-05 for the "actual signalling traffic" definition behind the independent-listener point), and the Telstra/V-Line pair for point 9: E-2026-07-12-01 (primary row for the instance — carries the access caveat + verify flag) with E-2026-07-11-07 (colour only)
 6. Optional: `current/project/ADR-007-testing-canary-strategy.md`, `current/project/03-risk-register.md` (PR5/PR8/PR11 rows)
 
 ## Drafting prompt (paste or reference as the task instruction)
@@ -135,6 +135,25 @@ THE ARGUMENT (from pivot-notes thread 1 — follow this arc)
    23 June pattern. The answer: version/config diversity, staged rollouts,
    and above all a testing discipline that injects silent faults and proves
    the trigger fires.
+   THEN the live counterexample, fifteen days later on the other side of the
+   world (E-2026-07-12-01; bounds in the constraints): on 8 July 2026 a
+   software defect in the TIME-SYNCHRONISATION nodes of Telstra's network —
+   Australia's largest, and the public bearer Victoria's regional railway
+   V/Line runs its train radio and control links over since a 2024 migration —
+   stopped all V/Line services for over a day; not a cyberattack. The detail
+   that makes it this paper's twin, attributed to V/Line's CEO: the trains
+   HAD a satellite backup, and it kept switching itself off, because the
+   flapping 4G kept telling it "connected — you're not needed". 23 June:
+   a silent fault, so the backup was NEVER ASKED. 8 July: a flapping fault,
+   so the backup was TOLD IT WASN'T NEEDED. Two faces of one defect —
+   fallback triggering that trusts the primary's self-report — and the
+   second face matters directly here, because a fallback over PUBLIC mobile
+   networks is exactly the direction DB has named for GSM-R resilience.
+   Bearer diversity must be proven at the failure-mode level, against
+   flapping as well as clean loss. Close the instance on the constructive
+   note: V/Line refused to resume until its OWN independent communications
+   test between controllers and crews had passed — prove-don't-trust,
+   practised under pressure.
 10. Close with the series bridge: detection is also an awareness problem —
    "why nobody knew" — which is where Paper 3 (adding watchful intelligence
    around the safety core, without touching it) picks up.
@@ -178,19 +197,28 @@ BINDING CONSTRAINTS (non-negotiable — from the source files)
 - The monoculture analogy (one bad update defeating identical systems, as in
   the 2024 CrowdStrike incident) may be used as a FRAMING ANALOGY only —
   it is explicitly not logged evidence. Mark it as an analogy.
-- The Telstra outage of 8 July 2026 (E-2026-07-11-07) MAY be used as a second,
-  cross-domain instance for point 9 — a software defect in a shared network
-  TIMING function took down a national PUBLIC mobile network, disrupting
-  regional rail services, cyberattack explicitly ruled out — with STRICT
-  bounds: the record's source is a B-tier vendor-blog relay, so (i) use it
-  only for the failure CLASS and the public-fallback common-mode warning
-  (the bearer class DB names as its fallback just failed the same way);
-  (ii) do NOT claim Telstra's failover failed to trigger or draw a "backup
-  never asked" parallel — the record does not establish Telstra's failover
-  mechanics; (iii) if the case is to carry more weight than a framing
-  instance, its facts must first be re-sourced to the Telstra statement /
-  ACMA findings (the row's flagged A-tier follow-up); (iv) one short
-  paragraph maximum, dates and scope only, no vendor-blog recommendations.
+- The Telstra/V-Line case of 8–9 July 2026 (E-2026-07-11-07, E-2026-07-12-01)
+  MAY be used as a DOCUMENTED second instance for point 9 — upgraded from the
+  v1.4 framing-only bound. What the record now supports, with attribution:
+  a software defect in Telstra's network TIME-SYNCHRONISATION nodes (acting
+  CEO Ackland, via The Conversation; cause-unknown at the time; no malicious
+  activity) took down Australia's largest public mobile network; V/Line —
+  whose train radio AND control connectivity ride Telstra 4G (ARTC/VicTrack
+  migrated train comms to Telstra 4G in 2024) — suspended ALL regional
+  Victorian services for ~24+ h; and the trains' SATELLITE BACKUP failed to
+  engage properly because the FLAPPING 4G kept telling it "connected, not
+  needed" (V/Line CEO Tieppo, via ABC). The convergence to write: 23 June =
+  a silent fault, the backup was NEVER ASKED; 8 July = a flapping fault, the
+  backup was TOLD IT WASN'T NEEDED — two faces of the same defect, fallback
+  triggering that trusts the primary's self-report; and V/Line's own
+  independent comms test before resumption is the prove-don't-trust
+  discipline in practice. REMAINING bounds: (i) VERIFY the Tieppo satellite
+  quote against the ABC page or a second carrier before publication (the
+  record's copy is search-retrieved — access caveat in E-2026-07-12-01);
+  (ii) still no claim about TELSTRA's internal failover mechanics; ACMA
+  findings are the pending A-tier follow-up; (iii) two short paragraphs
+  maximum; attribute Tieppo/Ackland by name and outlet; no vendor-blog
+  recommendations (E-2026-07-11-07 stays colour, not source).
 - ETSI TS 103 147 non-conformance: state it as the record does — the standard
   requires automatic switchover and names maintenance among covered events;
   the 23 June mode (manual recovery during planned maintenance) did not meet
@@ -250,8 +278,10 @@ custom → commercial 3GPP stack: frozen base, living delta, standard
 architecture) → the two failure classes (element vs disaster — DB gets this
 right) → the promise
 problem (asserted FRMCS failover) and the risk that remains (sync channel,
-untestable standby) → what "prove it" looks like → bridge to Paper 3. Short
-paragraphs, one or two diagrams, no headings deeper than one level.
+untestable standby) → the live counterexample (Telstra/V-Line: the backup
+that was told it wasn't needed) → what "prove it" looks like → bridge to
+Paper 3. Short paragraphs, one or two diagrams, no headings deeper than one
+level.
 
 Before you finish: re-check every number and claim against the attached files;
 list at the end (for the editor, not for publication) any claim you could not
@@ -266,7 +296,7 @@ trace to a source.
 - [ ] VDE quoted as attributed expert analysis, advocacy interest noted
 - [ ] Common-mode critique attributed to the engagement, not to the operator's article
 - [ ] CrowdStrike used only as a marked analogy (if at all)
-- [ ] Telstra 08.07.2026 (if used): failure class + public-fallback common-mode only; no failover-not-triggered claim; one paragraph max; B-tier relay flagged unless re-sourced to Telstra/ACMA primary
+- [ ] Telstra/V-Line 08–09.07.2026 (if used): satellite-fallback defeat attributed to Tieppo (ABC) and cause to Ackland (The Conversation); Tieppo quote re-verified against the ABC page before publication; no claims about Telstra's internal failover; two paragraphs max; ACMA follow-up noted
 - [ ] TS 103 147 stated factually, no negligence/liability editorialising
 - [ ] CSM point framed as engagement analysis of the rulebook; DB classification stated as not public; no breach asserted or implied
 - [ ] Six criteria cited from Reg (EU) 402/2013; ERA guide named as non-binding current guidance (never revised since 2009 — sharpener, if used, marked as engagement observation)
