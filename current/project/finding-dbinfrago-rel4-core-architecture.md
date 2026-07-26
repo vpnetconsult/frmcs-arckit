@@ -14,7 +14,7 @@
 | Type | Finding (evidence trace) |
 | Project | FRMCS arcKit — GSM-R→FRMCS transition + agentic oversight |
 | Classification | INTERNAL (C-tier estate attribution — verify at DB/TED before external use) |
-| Status | DRAFT · Version 1.0 · 2026-07-26 · Owner: Vpnet engagement lead |
+| Status | DRAFT · Version 1.1 · 2026-07-26 · Owner: Vpnet engagement lead (v1.1 adds §6 single-SCP SPOF probe) |
 | Companion | `master-architecture-reference.md` (Part B); `diagrams/ARC-FRMCS-DIAG-007…` (Rel-4 box); `gsmr-e2e-equipment-map.md` (§5 NSS) |
 
 ---
@@ -101,7 +101,35 @@ in the standard 3GPP redundancy lineage.
    finding lets those be sharpened to: **DB InfraGO specifically runs a Kapsch/Kontron Rel-4
    BICN core** (2 Call Servers / 7 Media Gateways / 2 HLRs / 1 SCP), with the C-tier flag.
 
-## 6. Requirements traceability
+## 6. Open question — the single SCP (R3 / PR5 SPOF probe)
+
+The named as-is topology (E-2026-06-24-20) pairs the **Call Servers (2, geo-redundant)** and
+the **HLRs (2)**, but lists **one Service Control Point**. An SCP hosts the Intelligent-Network /
+CAMEL services — in GSM-R typically **functional addressing, location-dependent addressing, and
+IN-mediated call handling** (railway-specific routing, potentially including REC routing). On its
+face, a lone SCP with no redundant peer is a **candidate central SPOF** for those services —
+exactly the R3 concern the engagement exists to surface.
+
+**This is a QUESTION to verify, not a confirmed SPOF.** From this C-tier 2011 vendor-PR source we
+cannot distinguish three very different realities:
+
+- **(a) Internally / geo-redundant SCP** reported as "one logical function" (carrier IN platforms
+  usually are) → a non-issue;
+- **(b) A single SCP accepted by design** because its services degrade gracefully (fail-open) → a
+  bounded, documented trade-off;
+- **(c) A genuine, fail-closed SPOF** → a serious finding, and a direct argument for the
+  geo-redundant, no-shared-failure-domain FRMCS target (R3 / ADR-001).
+
+**The probe (verify at DB/TED primary):** does DB's SCP have internal/geo-redundancy, and what is
+the **fail-behaviour** of functional-addressing / REC routing if the SCP is lost? Only (c) is a
+real SPOF, and only if fail-closed. The **asymmetry itself** (2×Call Server, 2×HLR, 1×SCP) is the
+signal worth chasing.
+
+**NB — not the incident.** The SCP was **not** the 23-June culprit (DB placed that in *"a network
+distribution component"*). This is a **separate, standing R3/PR5 question**, not a claim about the
+outage, and does not touch the culprit quarantine.
+
+## 7. Requirements traceability
 
 | Requirement | Bearing |
 |---|---|
@@ -109,8 +137,9 @@ in the standard 3GPP redundancy lineage.
 | R6 (bearer flexibility / no re-qualify) | Rel-4 BICN's bearer-independence is the CP/UP-separation lineage R6/OBapp continues |
 | R8 / PR7 (vendor concentration) | DB core = Kapsch→Kontron (a single core-vendor lineage) |
 | PR11 (silent-fault / proving discipline) | Modern redundant core ≠ proven trigger — the core finding's edge |
+| PR5 (SPOF-signature telemetry) | The single-SCP probe (§6) — instrument/verify the SPOF signature before build |
 
-## 7. Evidence refs
+## 8. Evidence refs
 
 **DB-specific (C-tier):** E-2026-06-24-20 (Kapsch Rel-4 core modernisation, topology) · E-2026-06-29-02 (DB core = Kapsch→Kontron; regional estate).
 **Architectural (A-tier):** E-2026-07-26-03 (TS 103 066 — Rel-99 baseline / Rel-4 optional) · E-2026-07-06-02/-03 (TEN plans — Kapsch NSS = Rel-4, NSN = Rel-99) · E-2026-07-05-08 (TS 123 236 pooling) · E-2026-07-01-09 (TS 103 147 auto-switchover).
