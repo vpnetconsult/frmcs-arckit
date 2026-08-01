@@ -200,7 +200,9 @@ The user's core question: what does FRMCS take *verbatim* from the consumer 3GPP
 | **UIC FRMCS Edition** | UIC | Edition 1, Edition 2 | the rail *profile* baseline |
 | **CCS TSI RMR Baseline** | ERA | Baseline 0, 1 | the *mandated* set in EU law |
 
-The **FRMCS Phase axis is authoritative** (3GPP Work Plan, E-2026-08-01-22): Phase 1=Rel-15 … Phase 6=Rel-20. Approximate correspondence to the *other* axes (**verify vs a UIC FRMCS Edition roadmap — not on file**): FRMCS **Edition 1** ≈ Phase 2/3 (Rel-16/17) = CCS TSI RMR **Baseline 0** (the current mandated, "not-tender-complete" set, E-2026-08-01-16); FRMCS **Edition 2** ≈ Phase 4+ (Rel-18+).
+The **FRMCS Phase axis is authoritative** (3GPP Work Plan, E-2026-08-01-22): Phase 1=Rel-15 … Phase 6=Rel-20.
+
+**The FRMCS-Version ↔ RMR-Baseline crosswalk is now grounded (ERA CCS TSI roadmap, E-2026-08-01-25)** — this closes §4's last-open axis: **FRMCS V1 = CCS TSI 2022 = RMR Baseline 0** (the legal anchor; the current mandated, "not-tender-complete" set, E-2026-08-01-16) → **FRMCS V2 = an ERA Technical Opinion** (the enabler for national pilots) → **FRMCS V3 = the subsequent CCS TSI = RMR Baseline 1** (which *starts the 7-year GSM-R-decommissioning notification*, migration §4a). Note the distinction: "FRMCS Version" (V1/V2/V3, the ERA/CCS-TSI delivery vehicle) is a *fourth* label alongside 3GPP Release, 3GPP Phase, and RMR Baseline — and it is the one the *legal* decommissioning clock hangs on. UIC "FRMCS Edition" numbering, if distinct from these Versions, still needs a UIC source to reconcile.
 
 **Authoritative rail work-item series → release** (3GPP Work Plan E-2026-08-01-22; ✓ = complete):
 

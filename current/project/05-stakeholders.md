@@ -37,7 +37,7 @@
 | BMDV (Federal Transport Ministry) | High | High | Manage closely | Strategy + funding alignment |
 | BMF (Federal Finance Ministry) | High | Medium | Keep satisfied | Funding case; the retrofit-directive gate |
 | Bund / ERTMS-Koordinierungsstelle | High | High | Manage closely | Sector coordination; funding (Sondervermögen) |
-| ERA / ERJU | High | High | Manage closely | TSI/FRMCS specs; conformance interface |
+| ERA / ERJU | High | High | Manage closely | TSI/FRMCS specs; conformance interface (contacts per E-2026-08-01-25: J. Doppelbauer [ERA Exec Dir], T. Chatelet [ERA]) |
 | European Commission | High | Medium | Keep satisfied | CRA/NIS-2/TSI/spectrum conformance |
 | BNetzA (spectrum) | Med-High | Medium | Keep satisfied | 900/1900 MHz allocation |
 | BSI (cyber authority) | Med-High | Medium | Keep satisfied | CRA/NIS-2, TR-03183 (ADR-012) |
@@ -47,9 +47,12 @@
 | Architecture Review Board (ARB) | High | High | Manage closely | Endorses ADRs, gate pass/hold |
 | Vpnet (engagement lead) | Medium | High | Manage closely | A for oversight architecture; never A for safety |
 | Digitale Schiene Deutschland (DSD) | Medium | High | Keep informed | DB's FRMCS programme; technical partner |
+| UIC (Head of FRMCS) | Medium | High | Keep informed | FRMCS spec owner (FRS/SRS/URS, FRMCS-T); contacts per E-2026-08-01-25: F. Davenne [UIC DG], D. Mandoc [Head of FRMCS] |
 | EVU / RUs + NE-Bahnen | Medium | High | Keep informed | Fleet retrofit dependency (R13) |
 | Ericsson · Siemens · Funkwerk · Vodafone · R&S | Medium | High | Keep informed | Secondary vendors; anti-lock-in leverage |
 | 3GPP · ETSI TC-RT · UIC · CENELEC · ECC | Medium | Medium | Keep informed | Standards track (MCX, FRS/SRS, EN 5012x) |
+| EIM (European Rail Infrastructure Managers) · CER (Community of European Railway & Infrastructure Cos) | Medium | High | Keep informed | EU IM/RU associations; **drove the FRMCS public-(terrestrial)-networks feasibility study** → the FRMCS-T/public-MNO migration option (E-2026-08-01-25/-24); agenda influence on the migration path |
+| IEC TC 9 / PT 63452 · GSMA · ER-ISAC | Medium | Medium | Keep informed | Rail-cyber successor standard (IEC 63452, E-2026-08-01-17/-20); GSMA operational-security layer (§4a gap); ER-ISAC = candidate rail sector-CERT |
 | VDB / Cybersecurity Rail Sector Group | Medium | High | Keep informed | Industry consensus; CRA guidance |
 | Allianz pro Schiene (advocacy) | Low-Med | High | Keep informed | Pro-rail lobby; agenda pressure |
 | Workforce (dispatchers/drivers/maint.) + unions (EVG/GDL) | Medium | High | Keep informed | HOF/safety culture; human-in-command |
