@@ -2,7 +2,9 @@
 
 **Purpose:** map which Standards Definition Organisations (SDOs) own which layer of FRMCS, trace each layer *backwards* to its GSM-R equivalent, and separate what FRMCS **reuses from the consumer 3GPP 5G Standalone (SA) stack** from what is **rail-specific divergence**.
 
-**Method / status:** v2 (2026-08-01; v1 2026-07-30), **anchored on the Kontron/DB (DSD) FRMCS MCX Design final report** (E-2026-07-01-10, Feb 2021, V1.1) and the ETSI/3GPP/CENELEC spec set already on file.
+**Method / status:** v3 (2026-08-01; v2 2026-08-01; v1 2026-07-30), **anchored on the Kontron/DB (DSD) FRMCS MCX Design final report** (E-2026-07-01-10, Feb 2021, V1.1) and the ETSI/3GPP/CENELEC spec set already on file.
+
+**v3 changes (2026-08-01):** added **§1b** (the research → normative pipeline — where foundation input enters and graduates; flagship: IRTF RFC 9315 IBN → 3GPP TS 28.312/28.530 + NWDAF → ADR-002 autonomy, with the FRMCS link marked *(inferred)* — confirmed out-of-normative-scope by FRMCS FFFIS-7950's reference list, E-2026-08-01-21); **broadened the IETF row** (full RFC set incl. HTTP/2 RFC 9113 + JSON RFC 8259; standards-body vs IRTF-research clarified); **refreshed §4** into a 3GPP-roadmap capability→release map (three-axis Release/Edition/Baseline reconciliation; Kontron 2021 gaps carried to their Rel-18 status; roadmap = the pacing function beneath the migration triangle).
 
 **v2 changes (2026-08-01):** added **IEC** and **UNISIG** rows to §1; IETF row de-inferenced (TS 33.210 §6 = the concrete 3GPP→IETF consumption point, E-2026-08-01-03); §4a security sub-tree updated — 3GPP SCAS (TS 33.117) + NDS/IP (TS 33.210) now EVIDENCED on file (E-2026-08-01-02/-03), the interconnect gap is confirmed **operational** (spec-side GTP defences exist); EN 50128 A1/A2 amendments on file (E-2026-07-31-05, E-2026-08-01-01) — the safety↔security bridge (EN 5012x ↔ IEC 62443) is now primary from **both sides**; successor watches added (EN 50716:2023, IEC 63452 — to verify, not asserted). Spec IDs are sourced from that report (Ch. 3–7) or from logged evidence rows; where a mapping is analytic inference it is marked *(inferred)*. Kontron release-mapping is 2021-vintage (Rel-15 available, Rel-16 in progress); the currently-logged ETSI normative editions are Rel-18 (e.g. TS 123 280 V18.11.0, E-2026-07-26-16) — release columns below reflect *when a capability first landed*, not the latest edition.
 
@@ -22,7 +24,7 @@
 | **ERA** (EU Agency for Railways) | Integrates FRS/SRS into EU law; owns interoperability conformance | **CCS TSI** (train radio + ETCS) — current law = **Reg (EU) 2023/1695 as amended by Reg (EU) 2026/693** (Annex I replaced wholesale; Table A 3 = non-exclusive safe harbour into CSM-RA; FRMCS Baseline 0 mandated but "not tender-complete", Note 9) | **E-2026-08-01-11 (TSI as amended, on file); E-2026-08-01-13 (edition/harmonisation verification)**; E-2026-07-25-05 (ERA Art-12 *report about* the TSI — NOT the TSI text); E-2026-07-01-10 |
 | **UNISIG** (industry consortium, UNIFE) | ETCS/ERTMS application specs riding the FRMCS bearer — meets ETSI TC-RT at the **OBapp/gateway boundary** (R6 decoupling); SUBSETs made binding via ERA's CCS TSI | **SUBSET-026** (ETCS SRS), **SUBSET-078** (RBC-interface FMEA; on file) | E-2026-07-25-07; E-2026-07-05-02 |
 | **CEPT / ECC** | Spectrum designation for rail (RMR — Rail Mobile Radio). Note: designation is **non-exclusive** (Decides 2); RMR is **not a safety service** (ITU RR No. 1.59); wideband = LTE or NR (technology-neutral) | ECC/DEC + **ECC(20)02** (RMR bands; replaces (02)05/09/10) | **E-2026-08-01-06 (primary, on file)**; E-2026-06-24-04 |
-| **IETF** | Internet protocols the 5G/IMS/MCX service-based layer runs on (HTTP/2, SIP, TLS) — consumed via **3GPP profiling**: TS 33.210 §6 profiles TLS 1.3/1.2 + JWE/JWS (RFC 8446 et al.) for 3GPP use | RFCs (consumed, not rail-specific) | E-2026-08-01-03 (TS 33.210 §6 — the concrete consumption point) |
+| **IETF** | **A standards body, not a research one** — defines the open internet-protocol standards (Standards-Track RFCs) the 5G/IMS/MCX/SBA service layer runs on. Distinctive among the SDOs here: open participation, "rough consensus and running code", **not** nation/treaty-based (contrast ITU) nor formal-committee (contrast ISO/IEC/CENELEC). Consumed **two ways**: (a) via **3GPP profiling** (TS 33.210 §6 profiles TLS 1.3/1.2 + JWE/JWS for 3GPP use); (b) **directly by the rail app specs** — FRMCS FFFIS-7950 OBapp API = HTTP/2 + JSON + ASN.1; SUBSET-146/-137 cite the X.509/CMP/OCSP/TLS RFCs for E2E security + key management. Its **research arm is the IRTF** (Internet Research Task Force) — out of scope for the bearer stack (e.g. RFC 9315 *Intent-Based Networking* is an IRTF informational doc, not referenced; a candidate ADR-002 autonomy reference, not a protocol standard) | RFCs on file: **HTTP/2** (9113) + **JSON** (8259) [FRMCS OBapp API]; **TLS 1.3** (8446) + integrity-only ciphers (9150); **X.509 PKI** — CMP (4210), OCSP (6960); **JWT** (7519); **WebSocket** (6455); **NTP v4** (5905) + Time Protocol (868); **MPTCP** (8684); randomness (4086); UUID (4122); host reqs (1122) — consumed, not rail-specific | E-2026-08-01-21 (FFFIS-7950 — HTTP/2 + JSON, OBapp API); E-2026-08-01-03 (TS 33.210 §6 profiling); E-2026-08-01-15/-18 (SUBSET-146/-137 cite PKI/TLS/OCSP directly); E-2026-07-30-03 (SFERA — TLS 1.3 + JWT) |
 | **GSMA** | The consumer-mobile **structural analogue of ETSI TC-RT**: profiles/governs 3GPP implementation for operators (roaming, device cert, deployment guidelines). FRMCS swaps GSMA → ETSI TC-RT at the implementor tier (see §1a). **Public PRDs on file** (FS.40 5G Security Guide, FS.57 MoTIF, FS.61 micro-segmentation, FS.56 MDSCert); **FS.11/19/20 interconnect guidelines = MEMBER-ONLY residual** — the gating itself evidences the §4a gap (rail has no membership channel; verify DB/sector GSMA or T-ISAC access) | NG.xxx, roaming agreements; FS-series security PRDs | E-2026-08-01-04/-07/-08/-09 (public set); §4a |
 | **ETSI TC CYBER** | ETSI's cybersecurity committee (distinct from TC-RT) — authors the **Consumer Mobile Device Protection Profiles** (Common-Criteria SFRs/SARs) that GSMA's MDSCert scheme certifies against; the SDO side of the industry-body↔SDO device-security loop (GSMA feeds identified gaps back to it, §1a analogy at the device layer). No rail equivalent → the FRMCS-terminal security-certification gap (E-2026-08-01-08) | **ETSI TS 103 732 series** (Consumer Mobile Device PP: base, biometric, preloaded-apps, bootloader/root-of-trust) | E-2026-08-01-08 (via GSMA FS.56/MDSCert) |
 
@@ -61,6 +63,37 @@ So FRMCS doesn't just *reuse consumer-5G technology* — it *reuses the consumer
 - **Legal wrapper:** ERA folds FRS/SRS into the **CCS TSI** (legally binding) → **MORANE-2** validates Edition 1.
 
 So the stack is drawn bottom-up (3GPP at the base = the *technology core*), but **authority runs top-down from UIC** (the *requirements apex*). The two are not in tension: UIC-set requirements are precisely what get realised as 3GPP rail work items and profiled by ETSI.
+
+---
+
+## 1b. The research → normative pipeline (where foundation input enters, and how it graduates)
+
+§1 and §1a are a **normative snapshot**. But standards don't appear fully formed — each has a **research / pre-normative foundation** that feeds it and matures along a pipeline. The map is therefore a *moving picture*: today's `watch` items are yesterday's research graduating.
+
+```
+LEGAL         ERA CCS TSI (Reg 2023/1695 + 2026/693)              ← binding
+  ▲
+NORMATIVE     3GPP TS · ETSI TS · CENELEC EN · IEC IS · UNISIG    ← the §1 roster
+  ▲
+PRE-NORMATIVE study items: 3GPP TR · ETSI TR                       ← "study before spec"
+  ▲
+RESEARCH      ERJU/Shift2Rail · EU Horizon · academia · IRTF       ← the foundation layer
+             (validation alongside: MORANE-2, 5GRAIL labs — prove specs pre-deployment)
+```
+
+| Foundation body | What it is | FRMCS anchor on file | Feeds |
+|---|---|---|---|
+| **Europe's Rail JU (ERJU / EU-Rail)**, ex-**Shift2Rail** | The EU rail R&D body — System Pillar (target architecture) + Innovation Pillar; a *formal* TSI pathway via CCS TSI Art 11 "innovative solutions" (ERJU → Agency opinion → TSI) | CYRail (Shift2Rail H2020, E-2026-07-30-07) | → CLC/TS 50701 → IEC 63452 |
+| **EU Horizon / H2020 projects** | FRMCS validation & prototyping | 5GRAIL GA 951725 (E-2026-06-29-01); 5G-RACOM multipath (E-2026-07-02-21) | → MORANE-2 validation; → 3GPP/ETSI specs |
+| **SDO study stages** | pre-normative TR → normative TS | 3GPP TR 22.889 (E-2026-07-30-26); ETSI TR 103 459 (E-2026-07-30-24) | → TS 22.289; → TS 103 764 |
+| **Academia / security research** | threat models, attack classes | ACM CCS (E-2026-07-24-01), SAFECOMP (E-2026-07-06-10), StrangeLove (E-2026-07-29-06), CVD catalogue (FS.40 §20) | → IEC 63452 §7 threat landscape; → GSMA MoTIF |
+| **IRTF** (IETF's research arm) | internet research (Informational RFCs) | RFC 9315 *Intent-Based Networking* (not referenced) | → 3GPP SA5 mgmt specs (below); → ADR-002 autonomy |
+
+**Flagship graduation — research that lands on this engagement's core.** Intent-Based Networking begins as **IRTF research** (RFC 9315, Informational, 2022). 3GPP then makes it **normative** in the 5G management-and-orchestration plane: **TS 28.312** (intent-driven management services) and **TS 28.530** (management & orchestration), using **closed-loop automation** plus **NWDAF** (Network Data Analytics Function) to *verify whether the stated intent is fulfilled*. That pattern — declare intent → automation realizes it within the bearer → analytics verify fulfilment — **is the agentic-oversight layer's pattern** (ADR-002/R9/R12): NWDAF-verifying-intent is the *assurance/Risk-Sentinel* role; closed-loop automation is exactly the *control* the guardrail keeps **human-in-command** over ("oversight, not control"). **The FRMCS→management-plane link is *(inferred)*, NOT a rail-spec reference:** FRMCS profiles the 3GPP *service* strata (MCX/IMS/security) — a primary mandated FRMCS spec (FFFIS-7950, E-2026-08-01-21) references the MCX service layer + HTTP/2 + JSON, and cites **nothing from SA5** (no 28.312/28.530/NWDAF). So the management plane is inherited as an operator/deployment capability, not a mandated rail interface — the intent/closed-loop substrate the autonomy layer *could* leverage, verify against FRMCS clause bodies before treating as firmer than inferred.
+
+**The management plane is a layer the §2 stack lacks.** 3GPP **SA5** (TS 28.530 M&O · TS 28.312 intent-driven · NWDAF + MDAF analytics, TS 28.104) is distinct from the control/user planes §2 maps — it is the *orchestration/assurance* plane. Candidate fetches: TS 28.530, TS 28.312 — the bearer-native counterpart to ADR-002.
+
+**Other graduations on file:** **CYRail (2018 research) → CLC/TS 50701 (2021) → IEC 63452 (~2028)** — a full ~10-year research→normative arc, end-to-end on file; **3GPP TR 22.889 (study) → TS 22.289 (normative rail reqs)**; **5G-RACOM multipath research → MPTCP (RFC 8684) → candidate FRMCS multi-bearer resilience (R4)**.
 
 ---
 
@@ -152,22 +185,53 @@ The user's core question: what does FRMCS take *verbatim* from the consumer 3GPP
 
 *Anchors:* E-2026-07-01-10 (Kontron Ch. 5.3 CP/UP + TR 23.794) · E-2026-07-02-03 (SIL4 Cloud / separation kernel) · E-2026-07-02-27 (Cloud4Rail) · E-2026-07-24-01 (5G-core attack surface) · E-2026-07-29-09 (silent-fault) · ADR-004 / ADR-011 / R4 / R14.
 
-## 4. Release timeline & the gaps Kontron named (2021 vintage)
+## 4. The 3GPP roadmap — the key enabler, and the capability → release map (v3, 2026-08-01)
 
-3GPP release landing (from Kontron Ch. 7, Fig. 7-3):
+**Why this is the pacing function.** FRMCS is a *profile* of 3GPP (§1a) — it originates no radio/service specs; it selects and profiles finalised 3GPP building blocks. So **FRMCS capability availability is gated by the 3GPP release cadence**: a feature is deployable only once 3GPP has *defined* it → ETSI TC-RT has *profiled* it → MORANE-2 has *validated* it. The 3GPP roadmap therefore sits **beneath the migration triangle** (migration-change-risk-assessment.md §4a): the CCS TSI "not complete for tendering" status (Note 9, E-2026-08-01-16) is *downstream* of 3GPP rail work items still maturing.
 
-- **Rel-15** — MCPTT 3.0, MCData 2.0; **Railways**: TS 22.289 (FRMCS reqs), TS 22.280 (functional aliases), TR 23.790 (FRMCS application-architecture study).
-- **Rel-16** — MCPTT 4.0, MC MBMS API (TS 23.479), MC-over-5GC study (TR 23.783); **Railways**: TS 22.280 (FRMCS↔GSM-R interworking), TS 22.282 (MCData IPcon); TR 23.794 (enhanced IMS→5GC, CUPS for IMS).
-- **Rel-17** — MC over 5GC (TR 23.783); FRMCS reqs update (TS 22.289).
+**Three numbering axes — do not conflate** (a recurring source of confusion):
 
-**Gaps Kontron flagged (candid, load-bearing for PR15 / ADR-007e):**
-1. Rail-specific **group affiliation** — only from Rel-16 (explicit-affiliation "in progress in 3GPP CT1").
-2. **Functional-alias termination side** — spec still in progress.
-3. **E2E encryption / security procedures** — "to be defined", all security functions **OPTIONAL** → since normatively defined by TS 33.180 (E-2026-07-26-20), but *optionality* remains a deployment/procurement matter (ADR-012 action-2).
-4. **MC-over-5GC** — Rel-16/17 study (TR 23.783); at study time MCX ran over LTE/EPC.
-5. **IMS↔5GC integration** — CUPS-for-IMS study (TR 23.794).
+| Axis | Owner | Values | Counts |
+|---|---|---|---|
+| **3GPP Release** | 3GPP | Rel-15 … Rel-19 (Rel-18+ = "5G-Advanced") | when a capability is *defined* |
+| **UIC FRMCS Edition** | UIC | Edition 1, Edition 2 | the rail *profile* baseline |
+| **CCS TSI RMR Baseline** | ERA | Baseline 0, 1 | the *mandated* set in EU law |
 
-*Currency note:* these are 2021/Rel-15/16 gaps; several have since closed at spec level (Rel-18 editions now on file, E-2026-07-26-16..-20). Whether they are closed *in deployment* is the open PR15 question — verify against MORANE-2 (E-2026-07-02-15) before treating as mature.
+Approximate correspondence (**verify vs a UIC FRMCS Edition roadmap — not authoritatively on file**): FRMCS **Edition 1** ≈ Rel-16/17 = CCS TSI RMR **Baseline 0** (the current mandated, "not-tender-complete" set, E-2026-08-01-16); FRMCS **Edition 2** ≈ Rel-18+.
+
+**Capability → release map** (release history per Kontron/3GPP; ✓ = spec edition logged on file):
+
+| Capability | 3GPP work (WG) | Release landing | On file |
+|---|---|---|---|
+| FRMCS service requirements | TS 22.289 (SA1) | Rel-15 initial → Rel-17 | ✓ V17.0.0 (E-2026-07-31-02) |
+| MC common / **functional alias** | TS 23.280 (SA6) | Rel-15 → Rel-18 | ✓ V18.11.0 (E-2026-07-26-16) |
+| MCPTT (voice) | TS 23.379 / 24.379 | Rel-13 → 15 (3.0) → 16 (4.0) | ✓ (E-2026-07-26-17) |
+| MCData | TS 23.282 / 24.282 | Rel-14 → 15 (2.0) → 16 | ✓ (E-2026-07-26-18) |
+| MCVideo | TS 23.281 / 24.281 | Rel-14/15 | ✓ (E-2026-07-26-19) |
+| 5G security architecture | TS 33.501 (SA3) | Rel-15 → 18 → 19 | ✓ V18.6.0/V19.6.0 (E-26-14, E-31-04) |
+| MC service security | TS 33.180 (SA3) | Rel-15+ | ✓ (E-2026-07-26-20) |
+| MC-over-5GC | TR 23.783 | Rel-16/17 study → normative Rel-17/18 | study-vintage (Kontron) |
+| IMS ↔ 5GC (CUPS-for-IMS) | TR 23.794 | Rel-16 study | study-vintage (Kontron) |
+| MBMS → 5G-MBS multicast | TS 23.479 → 5G MBS | Rel-16 → Rel-17 | via Kontron §7 |
+| GSM-R interworking | TS 22.280 → ETSI profiling | Rel-16 | ✓ via TS 103 792 (E-2026-07-26-13) |
+
+**The FRMCS requirements are spread across releases**, and the apex reqs spec (TS 22.289) is refreshed each release — so "FRMCS Edition 1" is not one release but a *selected profile across Rel-15→17*, with Edition 2 pulling in Rel-18 (5G-Advanced) features. This is precisely why no single "FRMCS is done at Rel-N" statement holds.
+
+**The Kontron 2021 gaps — original vs current status** (candid, load-bearing for PR15 / ADR-007e):
+
+| # | Gap (Kontron, 2021, ~Rel-15/16) | Status now |
+|---|---|---|
+| 1 | Rail **group affiliation** — "in progress in CT1" | Landed from Rel-16; *deployment* maturity TBD |
+| 2 | **Functional-alias termination side** — spec in progress | Verify at Rel-18 (not confirmed on file) |
+| 3 | **E2E encryption / security OPTIONAL** — "to be defined" | Normatively defined by TS 33.180 (E-2026-07-26-20); **optionality is now a deployment/procurement matter** (ADR-012 action-2) |
+| 4 | **MC-over-5GC** — Rel-16/17 study; MCX ran over LTE/EPC | Normative by Rel-17/18 (5GC-native) |
+| 5 | **IMS ↔ 5GC** — CUPS-for-IMS study (TR 23.794) | Verify normative status at Rel-18 |
+
+**Coupling to the migration triangle.** The 3GPP roadmap is the pacing function beneath FRMCS readiness: FRMCS cannot become tender-ready faster than 3GPP *defines* → ETSI *profiles* → MORANE-2 *validates*. So the "specs not tender-complete" front-of-runway squeeze (migration §4a vertex C) is not a drafting delay — it is the 3GPP rail work-items maturing. Several gaps closed at *spec* level by Rel-18; whether they are closed *in deployment* is the open PR15 question (verify vs MORANE-2, E-2026-07-02-15).
+
+**Honest gap in this map.** The release *history* is grounded in on-file spec editions; the **forward view (Rel-20+), the authoritative Edition↔Release↔Baseline crosswalk, and the current rail work-item status are NOT on file** — the specs give release anchors, not a UIC-published roadmap. Candidate fetches to make this authoritative: the **3GPP work plan / rail work-item status** and the **UIC FRMCS Edition roadmap**.
+
+*Anchors:* Kontron Ch. 7 Fig. 7-3 (E-2026-07-01-10) · TS 22.289 (E-2026-07-31-02) · MCX Stage-2 set (E-2026-07-26-16..-19) · TS 33.501/33.180 (E-26-14/-20, E-31-04) · TS 103 792 interworking (E-2026-07-26-13) · MORANE-2 (E-2026-07-02-15) · migration-change-risk-assessment.md §4a. Related: PR15, ADR-007(e), ADR-012, R1/R5/R7.
 
 ---
 
