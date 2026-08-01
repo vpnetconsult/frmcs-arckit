@@ -6,6 +6,8 @@
 
 **v3 changes (2026-08-01):** added **§1b** (the research → normative pipeline — where foundation input enters and graduates; flagship: IRTF RFC 9315 IBN → 3GPP TS 28.312/28.530 + NWDAF → ADR-002 autonomy, with the FRMCS link marked *(inferred)* — confirmed out-of-normative-scope by FRMCS FFFIS-7950's reference list, E-2026-08-01-21); **broadened the IETF row** (full RFC set incl. HTTP/2 RFC 9113 + JSON RFC 8259; standards-body vs IRTF-research clarified); **refreshed §4** into a 3GPP-roadmap capability→release map (three-axis Release/Edition/Baseline reconciliation; Kontron 2021 gaps carried to their Rel-18 status; roadmap = the pacing function beneath the migration triangle).
 
+**v4 changes (2026-08-01):** §4 **authoritatively grounded by the official 3GPP Work Plan** (E-2026-08-01-22, dated 2026-06-26) — the FRMCS **Phase axis** (Phase N = Rel-(14+N), Phase 1–6 = Rel-15–20) added as the 4th numbering axis; the **MONASTERY/FRMCS work-item series → release table** added (the roadmap in 3GPP's own WI names); the **forward view resolved** (Rel-20/Phase 6 live at 55%); spec-coverage note added (TS 22.261 base 5G reqs now on file, E-2026-08-01-23).
+
 **v2 changes (2026-08-01):** added **IEC** and **UNISIG** rows to §1; IETF row de-inferenced (TS 33.210 §6 = the concrete 3GPP→IETF consumption point, E-2026-08-01-03); §4a security sub-tree updated — 3GPP SCAS (TS 33.117) + NDS/IP (TS 33.210) now EVIDENCED on file (E-2026-08-01-02/-03), the interconnect gap is confirmed **operational** (spec-side GTP defences exist); EN 50128 A1/A2 amendments on file (E-2026-07-31-05, E-2026-08-01-01) — the safety↔security bridge (EN 5012x ↔ IEC 62443) is now primary from **both sides**; successor watches added (EN 50716:2023, IEC 63452 — to verify, not asserted). Spec IDs are sourced from that report (Ch. 3–7) or from logged evidence rows; where a mapping is analytic inference it is marked *(inferred)*. Kontron release-mapping is 2021-vintage (Rel-15 available, Rel-16 in progress); the currently-logged ETSI normative editions are Rel-18 (e.g. TS 123 280 V18.11.0, E-2026-07-26-16) — release columns below reflect *when a capability first landed*, not the latest edition.
 
 **Outcome anchor:** safe, continuous rail operations. This mapping exists to show where the safety-critical bearer's behaviour is *owned* (which SDO can change it) and where FRMCS inherits consumer-5G risk vs adds rail control.
@@ -185,7 +187,7 @@ The user's core question: what does FRMCS take *verbatim* from the consumer 3GPP
 
 *Anchors:* E-2026-07-01-10 (Kontron Ch. 5.3 CP/UP + TR 23.794) · E-2026-07-02-03 (SIL4 Cloud / separation kernel) · E-2026-07-02-27 (Cloud4Rail) · E-2026-07-24-01 (5G-core attack surface) · E-2026-07-29-09 (silent-fault) · ADR-004 / ADR-011 / R4 / R14.
 
-## 4. The 3GPP roadmap — the key enabler, and the capability → release map (v3, 2026-08-01)
+## 4. The 3GPP roadmap — the key enabler, and the capability → release map (v4, 2026-08-01; authoritatively grounded by the 3GPP Work Plan E-2026-08-01-22)
 
 **Why this is the pacing function.** FRMCS is a *profile* of 3GPP (§1a) — it originates no radio/service specs; it selects and profiles finalised 3GPP building blocks. So **FRMCS capability availability is gated by the 3GPP release cadence**: a feature is deployable only once 3GPP has *defined* it → ETSI TC-RT has *profiled* it → MORANE-2 has *validated* it. The 3GPP roadmap therefore sits **beneath the migration triangle** (migration-change-risk-assessment.md §4a): the CCS TSI "not complete for tendering" status (Note 9, E-2026-08-01-16) is *downstream* of 3GPP rail work items still maturing.
 
@@ -193,11 +195,25 @@ The user's core question: what does FRMCS take *verbatim* from the consumer 3GPP
 
 | Axis | Owner | Values | Counts |
 |---|---|---|---|
-| **3GPP Release** | 3GPP | Rel-15 … Rel-19 (Rel-18+ = "5G-Advanced") | when a capability is *defined* |
+| **3GPP Release** | 3GPP | Rel-15 … Rel-20 (Rel-18+ = "5G-Advanced") | when a capability is *defined* |
+| **3GPP FRMCS Phase** | 3GPP | Phase 1 … Phase 6 (**Phase N = Rel-(14+N)**) | the rail *work-item* generation inside 3GPP |
 | **UIC FRMCS Edition** | UIC | Edition 1, Edition 2 | the rail *profile* baseline |
 | **CCS TSI RMR Baseline** | ERA | Baseline 0, 1 | the *mandated* set in EU law |
 
-Approximate correspondence (**verify vs a UIC FRMCS Edition roadmap — not authoritatively on file**): FRMCS **Edition 1** ≈ Rel-16/17 = CCS TSI RMR **Baseline 0** (the current mandated, "not-tender-complete" set, E-2026-08-01-16); FRMCS **Edition 2** ≈ Rel-18+.
+The **FRMCS Phase axis is authoritative** (3GPP Work Plan, E-2026-08-01-22): Phase 1=Rel-15 … Phase 6=Rel-20. Approximate correspondence to the *other* axes (**verify vs a UIC FRMCS Edition roadmap — not on file**): FRMCS **Edition 1** ≈ Phase 2/3 (Rel-16/17) = CCS TSI RMR **Baseline 0** (the current mandated, "not-tender-complete" set, E-2026-08-01-16); FRMCS **Edition 2** ≈ Phase 4+ (Rel-18+).
+
+**Authoritative rail work-item series → release** (3GPP Work Plan E-2026-08-01-22; ✓ = complete):
+
+| Phase | Rel | Work item(s) | Status | Specs touched |
+|---|---|---|---|---|
+| 1 | 15 | FS_FRMCS (study, TR 22.989) + FS_FRMCS_ARCH (TR 23.790); **MONASTERY** (normative) + MONASTERY_SEC | ✓ 100% | 22.280/179, 23.280/379, 24.x; **33.180** (security) |
+| 2 | 16 | FS_FRMCS2 (study, **New TR 22.889**); **MONASTERY2** — **created New TS 22.289** | ✓ 100% | 22.280/281/282/179, 23.280/379/281/282 |
+| 3 | 17 | FS_FRMCS3; MONASTERYEND (gap analysis); **eMONASTERY2** | ✓ 100% | 23.280/379/281/282/283, 24.x |
+| 4 | 18 | FS_FRMCS_Ph4 (study) | ✓ 100% | — |
+| 5 | 19 | **FRMCS_Ph5** (normative: "Railways-specific Enhancements to Mission Critical") | ✓ 100% | 22.280/179/289/**261**, 23.280/281/282/379/283/289, 24.x |
+| 6 | 20 | **FRMCS_Ph6** (normative) | 🔵 55% (Stage-1 100%, Stage-2 90%, CT 0%) | 22.280/179/281, 23.280/281/282/379/283/289 |
+
+The **backward lineage** (§2) is now authoritative too: **VGCS/VBS** (Rel-7/11, GSM-R ASCI group calls) → **GCSE_LTE** (Rel-12, group-comms enabler for LTE) → **MCX** (Rel-13+) → **MONASTERY/FRMCS** (Rel-15+). Note Phase 5 touches **TS 22.261** (base 5G service reqs, on file E-2026-08-01-23) — rail requirements feed the *core* 5G reqs, not just profile them.
 
 **Capability → release map** (release history per Kontron/3GPP; ✓ = spec edition logged on file):
 
@@ -229,7 +245,7 @@ Approximate correspondence (**verify vs a UIC FRMCS Edition roadmap — not auth
 
 **Coupling to the migration triangle.** The 3GPP roadmap is the pacing function beneath FRMCS readiness: FRMCS cannot become tender-ready faster than 3GPP *defines* → ETSI *profiles* → MORANE-2 *validates*. So the "specs not tender-complete" front-of-runway squeeze (migration §4a vertex C) is not a drafting delay — it is the 3GPP rail work-items maturing. Several gaps closed at *spec* level by Rel-18; whether they are closed *in deployment* is the open PR15 question (verify vs MORANE-2, E-2026-07-02-15).
 
-**Honest gap in this map.** The release *history* is grounded in on-file spec editions; the **forward view (Rel-20+), the authoritative Edition↔Release↔Baseline crosswalk, and the current rail work-item status are NOT on file** — the specs give release anchors, not a UIC-published roadmap. Candidate fetches to make this authoritative: the **3GPP work plan / rail work-item status** and the **UIC FRMCS Edition roadmap**.
+**Honest gap in this map.** Mostly closed at v4: the **release history, the rail WI-series status, and the forward view (Rel-20/Phase 6) are now authoritative** (3GPP Work Plan, E-2026-08-01-22). **Spec coverage** of the specs the rail WIs touch: the architecture-load-bearing set is on file (22.289 reqs apex, 22.889 study, the MCX Stage-2 architecture 23.280/281/282/379, 33.180 security, and now **22.261** base 5G reqs, E-2026-08-01-23); not on file (lower priority) = the FRMCS study TRs (22.989/23.790/23.796, pre-normative) and the MCX Stage-3 protocol specs (24.x, below the engagement's altitude). **The one axis still unresolved:** the **UIC FRMCS Edition ↔ 3GPP Phase/Release crosswalk** — the Phase axis is authoritative, but how UIC Editions map to it needs a UIC FRMCS Edition roadmap (still to fetch).
 
 *Anchors:* Kontron Ch. 7 Fig. 7-3 (E-2026-07-01-10) · TS 22.289 (E-2026-07-31-02) · MCX Stage-2 set (E-2026-07-26-16..-19) · TS 33.501/33.180 (E-26-14/-20, E-31-04) · TS 103 792 interworking (E-2026-07-26-13) · MORANE-2 (E-2026-07-02-15) · migration-change-risk-assessment.md §4a. Related: PR15, ADR-007(e), ADR-012, R1/R5/R7.
 
