@@ -5,7 +5,7 @@
 **Deciders:** Architecture Review Board · Infrastructure Manager (DB InfraGO interface) · NSA / safety authority liaison · Vpnet engagement lead
 **Depends on:** ADR-001 (bridged dual-network parallel run), ADR-004 (SIL-4 boundary), ADR-007 (testing & canary); governs risks PR11–PR14
 **Affects requirements:** R2 (no break in live service), R3 (eliminate central SPOF), R4 (fail-soft)
-**Legal basis:** Common Safety Method for Risk Evaluation & Assessment — Commission Implementing Reg (EU) 402/2013, Art 4(2) significance test + Arts 5/6 (mandatory independent assessment by an assessment body / AsBo where a change is significant), under the Railway Safety Directive (Dir (EU) 2016/798). Verified vs primary law — E-2026-06-28-06.
+**Legal basis:** Common Safety Method for Risk Evaluation & Assessment — Commission Implementing Reg (EU) 402/2013, Art 4(2) significance test + Arts 5/6 (mandatory independent assessment by an assessment body / AsBo where a change is significant), under the Railway Safety Directive (Dir (EU) 2016/798). Verified vs primary law — E-2026-06-28-06. **Cadence skeleton (E-2026-08-01-11):** the CCS TSI as amended by Reg (EU) 2026/693, **Appendix B (transition regimes)**, puts **error-correction implementation deadlines into binding EU law** — where registered errors (RINF) require a new authorisation, the CCS subsystem must implement the corrections **≤6 months** after the interoperability-constituent update; in-operation subsystems **≤1 year**; with legal releases distinguished pre/post 1 June 2026 (partial vs full maintenance package). This is the legal deadline structure the policy below operates within — the significance test governs *how* a change is assessed, Appendix B governs *by when* error corrections must land.
 
 ## Context
 
@@ -79,4 +79,5 @@ The governing trade is **control rigour vs migration velocity**. Option A is che
 2. [ ] Codify the inactive-redundancy-only rule + maintenance window as binding (from DB countermeasures, E-2026-06-27-02/-03).
 3. [ ] Tie the pre-change test gate to ADR-007 (failover injection + canary-by-segment) and ADR-004 (per-change safety-impact analysis).
 4. [ ] Add the detection precondition (PR5/R12) and the vendor change-evidence requirement (PR13) as entry conditions.
-5. [ ] ARB + NSA ratify; link from PR12 in the risk register; extend the policy to FRMCS-core changes (PR11). Flip to Accepted.
+5. [ ] Reconcile the per-change gate cadence with the **CCS TSI Appendix-B error-correction deadlines** (Reg (EU) 2026/693: ≤6 months for new-authorisation changes / ≤1 year in-operation; pre/post-1-June-2026 legal-release split) — the policy's classification+gate overhead must fit inside these binding windows (E-2026-08-01-11); tension to watch: a Class-A change needing the highest ARB+NSA gate vs a 6-month legal deadline.
+6. [ ] ARB + NSA ratify; link from PR12 in the risk register; extend the policy to FRMCS-core changes (PR11). Flip to Accepted.

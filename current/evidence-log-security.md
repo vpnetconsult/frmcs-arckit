@@ -47,21 +47,31 @@
 | E-2026-08-01-08 | 2026-08-01 | GSMA FS.56 — MDSCert device-security certification requirements v1.0 (2025; COMPLETE text; 3rd public GSMA primary) | A | R14, ADR-012 (+R13) | watch | Consumer-device certification pattern (ETSI TS 103 732 PPs: root-of-trust, TEE, monthly update-check SFR) — no attack vector; peripheral to rail, logged for the scheme pattern | Third instance of the §4a no-rail-analogue pattern: MDSCert (devices) + NESAS (equipment) + FS.11/19/20 (interconnect ops) all lack rail counterparts → candidate gap: who certifies FRMCS terminal security? (CRA bites; raise at ADR-012 decision) |
 | E-2026-08-01-09 | 2026-08-01 | GSMA FS.40 — 5G Security Guide v3.0 (2024; 122 pp; COMPLETE text; capstone of the public GSMA set) | A | R14, ADR-012 (+R2, R12, R8/PR13) | validate | Umbrella reference: false-base-station defeat, downgrade limits, IPUPS/GTP-U border, legacy-signalling coexistence risks, zero trust, NESAS/SCAS assurance, supply chain, CVD attack catalogue (SUCI catchers, IMP4GT…) — SIM-SEC vector mine | §4a member-only residual NARROWS: architecture/assurance/legacy-risk all public; gated = FS.11/19/20 hardening specifics; structural rail-owner gap unchanged; NESAS fetch partially satisfied (§18.1) |
 
-## Simulation backlog (ATT&CK vectors for future red-team / PoC under ADR-007)
+## Simulation backlog (ATT&CK + GSMA MoTIF vectors for future red-team / PoC under ADR-007)
+
+**Vector-taxonomy decision (2026-08-01, E-2026-08-01-04).** Adopt **GSMA MoTIF** (Mobile Threat Intelligence Framework, FS.57) numbering **alongside** MITRE ATT&CK-ICS in the vector column — MoTIF covers the mobile-bearer attack classes ATT&CK-ICS lacks (interconnect, core signalling, false base station, subscriber ID/location). Convention: cite ATT&CK-ICS (Txxxx) for the rail-OT effect + MoTIF (MOTxxxx-class technique *names*, numbers TBC from FS.58) for the mobile-bearer mechanism; both "derived" unless a source assigns them.
+
+**Vector source — FS.40 §20 CVD catalogue (E-2026-08-01-09).** The GSMA 5G Security Guide §20 catalogues academic 5G/LTE attacks by CVD id — SUCI catchers (CVD-2020-0033), LTE/5G downgrade + DoS (CVD-2020-0034/-0036), IMP4GT impersonation (CVD-2019-0024), REVOLTE call eavesdropping (CVD-2019-0030), paging side channels (CVD-2018-0014), SLIC stealthy location (CVD-2020-0040). Mine these as SIM-SEC candidate vectors (all inherited by FRMCS via the 5G stack); most map to MoTIF false-base-station / subscriber-ID / AitM techniques. Effect/lesson only — no operational how-to.
+
 
 **SIM-SEC-001 — Unauthenticated VHF "RADIO-STOP" command injection (Poland pattern)**
 - Evidence: E-2026-07-29-05 (A, UTK NSA safety report 2023 — occurrence/date/category confirmed), corroborated by E-2026-07-29-04 (B) + E-2026-07-14-01 (D). **Gate MET** at governance level; a full TECHNICAL primary (PKBWK report / CERT.PL advisory) is a remaining narrower lead. Attribute train-count/mechanism to secondary Wired reporting, not UTK.
-- ATT&CK for ICS (analyst-derived): **T0860 Wireless Compromise → T0855 Unauthorized Command Message → T0814 Denial of Service / T0826 Loss of Availability**.
+- ATT&CK for ICS (analyst-derived): **T0860 Wireless Compromise → T0855 Unauthorized Command Message → T0814 Denial of Service / T0826 Loss of Availability**. MoTIF: **Exploit via Radio Interface** (FS.57 §4.1.10).
 - NOT applicable: **T0880 Loss of Safety** — the fail-safe operated as designed; malicious triggering of a safety function is an AVAILABILITY loss (fail-safe, not fail-soft), cf. E-2026-07-02-34.
 - Objective: demonstrate the FRMCS successor's 3GPP mutual auth/integrity/encryption (TS 33.501, TS 33.180) defeats the T0860→T0855 chain the analogue/GSM-R bearer cannot — the security half of the PR15 equivalence bar. Bears R4, R14, R2.
 
 **SIM-SEC-002 (candidate) — 5G-core control-plane bridging / rogue-gNB PITM**
-- Evidence: E-2026-07-24-01 (A, CCS '25). ATT&CK: **T0830 Adversary-in-the-Middle** (5G). 5G-generic, inherited by FRMCS. Effect/lesson only — NO operational how-to.
+- Evidence: E-2026-07-24-01 (A, CCS '25). ATT&CK: **T0830 Adversary-in-the-Middle** (5G). MoTIF: **Adversary-in-the-Middle + false-base-station software** (passive/active/MiTM, FS.57 §4.3). 5G-generic, inherited by FRMCS. Effect/lesson only — NO operational how-to.
+- Spec-side defences on file: false-base-station defeat (FS.40 §4.3), downgrade limits (FS.40 §5.5), SUCI/5G-GUTI privacy (TS 33.501).
+
+**SIM-SEC-004 (candidate) — interconnect-trust exploitation (GTPDOOR class)**
+- Evidence: E-2026-08-01-05 (A, ENISA 2018 — structural anchor), E-2026-08-01-04 (A, MoTIF), sdo-mapping §4a (GTPDOOR exemplar). MoTIF: **Exploit Interconnection Link + Exploit via Core Signalling Interface + Trusted Relationship** (FS.57 §4.1.7/4.1.8). ATT&CK-ICS: no clean equivalent (this is the mobile-bearer gap MoTIF fills). Effect: C2/exfil blended into legitimate SS7/Diameter/GTP interconnect traffic — hard to detect (ENISA: "very difficult").
+- Spec-side defences on file: NDS/IP GTP protection (TS 33.210 Annex B), SCAS GTP-C/U filtering (TS 33.117 §4.2.6). Gap: the OPERATIONAL layer (GSMA FS.20-role) has no rail owner — the sim would demonstrate the detection/monitoring requirement (R12), not a defeated defence. Bears R14, R2, R12.
 
 **SIM-SEC-003 (candidate) — GSM-R SIM / modem compromise (OTA firmware hijack; RF jamming → auto-stop)**
 - Evidence: E-2026-07-29-06 (C, ICT brief) summarizing the StrangeLove "Great Train Cyber Robbery" research (Timorin & Gordeychik, 2015) — PRIMARY deck NOT yet on file (pull + currency-check before building the sim; 2015 findings).
 - Vectors described: default SIM codes never changed; OTA firmware-upgrade hijack of GSM-R modems; GSM-R-compatible modem attacks; GSM frequency jamming → automatic train stop (fail-safe/DoS).
-- ATT&CK (analyst-derived, provisional): **T0860 Wireless Compromise** (RF jamming / radio access) + firmware-hijack vector → **T0814 Denial of Service / T0826 Loss of Availability**; OTA firmware = supply-chain/firmware-implant angle. Overlaps SIM-SEC-001 (radio-layer availability).
+- ATT&CK (analyst-derived, provisional): **T0860 Wireless Compromise** (RF jamming / radio access) + firmware-hijack vector → **T0814 Denial of Service / T0826 Loss of Availability**; OTA firmware = supply-chain/firmware-implant angle. MoTIF: **Exploit via Radio Interface + Supply Chain Compromise** (FS.57 §4.1.10/4.1.19). Overlaps SIM-SEC-001 (radio-layer availability).
 
 ## Adversary profiles (the "who" to emulate across the SIM-SEC vectors)
 
