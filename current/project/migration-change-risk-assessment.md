@@ -54,7 +54,7 @@ The base assessment (§1–4) treats change-on-legacy as a **static** risk. It i
 |---|---|---|---|
 | **A — DE switch-off ambition** | **2035** | R1 / R13 (DE national plan) | The intended *end* of the dual run: GSM-R off, fleet on FRMCS |
 | **B — EU Class B funding horizon** | **2040** | Reg (EU) 2026/693 Art 1(2), CCS TSI (E-2026-08-01-11) | EU law *funds* GSM-R-era (Class B) on-board equipment **five years past** the DE ambition |
-| **C — FRMCS on-board not tender-complete** | **2026 (now)** | CCS TSI Table A2 **Note 9** (E-2026-08-01-11) | The FRMCS on-board specs are, *in binding EU law today*, "not considered complete for the purpose of tendering the on-board equipment"; test-spec placeholders (idx 96/97) still Reserved |
+| **C — FRMCS on-board not tender-complete** | **standing since 2023, still true 2026** | CCS TSI Table A2 **Note 9** — in the **base act 2023/1695** (E-2026-08-01-16), persisting through the 2026/693 amendment (E-2026-08-01-11); recital 7 "full FRMCS … not yet available" | The FRMCS on-board specs are, *in binding EU law*, "not considered complete for the purpose of tendering the on-board equipment"; test-spec placeholders (idx 96/97) still Reserved. **This has stood ~3 years** — the immaturity is persistent, not a transient teething gap, which sharpens the front-of-runway squeeze |
 
 Underneath all three sits the pressure that makes the squeeze dangerous: **2G/GSM-R obsolescence ~2030** (R1) — the estate starts going obsolete *before* the earliest endpoint.
 
