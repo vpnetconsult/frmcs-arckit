@@ -2,30 +2,10 @@
 
 **Status:** Proposed
 **Date:** 2026-06-24
-**Last read back against evidence:** 2026-08-15 · **Next review due: 2026-11-15** (quarterly; this ADR is load-bearing and had gone 7 weeks and 338 evidence rows without a read-back — see `linkedin-post-decision-drift.md`)
 **Deciders:** Infrastructure Manager CTO / Head of Telecoms · ERTMS Programme · Architecture Review Board · National Safety Authority interface
 **Tags:** ERTMS · GSM-R · FRMCS · 5G SA · 3GPP MCX · CCS TSI · spectrum
-**Downstream ADRs (this decision is their parent — added 2026-08-15):** ADR-002 (agentic decision & oversight layer) · ADR-003 (EU AI Act classification) · ADR-004 (SIL-4 boundary / freedom-from-interference) · ADR-007 (testing & canary strategy) · ADR-009 (fleet retrofit — R13) · ADR-010 (eval strategy) · ADR-011 (migration change-control) · ADR-012 (cybersecurity regulatory conformance — CRA/NIS-2)
 
 ---
-
-## ⚠️ Timeline premise — corrected 2026-08-15
-
-**This ADR previously asserted a GSM-R switch-off of "around 2030". That figure is WITHDRAWN.** It originated in **E-2026-06-24-03 (tier B)**, which the evidence log itself marked *"superseded/refined by E-11/-13"* — **on 24 June 2026, the day the register opened.** The log caught it immediately; this ADR never absorbed the correction and carried the stale figure for seven weeks and 338 evidence rows, while internally contradicting itself (§References already said 2035). That drift is written up in `linkedin-post-decision-drift.md`; this block is the repair.
-
-**Stated position — GSM-R end-of-life horizon:**
-
-| Marker | Date | Source | Weight |
-|---|---|---|---|
-| **EU legal outer bound** | **31 Dec 2040** — Class B funding option, Reg (EU) 2026/693 Art 8(2) | E-2026-08-01-11, -16 | **A — binding law** |
-| ERA's own obsolescence window | **2035–2040** | E-2026-08-01-25 | A |
-| German national switch-off | **2035** (earliest partial 2032) | E-2026-06-24-11, -13, -21 | A |
-| Operator (DSD) positioning | **"mid-2030s"** | E-2026-07-01-11 | A — operator primary |
-| Vendor support commitments | ≥2035; to 2040 | E-2026-07-26-06; E-2026-07-26-01 | **B — vendor-interested** (VIAVI sells GSM-R support contracts to 2040); upper-bound signal, not a planning date |
-
-**Planning position: coexistence to at least 2035, with 2040 as the legal outer bound.** RMR carries GSM-R and FRMCS as two Class A radio systems permitted to coexist (E-2026-08-01-25) — that is the legal basis for the dual run, not merely a tolerance.
-
-**Does this change the decision? No — and that is worth stating explicitly.** Obsolescence still forces the move (supply, skills, capability ceiling are independent of the switch-off date) and the target architecture is unaffected. **What changes is the premise's direction of pressure:** the parallel-run window is *longer* than this ADR assumed, so **coexistence (R2) becomes more load-bearing, not less** — more years carrying two estates, two skill sets and two assurance chains (see Consequences → Harder), and a longer funding exposure. It also means the urgency framing in §Context force 1 was overstated: the driver is obsolescence and capability, not a 2030 cliff.
 
 ## Context
 
@@ -33,7 +13,7 @@ GSM-R is the communications leg of ERTMS, paired with ETCS for signalling. It is
 
 Three forces now compel a decision:
 
-1. **Obsolescence and supply risk.** Major suppliers have signalled discontinuation of GSM-R maintenance from around 2030 — **but note that vendor EOL signalling and the actual switch-off are different things: current vendor commitments run to ≥2035 and, interestedly, to 2040 (see Timeline premise above)**. The load-bearing drivers are the contracting 2G skills base and spares supply, not a date. **Switch-off horizon: 2035 national (DE), 2035–2040 per ERA, 31 Dec 2040 as the EU legal outer bound — with a decade-plus parallel run before it.**
+1. **Obsolescence and supply risk.** Major suppliers have signalled discontinuation of GSM-R maintenance from around 2030, and the engineering skills base for 2G is contracting. EU-Rail / FRMCS Deployment Group scenarios assume a final GSM-R switch-off around 2030 or shortly after, with a decade-plus parallel-run period before that.
 2. **Capacity and capability ceiling.** Circuit-switched GSM-R cannot carry ATO, real-time video, TCMS telemetry, or high-density ETCS Level 2/3 traffic. It saturates at busy nodes and offers no native packet path for digital-rail applications.
 3. **Regulatory and interoperability pull.** FRMCS is the UIC-designated successor, being introduced through the CCS TSI and completed by ETSI TC RT specifications. RMR spectrum additional to GSM-R has been secured in Europe (ECC (20)02): a dedicated 1900 MHz band (n101) plus refarmed sub-GHz. FRMCS FRS/SRS V1 is finalised; V2 is in flight; field trials run from 2026 with V3 expected around 2027.
 
@@ -55,7 +35,7 @@ Run GSM-R and FRMCS **in parallel** through the transition, using **hybrid cab r
 
 ### Option A — Sustain / life-extend GSM-R
 
-Keep the 2G estate running with sourced spares and bespoke vendor support past 2030 (vendors now offer support to ≥2035/2040 — see Timeline premise).
+Keep the 2G estate running with sourced spares and bespoke vendor support past 2030.
 
 | Dimension | Assessment |
 |-----------|------------|
@@ -66,7 +46,7 @@ Keep the 2G estate running with sourced spares and bespoke vendor support past 2
 | Regulatory fit | Diverges from CCS TSI direction |
 
 **Pros:** No migration programme; no spectrum/RAN capex now.
-**Cons:** Terminal architecture; supplier exit signalled from ~2030 (commitments to ≥2035/2040 are vendor-interested — see Timeline premise); cannot host ATO/video/dense ETCS; growing skills gap; a deferral, not a decision. **Note: a longer-than-assumed GSM-R horizon makes this option *more* superficially attractive and therefore needs the capability-ceiling argument, not the obsolescence-date argument, to carry the rejection.**
+**Cons:** Terminal architecture; supplier exit ~2030; cannot host ATO/video/dense ETCS; growing skills gap; a deferral, not a decision.
 
 ### Option B — FRMCS on dedicated RMR spectrum, dedicated rail 5G SA (recommended)
 
@@ -244,7 +224,7 @@ A structured, viewpoint-by-viewpoint evaluation supporting the ADR. Read as the 
 
 ## 4. Assessment verdict
 
-The transition is **necessary** (obsolescence, contracting 2G supply/skills base, capability ceiling — **not a 2030 cliff; see Timeline premise, corrected 2026-08-15**) and **architecturally sound** under Option B. The FRMCS reference architecture — 5G SA transport, MCX service layer, gateway decoupling, OBapp-mediated applications — is well-formed and standards-anchored. The residual risk is concentrated in three places: **RF coverage** (the make-or-break layer), **fleet-scale on-board retrofit** (TOBA/hybrid cab radios), and **multi-year coexistence**. The recommended posture is a **services-led, phased parallel run** with early de-risking PoCs aligned to 5GRail/MORANE2, dedicated spectrum for the spine, and public-5G/satellite as a sanctioned fallback rather than the foundation.
+The transition is **necessary** (obsolescence, ~2030 supplier exit, capability ceiling) and **architecturally sound** under Option B. The FRMCS reference architecture — 5G SA transport, MCX service layer, gateway decoupling, OBapp-mediated applications — is well-formed and standards-anchored. The residual risk is concentrated in three places: **RF coverage** (the make-or-break layer), **fleet-scale on-board retrofit** (TOBA/hybrid cab radios), and **multi-year coexistence**. The recommended posture is a **services-led, phased parallel run** with early de-risking PoCs aligned to 5GRail/MORANE2, dedicated spectrum for the spine, and public-5G/satellite as a sanctioned fallback rather than the foundation.
 
 ---
 
@@ -255,9 +235,9 @@ The transition is **necessary** (obsolescence, contracting 2G supply/skills base
 - **3GPP** — Mission-Critical Services (MCX): MCPTT, MCData, MCVideo; common MC architecture (e.g. TS 23.380); IMS-derived functions.
 - **CEPT/ECC** — Decision ECC (20)02, RMR spectrum (1900 MHz n101 + refarmed sub-GHz).
 - **ETSI TC RT** — Railway Telecommunications technical specifications completing FRMCS.
-- **EU-Rail / FRMCS Deployment Group** — migration scenarios; coexistence to ~2030+, GSM-R switch-off around 2030 or shortly after. **⚠️ SUPERSEDED as a timeline source (2026-08-15) — see Timeline premise; retained here only to show what the original ADR rested on.**
+- **EU-Rail / FRMCS Deployment Group** — migration scenarios; coexistence to ~2030+, GSM-R switch-off around 2030 or shortly after.
 - **Projects** — 5GRail (Horizon 2020), MORANE2 / "Destination 2" (2024–2027), 5G-RACOM (Franco-German), Digitale Schiene Deutschland / Kontron–DB FRMCS MCX design.
 - **Vendor architecture material** — Ericsson (FRMCS/5G integration; radio planning), Nokia (1900 MHz n101 live test-track call), ANDREW (RF foundation, site-sharing filters).
-- **National programmes** — SNCF Réseau (2028–2035, commercial from 2032; Kontron lifecycle contract); Deutsche Bahn / DB Infrago early-mover trials; DE national GSM-R switch-off planned **2035**, ~16,000–21,000 vehicles, €1.2–2.4bn retrofit, no EU legal mandate yet; EU-level GSM-R support to ≥2030 per UNITEL Committee 2021, **now superseded by the 31 Dec 2040 Class B funding date in Reg (EU) 2026/693 Art 8(2) (E-2026-08-01-11, -16)**; path = FRMCS-V3 (end-2026) → TSI ZZS 2027 → 5yr → earliest partial switch-off 2032 (Sektorinitiative FRMCS-Fahrzeugmigration — E-2026-06-24-11, -13).
+- **National programmes** — SNCF Réseau (2028–2035, commercial from 2032; Kontron lifecycle contract); Deutsche Bahn / DB Infrago early-mover trials; DE national GSM-R switch-off planned **2035**, ~16,000–21,000 vehicles, €1.2–2.4bn retrofit, no EU legal mandate yet; EU-level GSM-R support to ≥2030 per UNITEL Committee 2021; path = FRMCS-V3 (end-2026) → TSI ZZS 2027 → 5yr → earliest partial switch-off 2032 (Sektorinitiative FRMCS-Fahrzeugmigration — E-2026-06-24-11, -13).
 
-*Note (revised 2026-08-15): the original template placeholder text — "ADR number, deciders and status are placeholders, renumber before circulating" — was removed as inaccurate and misleading. **ADR-001 is not a placeholder:** it is the parent decision for eight downstream ADRs and is referenced across 338 evidence rows. The **Status field is real and currently `Proposed`** — it has never been ratified, which is a live finding, not a template artefact.*
+*Note: ADR number, deciders and status are placeholders — renumber to fit your sequence (e.g. for github.com/vpnetconsult/ibn-core) before circulating.*

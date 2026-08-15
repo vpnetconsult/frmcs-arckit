@@ -3,9 +3,7 @@
 **Status:** Proposed
 **Date:** 2026-06-24
 **Deciders:** Infrastructure Manager CTO · ERTMS Programme · AI Governance / Risk · National Safety Authority interface · Architecture Review Board
-**Last read back against evidence:** 2026-08-15 · **Next review due: 2026-11-15** (quarterly; load-bearing, and had gone 7 weeks without a read-back — see `linkedin-post-decision-drift.md`)
 **Depends on:** ADR-001 (GSM-R → FRMCS transition)
-**Downstream / related ADRs (added 2026-08-15 — this ADR previously referenced NONE of them):** ADR-003 (EU AI Act classification — **resolves this ADR's action item 1**) · ADR-004 (SIL-4 boundary / freedom-from-interference — polices the guardrail this ADR sets) · ADR-007 (testing & canary) · ADR-010 (eval strategy — the evaluation this ADR requires) · ADR-011 (migration change-control) · ADR-012 (cybersecurity conformance — the oversight layer is itself a product with digital elements)
 **Tags:** agentic AI · NIST AI RMF · EU AI Act · human-in-the-loop · SIL-4 · governance
 
 ## Context
@@ -58,7 +56,7 @@ Agents propose; humans execute everything.
 
 ### Option C — Agentic layer with oversight bounded by decision class (recommended)
 Autonomy where reversible and safe; human-in-the-loop where irreversible/financial; human-in-command for safety actuation.
-**Pros:** speed where safe, control where it matters; certifiable core preserved; closes the awareness gap. **Cons:** requires a real AI management system (NIST AI RMF / ISO 42001) and eval/drift monitoring. ~~and an EU AI Act high-risk compliance posture~~ — **CORRECTED 2026-08-15: this ADR asserted a high-risk compliance posture as a settled cost. It is not. ADR-003 verified against primary law (Reg (EU) 2024/1689) on 2026-06-24 — the same day this ADR was written — that the layer AS ARCHITECTED HERE (oversight not control, non-actuating, human-in-command) sits OUTSIDE the high-risk perimeter: not high-risk as designed, conditional on the Art 3(14) safety-component test. See ADR-003 §Verification findings; evidence E-2026-06-24-07 (tier A).** Recommended.
+**Pros:** speed where safe, control where it matters; certifiable core preserved; closes the awareness gap. **Cons:** requires a real AI management system (NIST AI RMF / ISO 42001), eval/drift monitoring, and an EU AI Act high-risk compliance posture. Recommended.
 
 ## Trade-off analysis
 
@@ -67,12 +65,12 @@ The dominant trade is **speed of proposal vs autonomy of action**. The agent's v
 ## Consequences
 
 **Easier:** anticipation replaces *fassungslos*-after-the-fact (R12); fast, bounded resilience response (R3/R4); decision-ready briefs with named accountability.
-**Harder:** a genuine AI management system, agent evaluation, drift and automation-bias metrics. **CORRECTED 2026-08-15 — the original text read "and EU AI Act high-risk obligations (Art 14 oversight, logging, transparency, risk-management system)", asserting high-risk as fact in breach of this project's standing rule that it must not be asserted until verified. ADR-003 verified it: NOT high-risk as designed. The Art 14 / logging / transparency / risk-management obligations therefore do NOT attach automatically — they attach only if the layer becomes a safety component. Adopting them anyway would be a self-inflicted conformity programme. What DOES remain binding is the design constraint that keeps it that way (ADR-003 action item 5): the layer must stay non-actuating and advisory, and any move toward actuation re-triggers the Art 6(1)(a) test.**
-**To revisit:** the coupling/autonomy boundary per decision class as 3GPP MCX and model capabilities mature; ~~EU AI Act classification once verified against Annex I and the CCS TSI interface~~ — **VERIFIED 2026-06-24 in ADR-003 (Annex I §B item 17 via Rail Dir (EU) 2016/797; Art 6(1) two-part test; Annex III(2) covers road traffic NOT rail, so no independent trigger). Outcome: not high-risk as designed, conditional on the safety-component test. What remains to revisit is the CONDITION, not the classification — any design change toward actuation.**
+**Harder:** a genuine AI management system, agent evaluation, drift and automation-bias metrics, and EU AI Act high-risk obligations (Art 14 oversight, logging, transparency, risk-management system).
+**To revisit:** the coupling/autonomy boundary per decision class as 3GPP MCX and model capabilities mature; EU AI Act classification once verified against Annex I and the CCS TSI interface.
 
 ## Action items
 
-1. [x] ~~Verify EU AI Act high-risk classification for rail-control AI against Annex I + CCS TSI interface (load-bearing — do not assert until verified).~~ — **DONE 2026-06-24 in ADR-003, closed here 2026-08-15.** This item sat open for seven weeks after it had already been completed in a downstream ADR that this one did not reference. Outcome: **not high-risk as designed**, conditional on the Art 3(14) safety-component test. **Successor obligation (do not drop): carry the safety-component boundary as a verified design constraint — ADR-003 action item 5 — and re-run the Art 6(1)(a) test on any change that moves the layer toward actuation.**
+1. [ ] Verify EU AI Act high-risk classification for rail-control AI against Annex I + CCS TSI interface (load-bearing — do not assert until verified).
 2. [ ] Adopt NIST AI RMF (Govern/Map/Measure/Manage) as the operating spine; wrap with ISO/IEC 42001 + 23894.
 3. [ ] Specify each agent's intended use, inputs, and decision class; bind to the HITL table.
 4. [ ] Define the SIL-4 boundary: what the agent may read/advise vs what only the certified kernel may actuate.
