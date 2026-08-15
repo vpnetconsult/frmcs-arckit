@@ -29,6 +29,30 @@ printf "file\tsha256\tlines\tbytes\n" > "$MAN"
     printf "%s\t%s\t%s\t%s\n" "${f#./}" "$h" "$l" "$b" >> "$MAN"
   done )
 
+# --- Decision-health counters (added 2026-08-15) ---
+# Deliberately computed over the FROZEN copy so the numbers match the snapshot.
+ADR_TOTAL=0; ADR_ACC=0; ADR_PROP=0; AI_OPEN=0; AI_DONE=0
+while IFS= read -r a; do
+  [ -n "$a" ] || continue
+  ADR_TOTAL=$((ADR_TOTAL+1))
+  st=$(grep -m1 '^\*\*Status:\*\*' "$a" 2>/dev/null || true)
+  case "$st" in *Accepted*) ADR_ACC=$((ADR_ACC+1)) ;; *Proposed*) ADR_PROP=$((ADR_PROP+1)) ;; esac
+  o=$(grep -c '^[0-9]\{1,\}\. \[ \]' "$a" 2>/dev/null) || o=0
+  d=$(grep -c '^[0-9]\{1,\}\. \[x\]' "$a" 2>/dev/null) || d=0
+  AI_OPEN=$((AI_OPEN+o)); AI_DONE=$((AI_DONE+d))
+done <<EOF
+$(find "$DST" -type f -name 'ADR-0*.md' | sort)
+EOF
+
+EVF="$DST/evidence-log.md"
+EV_TOTAL=$(grep -c '^| E-' "$EVF" 2>/dev/null) || EV_TOTAL=0
+N_REV=$(grep -c '| revise |' "$EVF" 2>/dev/null) || N_REV=0
+N_VAL=$(grep -c '| validate |' "$EVF" 2>/dev/null) || N_VAL=0
+N_WAT=$(grep -c '| watch |' "$EVF" 2>/dev/null) || N_WAT=0
+N_ACT=$((N_REV+N_VAL+N_WAT))
+RATE=0
+[ "$N_ACT" -gt 0 ] && RATE=$((N_REV*100/N_ACT))
+
 # --- Requirement-status counts (watch these shift day to day) ---
 # Read only the status column (field 6) of requirement rows, not the whole row.
 MX="$DST/traceability-matrix.md"
@@ -51,7 +75,31 @@ count() { printf '%s\n' "$ROWS" | grep -c "$1" 2>/dev/null || true; }
   echo "| Proposed | $(count 'Proposed') |"
   echo "| Recommended | $(count 'Recommended') |"
   echo
-  echo "Evidence entries logged: $(($(grep -c '^| E-' "$DST/evidence-log.md" 2>/dev/null || echo 0)))"
+  echo "Evidence entries logged: $EV_TOTAL"
+  echo
+  echo "## Decision health"
+  echo
+  echo "The register's failure mode is decision drift: evidence accumulates while"
+  echo "decisions stand still. These counters make that visible in every baseline"
+  echo "instead of needing an audit to discover it. See evidence-log.md rule 4."
+  echo
+  echo "| Metric | Value |"
+  echo "|---|---|"
+  echo "| ADRs Accepted | $ADR_ACC of $ADR_TOTAL |"
+  echo "| ADRs Proposed | $ADR_PROP of $ADR_TOTAL |"
+  echo "| ADR action items closed / open | $AI_DONE / $AI_OPEN |"
+  echo "| Evidence rows: revise | $N_REV |"
+  echo "| Evidence rows: validate | $N_VAL |"
+  echo "| Evidence rows: watch | $N_WAT |"
+  echo "| **Revise rate** | **${RATE}%** |"
+  echo
+  if [ "$ADR_ACC" -eq 0 ] && [ "$ADR_TOTAL" -gt 0 ]; then
+    echo "> **No ADR has ever been ratified.** Every decision in this register is still provisional."
+  fi
+  if [ "$RATE" -lt 10 ]; then
+    echo "> **Revise rate below 10%.** Incoming evidence is almost never changing a decision."
+    echo "> That is either a settled question or a disconnected wire — check which."
+  fi
 } > "$DST/BASELINE.md"
 
 # --- Diff vs previous baseline (most recent dated dir before this one) ---
