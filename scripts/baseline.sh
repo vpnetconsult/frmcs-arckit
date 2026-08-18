@@ -46,9 +46,12 @@ EOF
 
 EVF="$DST/evidence-log.md"
 EV_TOTAL=$(grep -c '^| E-' "$EVF" 2>/dev/null) || EV_TOTAL=0
-N_REV=$(grep -c '| revise |' "$EVF" 2>/dev/null) || N_REV=0
-N_VAL=$(grep -c '| validate |' "$EVF" 2>/dev/null) || N_VAL=0
-N_WAT=$(grep -c '| watch |' "$EVF" 2>/dev/null) || N_WAT=0
+# Tolerate bold/whitespace around the action value: rows are hand-written and
+# "| **revise** |" is as common as "| revise |". The 2026-08-18 baseline missed
+# five rows for exactly this reason and under-reported the revise rate.
+N_REV=$(grep -cE '\| *\*{0,2}revise\*{0,2} *\|' "$EVF" 2>/dev/null) || N_REV=0
+N_VAL=$(grep -cE '\| *\*{0,2}validate\*{0,2} *\|' "$EVF" 2>/dev/null) || N_VAL=0
+N_WAT=$(grep -cE '\| *\*{0,2}watch\*{0,2} *\|' "$EVF" 2>/dev/null) || N_WAT=0
 N_ACT=$((N_REV+N_VAL+N_WAT))
 RATE=0
 [ "$N_ACT" -gt 0 ] && RATE=$((N_REV*100/N_ACT))
@@ -92,6 +95,12 @@ count() { printf '%s\n' "$ROWS" | grep -c "$1" 2>/dev/null || true; }
   echo "| Evidence rows: validate | $N_VAL |"
   echo "| Evidence rows: watch | $N_WAT |"
   echo "| **Revise rate** | **${RATE}%** |"
+  if [ "$N_ACT" -ne "$EV_TOTAL" ]; then
+    echo
+    echo "> **⚠️ COUNTER RECONCILIATION FAILED: $N_ACT actioned rows vs $EV_TOTAL evidence rows.**"
+    echo "> $((EV_TOTAL - N_ACT)) row(s) carry an action value this parser did not match."
+    echo "> The revise rate above is UNDER-REPORTED — fix the parser before trusting it."
+  fi
   echo
   if [ "$ADR_ACC" -eq 0 ] && [ "$ADR_TOTAL" -gt 0 ]; then
     echo "> **No ADR has ever been ratified.** Every decision in this register is still provisional."
