@@ -19,13 +19,14 @@
 
 | Marker | Date | Source | Weight |
 |---|---|---|---|
-| **EU legal outer bound** | **31 Dec 2040** — Class B funding option, Reg (EU) 2026/693 Art 8(2) | E-2026-08-01-11, -16 | **A — binding law** |
+| ~~EU legal outer bound~~ **⚠️ WITHDRAWN 2026-08-18 (E-2026-08-18-02)** | ~~31 Dec 2040 — Class B funding option~~ **— MISATTRIBUTED. GSM-R is a Class A radio system (E-2026-08-01-25: "RMR = two radio Class A systems (GSM-R + FRMCS)"), so the Class B funding provision in Reg (EU) 2026/693 does NOT bound it. That date governs legacy Class B national systems.** | E-2026-08-01-25 | — |
+| **THERE IS NO EU LEGAL END-DATE FOR GSM-R** | **none** — E-2026-08-01-25 (tier A): *"GSM-R continues as Class A **without end-date**"* | E-2026-08-01-25 | **A** |
 | ERA's own obsolescence window | **2035–2040** | E-2026-08-01-25 | A |
 | German national switch-off | **2035** (earliest partial 2032) | E-2026-06-24-11, -13, -21 | A |
 | Operator (DSD) positioning | **"mid-2030s"** | E-2026-07-01-11 | A — operator primary |
 | Vendor support commitments | ≥2035; to 2040 | E-2026-07-26-06; E-2026-07-26-01 | **B — vendor-interested** (VIAVI sells GSM-R support contracts to 2040); upper-bound signal, not a planning date |
 
-**Planning position: coexistence to at least 2035, with 2040 as the legal outer bound.** RMR carries GSM-R and FRMCS as two Class A radio systems permitted to coexist (E-2026-08-01-25) — that is the legal basis for the dual run, not merely a tolerance.
+**Planning position: coexistence to at least 2035, on a planning range with NO statutory backstop.** **⚠️ Corrected 2026-08-18 (E-2026-08-18-02): this previously read "with 2040 as the legal outer bound", which was wrong** — it attributed a Class B funding date to a Class A system. **The original ADR-001 error (a hard ~2030 date) and its 2026-08-15 repair (a hard 2040 legal bound) were the same mistake twice: manufacturing legal certainty about a date that is not in law.** The horizon is set by national plan (DE 2035), ERA's obsolescence window (2035–2040), operator positioning ("mid-2030s") and vendor support — **none of them a legal bound.** **The absence of a statutory backstop is itself load-bearing: nothing external forces this migration to complete, which INCREASES the weight on R2 coexistence rather than relieving it.** RMR carries GSM-R and FRMCS as two Class A radio systems permitted to coexist (E-2026-08-01-25) — that is the legal basis for the dual run, not merely a tolerance.
 
 **Does this change the decision? No — and that is worth stating explicitly.** Obsolescence still forces the move (supply, skills, capability ceiling are independent of the switch-off date) and the target architecture is unaffected. **What changes is the premise's direction of pressure:** the parallel-run window is *longer* than this ADR assumed, so **coexistence (R2) becomes more load-bearing, not less** — more years carrying two estates, two skill sets and two assurance chains (see Consequences → Harder), and a longer funding exposure. It also means the urgency framing in §Context force 1 was overstated: the driver is obsolescence and capability, not a 2030 cliff.
 
@@ -35,7 +36,7 @@ GSM-R is the communications leg of ERTMS, paired with ETCS for signalling. It is
 
 Three forces now compel a decision:
 
-1. **Obsolescence and supply risk.** Major suppliers have signalled discontinuation of GSM-R maintenance from around 2030 — **but note that vendor EOL signalling and the actual switch-off are different things: current vendor commitments run to ≥2035 and, interestedly, to 2040 (see Timeline premise above)**. The load-bearing drivers are the contracting 2G skills base and spares supply, not a date. **Switch-off horizon: 2035 national (DE), 2035–2040 per ERA, 31 Dec 2040 as the EU legal outer bound — with a decade-plus parallel run before it.**
+1. **Obsolescence and supply risk.** Major suppliers have signalled discontinuation of GSM-R maintenance from around 2030 — **but note that vendor EOL signalling and the actual switch-off are different things: current vendor commitments run to ≥2035 and, interestedly, to 2040 (see Timeline premise above)**. The load-bearing drivers are the contracting 2G skills base and spares supply, not a date. **Switch-off horizon: 2035 national (DE), 2035–2040 per ERA — and NO EU legal end-date at all (corrected 2026-08-18, E-2026-08-18-02; GSM-R is Class A "without end-date"). A decade-plus parallel run before it.**
 2. **Capacity and capability ceiling.** Circuit-switched GSM-R cannot carry ATO, real-time video, TCMS telemetry, or high-density ETCS Level 2/3 traffic. It saturates at busy nodes and offers no native packet path for digital-rail applications.
 3. **Regulatory and interoperability pull.** FRMCS is the UIC-designated successor, being introduced through the CCS TSI and completed by ETSI TC RT specifications. RMR spectrum additional to GSM-R has been secured in Europe (ECC (20)02): a dedicated 1900 MHz band (n101) plus refarmed sub-GHz. FRMCS FRS/SRS V1 is finalised; V2 is in flight; field trials run from 2026 with V3 expected around 2027.
 
