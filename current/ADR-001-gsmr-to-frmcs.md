@@ -146,7 +146,7 @@ The gateway-decoupling and loose-coupling commitments de-risk the largest long-t
 
 ## Action Items
 
-1. [x] `[D]` ~~Ratify Option B (dedicated 5G SA + MCX, parallel run) as target; record Option C as fallback layer.~~ — **ARB ratified 2026-08-15 (Resolution 3), on the corrected 2035/2040 timeline premise. NSA concurrence outstanding.**
+1. [x] `[D]` ~~Ratify Option B (dedicated 5G SA + MCX, parallel run) as target; record Option C as fallback layer.~~ — **ARB ratified 2026-08-15 (Resolution 3), on the corrected 2035/2040 timeline premise. Settled internally; no external validation sought or available — see the Status line.**
 2. [ ] `[I]` Commission rail-specific Network Planning & Optimisation (NPO): inter-site dimensioning in RMR bands, reuse assessment of GSM-R sites/backhaul, tunnel and cell-edge coverage modelling.
 3. [ ] `[I]` Define the service catalogue and per-application QoS/priority profiles (voice, ETCS, ATO, video, TCMS) to set base requirements.
 4. [ ] `[I]` Fix the on-board architecture: TOBA gateway spec, OBapp/OBrad/OBom interfaces, hybrid cab-radio strategy, coupling decision per application.
