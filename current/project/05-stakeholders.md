@@ -5,58 +5,81 @@
 **Owner:** Vpnet Cloud Solutions Sdn. Bhd. · sales@vpnet.cloud
 **Linked records:** `00-charter.md`, `01-governance-and-raci.md` (project-internal RACI — this document extends it to the full multi-party universe), `02-phase-gate-plan.md` (G0–G5), `03-risk-register.md` (PR1–PR16), `04-adr-log.md`, `traceability-matrix.md` (R1–R14), `frmcs-partner-responsibility.md`.
 
+> **⚠️ STANDING — corrected 2026-08-19, read before the tables.** This map was written on 2026-07-01 under a charter that named a client. **There is no client** (`00-charter.md` §Standing). Vpnet holds **no engagement with any party in this document**; every entry is compiled from **public statements and published sources**, and **naming a party is not approaching them**. Accordingly the old **"Engagement strategy"** column — which read *"Co-own the spine"*, *"Early + continuous"* — has been replaced by **"Mandate held"**, because that is what the map actually knows and the only thing it can honestly assert. The analytical content is unchanged and remains valid; what changed is the claim the map made about Vpnet's relationship to it.
+>
+> **What the map is FOR, restated:** (1) knowing which party holds which mandate, so findings are addressed to the right function on the merits; (2) **role-equivalence — the function set is the template for locating the Malaysian counterparts**, which is Track B's first deliverable. Outreach, where it happens, is **peer exchange: sharing findings, claiming nothing.** Approval-, concurrence- or endorsement-seeking is out of scope permanently.
+
 > **Scope note.** This is the external + internal stakeholder map. `01-governance-and-raci.md` already holds the internal 4-role RACI (Vpnet · IM · NSA · Vendor prime) and the decision-class oversight model; both are carried here and widened to every party. Governing constraint retained: **Vpnet is never Accountable for safety** — the IM and NSA are.
 >
 > **Layout note.** arcKit's `stakeholders` skill targets the plugin `projects/` scaffold and adds UK-Gov roles (SRO/GDS/CDDO); this is an EU/German-rail engagement in the `current/` layout, so those UK-specific elements are omitted and the artifact is written as `current/project/05-stakeholders.md`.
 
-## 1. Power–Interest grid
+## 1. Power–Interest grid — who holds what
+
+> **Read this as a map of mandates, not of relationships.** Vpnet has no engagement with any party below (`00-charter.md` §Standing). Every entry is compiled from **public statements and published sources**; naming a party is not approaching them. The quadrant labels describe **how much a party's mandate bears on the outcome**, not how we intend to handle them.
 
 ```
                     HIGH INTEREST                         LOWER INTEREST
         ┌───────────────────────────────────┬───────────────────────────────┐
-  HIGH  │ MANAGE CLOSELY                    │ KEEP SATISFIED                │
+  HIGH  │ DECISIVE                          │ INFLUENTIAL                   │
  POWER  │ DB InfraGO (IM) · EBA (NSA)       │ BMF (Finance Ministry)        │
         │ BMDV (Transport) · Bund/ERTMS-KoSt│ European Commission           │
-        │ ERA / ERJU · ARB · Vpnet (lead)   │ BNetzA (spectrum) · BSI (cyber)│
+        │ ERA / ERJU                        │ BNetzA (spectrum) · BSI (cyber)│
         │ Nokia · Kontron  [concentration]  │ AsBo / NoBo / ISA (assessors) │
         ├───────────────────────────────────┼───────────────────────────────┤
- LOWER  │ KEEP INFORMED                     │ MONITOR                       │
+ LOWER  │ AFFECTED                          │ PERIPHERAL                    │
  POWER  │ DSD · EVU/RUs · NE-Bahnen         │ Passengers · Freight customers│
         │ VDB / CSRG · Allianz pro Schiene  │ Tour operators                │
         │ Ericsson·Siemens·Funkwerk·Vodafone│                               │
         │ 3GPP·ETSI TC-RT·UIC·CENELEC·Unions│                               │
         └───────────────────────────────────┴───────────────────────────────┘
    [concentration] = Nokia/Kontron hold structural power via the duopoly (R8/PR7/PR13),
-   so they are managed closely as a dependency risk, not merely as suppliers.
+   so they are tracked as a dependency risk, not merely as suppliers.
+   Vpnet and the ARB are deliberately absent from this grid: neither is an external
+   stakeholder, and placing the author inside their own power map was an error of the
+   original version. Both are described in §"The author's own position" below.
 ```
 
-| Stakeholder | Power | Interest | Quadrant | Engagement strategy |
+| Stakeholder | Power | Interest | Quadrant | **Mandate held — the function to role-match in Malaysia** |
 |---|---|---|---|---|
-| DB InfraGO (Infrastructure Manager) | High | High | Manage closely | Co-own the spine; A for safety & go-live |
-| EBA (Eisenbahn-Bundesamt, NSA) | High | High | Manage closely | Early + continuous; A for authorisation |
-| BMDV (Federal Transport Ministry) | High | High | Manage closely | Strategy + funding alignment |
-| BMF (Federal Finance Ministry) | High | Medium | Keep satisfied | Funding case; the retrofit-directive gate |
-| Bund / ERTMS-Koordinierungsstelle | High | High | Manage closely | Sector coordination; funding (Sondervermögen) |
-| ERA / ERJU | High | High | Manage closely | TSI/FRMCS specs; conformance interface (contacts per E-2026-08-01-25: J. Doppelbauer [ERA Exec Dir], T. Chatelet [ERA]) |
-| European Commission | High | Medium | Keep satisfied | CRA/NIS-2/TSI/spectrum conformance |
-| BNetzA (spectrum) | Med-High | Medium | Keep satisfied | 900/1900 MHz allocation |
-| BSI (cyber authority) | Med-High | Medium | Keep satisfied | CRA/NIS-2, TR-03183 (ADR-012) |
-| AsBo / NoBo / ISA | Med-High | Medium | Keep satisfied | Independent assessment sign-off |
-| Nokia | High | High | Manage closely | 5G RAN + core; concentration risk (R8) |
-| Kontron Transportation | High | High | Manage closely | MCX/IMS/dispatcher; concentration risk (R8) |
-| Architecture Review Board (ARB) | High | High | Manage closely | Endorses ADRs, gate pass/hold |
-| Vpnet (engagement lead) | Medium | High | Manage closely | A for oversight architecture; never A for safety |
-| Digitale Schiene Deutschland (DSD) | Medium | High | Keep informed | DB's FRMCS programme; technical partner |
-| UIC (Head of FRMCS) | Medium | High | Keep informed | FRMCS spec owner (FRS/SRS/URS, FRMCS-T); contacts per E-2026-08-01-25: F. Davenne [UIC DG], D. Mandoc [Head of FRMCS] |
-| EVU / RUs + NE-Bahnen | Medium | High | Keep informed | Fleet retrofit dependency (R13) |
-| Ericsson · Siemens · Funkwerk · Vodafone · R&S | Medium | High | Keep informed | Secondary vendors; anti-lock-in leverage |
-| 3GPP · ETSI TC-RT · UIC · CENELEC · ECC | Medium | Medium | Keep informed | Standards track (MCX, FRS/SRS, EN 5012x) |
-| EIM (European Rail Infrastructure Managers) · CER (Community of European Railway & Infrastructure Cos) | Medium | High | Keep informed | EU IM/RU associations; **drove the FRMCS public-(terrestrial)-networks feasibility study** → the FRMCS-T/public-MNO migration option (E-2026-08-01-25/-24); agenda influence on the migration path |
-| IEC TC 9 / PT 63452 · GSMA · ER-ISAC | Medium | Medium | Keep informed | Rail-cyber successor standard (IEC 63452, E-2026-08-01-17/-20); GSMA operational-security layer (§4a gap); ER-ISAC = candidate rail sector-CERT |
-| VDB / Cybersecurity Rail Sector Group | Medium | High | Keep informed | Industry consensus; CRA guidance |
-| Allianz pro Schiene (advocacy) | Low-Med | High | Keep informed | Pro-rail lobby; agenda pressure |
-| Workforce (dispatchers/drivers/maint.) + unions (EVG/GDL) | Medium | High | Keep informed | HOF/safety culture; human-in-command |
-| Passengers · Freight · Tour operators | Low | High | Monitor | End-affected; comms via DB |
+| DB InfraGO (Infrastructure Manager) | High | High | Decisive | **Infrastructure manager.** Owns and operates the federal network estate; would be Accountable for safety and go-live in any real deployment. Subject of the 23–24 Jun incident analysis |
+| EBA (Eisenbahn-Bundesamt, NSA) | High | High | Decisive | **National safety authority.** Authorisation and supervision; *Serienzulassung*; GSM-R fallback + CSM-RA change discipline are named 2025 supervision foci (E-2026-06-30-05) |
+| DZSF (Deutsches Zentrum für Schienenverkehrsforschung) | Med-High | High | Decisive | **Safety-research institute of the safety authority.** Commissions and publishes the ATO/AI-assurance research the assessment leans on most heavily (E-2026-08-19-01/-02/-05/-06/-07). Research perspective, expressly not EBA policy |
+| BMDV (Federal Transport Ministry) | High | High | Decisive | **Transport ministry.** Digitalisation strategy, programme timeline, funding alignment |
+| BMF (Federal Finance Ministry) | High | Medium | Influential | **Finance ministry.** Fiscal control; releases the retrofit funding directive |
+| Bund / ERTMS-Koordinierungsstelle | High | High | Decisive | **Sector coordinating body.** Cross-operator coordination; *Sondervermögen* funding route |
+| ERA / ERJU | High | High | Decisive | **Supranational agency + joint undertaking.** TSI/FRMCS specification and conformance; the ERJU System Pillar owns the four cyber specs (E-2026-08-15-53) |
+| European Commission | High | Medium | Influential | **Legislator.** CRA, NIS-2, RED, TSI, spectrum instruments — the legal layer that does *not* transfer to Track B |
+| BNetzA (spectrum) | Med-High | Medium | Influential | **National spectrum regulator.** 900 / 1900 MHz allocation; the n101 premise in ADR-001 depends on the ECC-harmonised equivalent existing at all |
+| BSI (cyber authority) | Med-High | Medium | Influential | **National cyber authority.** CRA/NIS-2 supervision, TR-03183. **Its *Allianz für Cyber-Sicherheit* is a cooperation network Vpnet holds membership of — the one peer-exchange channel already legitimately open** (`09-acs-enquiry-2026-08-18.md`) |
+| AsBo / NoBo / ISA | Med-High | Medium | Influential | **Independent assessment bodies.** CSM-RA assessment body, TSI notified body, EN 50129 independent safety assessor — three distinct functions often conflated |
+| Nokia | High | High | Decisive | **Network vendor.** 5G RAN + core; concentration risk (R8) |
+| Kontron Transportation | High | High | Decisive | **Mission-critical-comms vendor.** MCX/IMS/dispatcher; concentration risk (R8) |
+| Digitale Schiene Deutschland (DSD) | Medium | High | Affected | **Operator's digitalisation programme.** DB's FRMCS/ATO delivery arm; a primary technical source for the corpus |
+| UIC (Head of FRMCS) | Medium | High | Affected | **International sector body.** FRMCS specification owner (FRS/SRS/URS, FRMCS-T); contacts per E-2026-08-01-25 |
+| EVU / RUs + NE-Bahnen | Medium | High | Affected | **Railway undertakings + non-federal railways.** Fleet retrofit dependency (R13); bear the dual-run cost |
+| Ericsson · Siemens · Funkwerk · Vodafone · R&S | Medium | High | Affected | **Secondary vendors.** The alternatives that make unbundling credible. ⚠️ Siemens also sits inside ERJU *and* the DZSF research stream (E-2026-08-19-07) — not an independent corroboration source |
+| 3GPP · ETSI TC-RT · UIC · CENELEC · ECC | Medium | Medium | Affected | **Standards development organisations.** MCX, FRS/SRS, EN 5012x, spectrum harmonisation |
+| EIM · CER | Medium | High | Affected | **EU IM/RU associations.** Drove the FRMCS public-networks feasibility study → the FRMCS-T/public-MNO option (E-2026-08-01-25/-24); agenda influence on the migration path |
+| IEC TC 9 / PT 63452 · GSMA · ER-ISAC | Medium | Medium | Affected | **Successor-standard body · operator-security layer · candidate sector-CERT** (E-2026-08-01-17/-20) |
+| VDB / Cybersecurity Rail Sector Group | Medium | High | Affected | **Industry association.** CRA guidance and sector consensus |
+| Allianz pro Schiene (advocacy) | Low-Med | High | Affected | **Advocacy coalition.** Agenda pressure on government (E-2026-07-01-07) |
+| Workforce (dispatchers/drivers/maint.) + unions (EVG/GDL) | Medium | High | Affected | **The humans the oversight layer is designed around.** HOF/safety culture; human-in-command is their authority, not an abstraction |
+| Passengers · Freight · Tour operators | Low | High | Peripheral | **End-affected.** The people for whom "continuous" failed on 23 June |
+
+### The function set — the transferable artefact
+
+Strip the names and what remains is the **role-equivalence template**, which is the point of this map for Track B:
+
+**infrastructure manager / operator · national safety authority · safety-research institute · transport ministry · finance ministry · sector coordinator · supranational spec + conformance body · spectrum regulator · cyber authority · independent assessors (assessment body / notified body / ISA) · network vendor · mission-critical-comms vendor · standards development organisations · railway undertakings · industry association · advocacy · organised workforce · end-affected public**
+
+**Track B's first deliverable is to establish who occupies each of these roles in Malaysia, from primary domestic sources.** Two cautions the EU/D map itself teaches: functions that look like one body may be several (AsBo / NoBo / ISA are three), and a function may have **no local occupant at all** — an absent safety-research institute or an absent sector-CERT is a finding, not a gap to paper over.
+
+### The author's own position
+
+Neither of these is an external stakeholder, and the original version's placement of both inside the power grid was a category error:
+
+- **Vpnet Cloud Solutions Sdn. Bhd.** — author of the assessment. **Accountable for its honesty and its published claims; never Accountable for safety.** Holds no mandate over any party above and no engagement with any of them.
+- **Architecture Review Board (ARB)** — a **working session chaired by the Vpnet engagement lead**, not a convened board of the named deciders (`07-arb-minute-2026-08-15.md`). `Accepted (ARB)` settles a decision *internally* and is not an external position.
 
 ## 2. Drivers (the WHY) — key parties
 
@@ -89,6 +112,8 @@
 ## 4. Cross-party RACI — keyed to decisions, gates & decision classes
 
 R = Responsible · A = Accountable · C = Consulted · I = Informed. Extends the 4-role RACI in `01-governance-and-raci.md`.
+
+> **⚠️ This table is a FINDING, not a description of an existing arrangement.** No party below has accepted any of these roles, because none has been engaged. Read it as **the accountability structure a real deployment would require** — the assessment's answer to "who would have to own what" — derived from the legal instruments and the published mandates. **It is an output of the analysis, and it is also a transferable one:** the *shape* of the allocation is what Track B re-derives against Malaysian bodies, once §1's function set has local occupants.
 
 | Decision / gate | IM (DB InfraGO) | NSA (EBA) | BSI | ARB | Vpnet | Funding (BMDV/BMF/Bund) | Standards (ERA/ERJU/ETSI) | Assessors (AsBo/NoBo/ISA) | Vendor prime (Nokia/Kontron) |
 |---|---|---|---|---|---|---|---|---|---|
@@ -128,21 +153,30 @@ R = Responsible · A = Accountable · C = Consulted · I = Informed. Extends the
 
 **ADR deciders (from the ADRs) → stakeholders:** ARB (endorse) · IM/DB InfraGO (safety A) · NSA/EBA (authorisation A) · CISO/**BSI** (cyber, ADR-012) · **Vpnet** (architecture R). No ADR is Accountable to a vendor.
 
-## 7. Engagement plan (champions · fence-sitters · resisters)
+## 7. Disposition analysis — who would resist, and why it matters to the argument
 
-| Posture | Parties | Approach |
-|---|---|---|
-| **Champions** | DSD, ERJU, Allianz pro Schiene, ARB | Amplify; use their momentum to unblock funding (C-1) and standards |
-| **Fence-sitters** | BMF, BNetzA, secondary vendors, unions | Convert with evidence (gate passes, funding-flow data, role-clarity) |
-| **Resisters / friction** | Concentration incumbents on unbundling (C-3); schedule-vs-rigour pressure (C-2) | Contain via procurement structure + non-negotiable gates; never trade the guardrail |
-| **Authorities (non-negotiable)** | EBA, BSI, ERA, AsBo/NoBo | Engage early + continuously; their sign-off is a gate, not a stakeholder to "win" |
+> **This replaces the original "Engagement plan" (champions · fence-sitters · resisters) and its comms cadence.** That section set out weekly ARB, per-gate reviews with an "NSA + BSI interface", and quarterly syncs with BMDV/Bund — **a schedule of meetings with bodies that have no relationship to this work.** It described a delivery engagement that does not exist. What is genuinely useful in the original is the *disposition* reading — who would push back on the argument and on what grounds — because an assessment that has not modelled its own opposition is untested. That is what remains below.
 
-**Comms cadence** (extends `01` operating cadence): weekly ARB; per-gate review (ARB + AI-governance + **NSA + BSI** interface); quarterly funding/strategy sync with **BMDV/Bund**; standards liaison with **ERA/ERJU/ETSI TC-RT** per release.
+| Disposition | Parties | The position they would take | What the assessment owes them |
+|---|---|---|---|
+| **Aligned with the argument** | DSD, ERJU, DZSF, Allianz pro Schiene | Already publishing in the same direction — separation of learning components from the vital layer, explicit risk estimation for novel functions, modernisation urgency | Cite them precisely and **do not overclaim their support**. DZSF's own disclaimer applies: research perspective, not authority policy. Convergence is not endorsement |
+| **Would need convincing on evidence** | BMF, BNetzA, secondary vendors, unions | Cost, spectrum availability, commercial position, role clarity under rising automation | Evidence they can check: funding-flow data, the n101 dependency stated as a dependency, the automation-bias treatment (PR4) written for the people it affects |
+| **Structural friction with the conclusions** | Concentration incumbents on unbundling (C-3); schedule-versus-rigour pressure (C-2) | Unbundled procurement erodes installed-base advantage; gate rigour costs time | Argue it on the record (R8/PR13, ADR-007/-011) and **never trade the guardrail for velocity**. Their objection is legitimate and should be stated at its strongest before it is answered |
+| **Authorities — the parties the argument must survive** | EBA, BSI, ERA, AsBo/NoBo/ISA | They hold the mandates; they have not seen this work and owe it nothing | **Precision.** Every claim about what they require must be traceable to a primary instrument, not to a secondary reading. **Their concurrence is not sought and is not available** — what is sought is that nothing said about their regime is wrong |
+
+**The opposition case, stated plainly** — the assessment's most exposed flanks, held here so they are not discovered by someone else first:
+
+1. **No mandate, no operational data.** Everything rests on public sources. An IM with the incident telemetry could contradict parts of the 23-June reconstruction, and would be right to.
+2. **Track B has no evidence base.** 355 rows about Europe say nothing about Malaysia (`00-charter.md` Track B).
+3. **Source independence is thinner than the row count suggests.** Siemens sits behind both the ERJU and DZSF streams (E-2026-08-19-07); Benoliel recurs across three affiliations. Corroboration counted twice is corroboration once.
+4. **The ARB is one person in a room.** `Accepted (ARB)` means internally settled, nothing more.
+
+**Cadence — internal only.** Daily evidence + `baseline.sh`; ADR read-backs on the review dates ADR-001/-002 carry (next due **2026-11-15**). **There is no external cadence, because there is no external party.** Peer exchange, when it happens, is episodic and initiated by Vpnet with nothing asked in return.
 
 ---
 
 **Generated by:** `/arckit:stakeholders`, adapted to the `current/` layout (complements `01-governance-and-raci.md`)
-**Generated on:** 2026-07-01 · **Status:** DRAFT
+**Generated on:** 2026-07-01 · **Amended:** 2026-08-19 (standing corrected: "Engagement strategy" → "Mandate held"; function set added for Track B role-equivalence; §7 engagement plan replaced by disposition analysis) · **Status:** DRAFT
 **ArcKit version:** v5.11.0
 **AI model:** claude-opus-4-8[1m]
 **Generation context:** Built from the charter, governance/RACI, phase-gate plan, risk register (PR1–PR16), traceability matrix (R1–R14), partner-responsibility artifact, and evidence log (esp. E-17, E-2026-06-30-05, E-2026-07-01-02/-04/-05/-07/-08/-10).
