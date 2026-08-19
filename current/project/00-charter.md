@@ -49,7 +49,7 @@ The engagement has one method and two distinct purposes. Confusing them is the f
 
 **Where that leaves the two drafted approaches.**
 - **`09-acs-enquiry-2026-08-18.md` — consistent with the model and may proceed.** It runs through a membership Vpnet actually holds, and its own opening checks already state the correct standing: the ACS "is not a submission channel", creates no regulatory interface, and does **not** discharge ADR-012 action 9. That is peer exchange, correctly framed.
-- **`08-eba-consultation-2026-08-18.md` — held, and requires reframing before it could ever go.** Its stated purpose is to "discharge the NSA consultation" and "clear the `NSA concurrence outstanding` qualifier" — **approval-shaped, and therefore out of scope as drafted.** A letter sharing findings with the EBA on their merits would be a different document with a different opening, and is a decision to take on its own terms.
+- **`08-eba-consultation-2026-08-18.md` — REWRITTEN 2026-08-19 as a findings-sharing letter (rev. 3); now consistent with the model.** As originally drafted it was approval-shaped — its purpose was to discharge an NSA consultation and clear the `NSA concurrence outstanding` qualifier — and it assumed a client it did not have. **Rev. 3 states the standing in its opening lines, shares three findings with the reasoning shown, and asks for nothing.** No reply is an acceptable outcome and blocks nothing. **The filename is legacy and kept for traceability; the word "consultation" in it no longer describes the document.**
 
 **Success for Track A is falsification-resistance, not approval.** No EU body will ever ratify this work, and the charter no longer pretends otherwise.
 
