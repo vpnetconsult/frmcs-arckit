@@ -12,14 +12,15 @@
 
 > **Correction retained from 2026-08-18 (E-2026-08-18-02).** An earlier draft cited "31 December 2040 as the outer bound implied by the Class B funding provision". That conflated Class A and Class B: **GSM-R is a Class A radio system without an end-date**; the 2040 date governs legacy Class B national systems. **The EBA administers precisely this distinction.** The error is recorded here rather than quietly removed — it is the reason the letter below now leads with its own limits.
 
-## Before sending — five checks
+## Before sending — six checks
 
 1. **The standing declaration is not optional and belongs in the first paragraph.** Independent assessment · no client · no mandate · nothing requested. A letter that lets a regulator infer a mandate that does not exist is the single most damaging thing this engagement could send — and burying the disclaimer at the bottom is the same error with better manners.
 2. **No cc to any infrastructure manager, and no "we are supporting…" formulation.** The original carried `cc: [IM contact]` and opened by claiming to support an IM. Both are gone. Vpnet speaks for Vpnet.
 3. **Addressee — DECIDED 2026-08-19: DZSF first, not the EBA.** The reasoning, recorded so it is not re-litigated: **DZSF is a research body and authorises nothing**, so no part of the exchange can be mistaken for an authorisation contact — which is the specific failure mode this rewrite exists to avoid. The letter engages directly with **its own published work** and with research **it commissioned**, so it arrives as a response to something rather than out of nowhere. And its **Human Factors lead** (published contact, E-2026-08-18-08) is also lead author on the AI-perception assurance work the letter engages with — DZSF's human-factors group spans both safety culture and AI assurance, which is this engagement's exact intersection.
    **The EBA is not ruled out; it is sequenced second and would need its own letter.** The authorisation-regime material (the repealed-TSI question) has been **removed from this letter** because DZSF cannot answer it and including it would blur the research/authorisation line the choice of recipient is meant to draw. It is parked in §"Held for a possible EBA letter" below. Published EBA leads remain on file (Leiterin Referat 34; Referentin Sicherheitsbescheinigung). The generic `sg92@eba.bund.de` on the TSI chronology (E-2026-08-18-06) is for corrections to that table and is not a counterpart for either letter.
 4. **Attachments: none, or the three ADRs only.** Do **not** attach `evidence-log.md`. It paraphrases sources under eight distinct handling classes (RESTRICTED, "Intern", Restricted©Infrabel, TLP:AMBER/GREEN/CLEAR, reproduction-forbidden), and the handling policy is still unwritten. The letter is written to stand alone with no attachments at all.
-5. **Expect no reply, and design for that.** An unsolicited letter from an unknown independent party to a federal authority most likely receives nothing. **That is not a failure and blocks nothing** — the assessment concludes on its own evidence either way (`00-charter.md`, Track A). Do not build any dependency on a response.
+5. **The remaining `[name]` is the ADDRESSEE, not the signatory.** The letter is signed **Dr. Roland Karl Pfeifer** (set 2026-08-19). What is still open is who it is addressed to: the **DZSF Human Factors lead** is the intended recipient per check 3, but the published contact on file dates from a **2024 conference report (E-2026-08-18-08)** — **confirm the current holder of the role before sending rather than writing to a name that may have moved on.** *Note in passing: the doctorate is worth carrying in the signature for this recipient. Writing to a research institute, it places the letter in the register it is actually written in — one researcher sharing findings with another — which is exactly the standing the rewrite is trying to establish, and it is the honest description rather than an embellishment.*
+6. **Expect no reply, and design for that.** An unsolicited letter from an unknown independent party to a federal authority most likely receives nothing. **That is not a failure and blocks nothing** — the assessment concludes on its own evidence either way (`00-charter.md`, Track A). Do not build any dependency on a response.
 
 ---
 
@@ -66,7 +67,7 @@ I am conscious that unsolicited letters create work. **Nothing here needs a resp
 
 Yours sincerely,
 
-[name] — Vpnet Cloud Solutions Sdn. Bhd.
+**Dr. Roland Karl Pfeifer** — Vpnet Cloud Solutions Sdn. Bhd.
 *Independent assessment; no client, no mandate, nothing requested.*
 
 ---
