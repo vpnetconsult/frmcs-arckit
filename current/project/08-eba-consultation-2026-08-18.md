@@ -1,4 +1,6 @@
-# EBA findings-sharing letter — FRMCS transition and an advisory oversight layer
+# DZSF findings-sharing letter — FRMCS transition and an advisory oversight layer
+
+*(Addressee changed to DZSF 2026-08-19. Filename is legacy — see the note below.)*
 
 **Drafted:** 2026-08-18 as a *consultation note* · **Corrected 2026-08-18 (E-2026-08-18-02)** · **REWRITTEN 2026-08-19 as a findings-sharing letter** · **Status: DRAFT — not sent**
 
@@ -14,25 +16,26 @@
 
 1. **The standing declaration is not optional and belongs in the first paragraph.** Independent assessment · no client · no mandate · nothing requested. A letter that lets a regulator infer a mandate that does not exist is the single most damaging thing this engagement could send — and burying the disclaimer at the bottom is the same error with better manners.
 2. **No cc to any infrastructure manager, and no "we are supporting…" formulation.** The original carried `cc: [IM contact]` and opened by claiming to support an IM. Both are gone. Vpnet speaks for Vpnet.
-3. **Addressee.** Published leads on file (E-2026-08-18-08), all published by their authors: the **Leiterin Referat 34** and the **Referentin Sicherheitsbescheinigung** at the EBA, and **DZSF's Human Factors lead** — who is also lead author on the AI-perception assurance work the letter engages with, i.e. DZSF's human-factors group spans both safety culture and AI assurance, which is this engagement's exact intersection. **For a findings-sharing letter, DZSF is arguably the better first recipient than the EBA**: it is a research body, the letter engages with its published work, and it does not authorise anything — so nothing about the exchange can be mistaken for an authorisation contact. The generic `sg92@eba.bund.de` on the TSI chronology (E-2026-08-18-06) is for corrections to that table and is **not** a counterpart for this.
+3. **Addressee — DECIDED 2026-08-19: DZSF first, not the EBA.** The reasoning, recorded so it is not re-litigated: **DZSF is a research body and authorises nothing**, so no part of the exchange can be mistaken for an authorisation contact — which is the specific failure mode this rewrite exists to avoid. The letter engages directly with **its own published work** and with research **it commissioned**, so it arrives as a response to something rather than out of nowhere. And its **Human Factors lead** (published contact, E-2026-08-18-08) is also lead author on the AI-perception assurance work the letter engages with — DZSF's human-factors group spans both safety culture and AI assurance, which is this engagement's exact intersection.
+   **The EBA is not ruled out; it is sequenced second and would need its own letter.** The authorisation-regime material (the repealed-TSI question) has been **removed from this letter** because DZSF cannot answer it and including it would blur the research/authorisation line the choice of recipient is meant to draw. It is parked in §"Held for a possible EBA letter" below. Published EBA leads remain on file (Leiterin Referat 34; Referentin Sicherheitsbescheinigung). The generic `sg92@eba.bund.de` on the TSI chronology (E-2026-08-18-06) is for corrections to that table and is not a counterpart for either letter.
 4. **Attachments: none, or the three ADRs only.** Do **not** attach `evidence-log.md`. It paraphrases sources under eight distinct handling classes (RESTRICTED, "Intern", Restricted©Infrabel, TLP:AMBER/GREEN/CLEAR, reproduction-forbidden), and the handling policy is still unwritten. The letter is written to stand alone with no attachments at all.
 5. **Expect no reply, and design for that.** An unsolicited letter from an unknown independent party to a federal authority most likely receives nothing. **That is not a failure and blocks nothing** — the assessment concludes on its own evidence either way (`00-charter.md`, Track A). Do not build any dependency on a response.
 
 ---
 
-## Draft letter — rev. 3 (2026-08-19, rewritten as findings-sharing)
+## Draft letter — rev. 4 (2026-08-19, findings-sharing, addressed to DZSF)
 
 **Subject:** Findings from an independent assessment — FRMCS transition and an advisory, non-actuating oversight layer
 
 Dear [name],
 
-I write as an independent party, not on behalf of any railway undertaking or infrastructure manager. **There is no client behind this letter, I hold no mandate from anyone in the sector, and I am not asking for a decision, an opinion or any form of concurrence.** I am sharing the findings of an assessment I have carried out from public sources, because two of them touch on your work directly and because if I have read something wrongly I would rather learn that than publish it.
+I write as an independent party, not on behalf of any railway undertaking or infrastructure manager, and I am writing to the DZSF rather than to a supervisory body deliberately: nothing here concerns authorisation, and I would not want it mistaken for an approach that does. **There is no client behind this letter, I hold no mandate from anyone in the sector, and I am not asking for a decision, an opinion or any form of concurrence.** I am sharing the findings of an assessment I have carried out from public sources, because two of them touch on your work directly and because if I have read something wrongly I would rather learn that than publish it. **Your published research is the single largest source in what I have built**, which is both why I am writing and why I would rather you saw the conclusions than found them later.
 
-Over recent months I have built an evidence-based architecture assessment of the GSM-R → FRMCS transition and of using an agentic AI layer for oversight — advisory only, never actuating. It rests entirely on published material: primary legal texts, ERA and ERJU output, the DZSF's research publications, and the operator's own account of the June 2026 GSM-R outage. Three findings seem worth putting in front of you.
+Over recent months I have built an evidence-based architecture assessment of the GSM-R → FRMCS transition and of using an agentic AI layer for oversight — advisory only, never actuating. It rests entirely on published material: primary legal texts, ERA and ERJU output, **your own research publications and the work you have commissioned**, and the operator's own account of the June 2026 GSM-R outage. Three findings seem worth putting in front of you.
 
-**1. A contrast drawn from the DZSF's own published work — and the boundary it implies.**
+**1. A contrast drawn from your published work — and the boundary it implies.**
 
-The DZSF's work on testing and validating AI-based perception systems for GoA 3+ describes a system that ingests sensor data, determines whether obstacle-free travel is possible, and initiates **horn, service braking or emergency braking** — it acts on the train, and is accordingly assigned safety requirements at SIL 1–SIL 2.
+Your work on testing and validating AI-based perception systems for GoA 3+ describes a system that ingests sensor data, determines whether obstacle-free travel is possible, and initiates **horn, service braking or emergency braking** — it acts on the train, and is accordingly assigned safety requirements at SIL 1–SIL 2.
 
 The layer I have assessed does none of that. It reads network and operational data and **advises human operators**; it has **no path to actuate any safety-critical function**, and the certified deterministic kernel is untouched by it. My assessment concludes that such a layer sits **outside** the safety-component perimeter of the control-command subsystem, and that this is the hinge on which its treatment under Regulation (EU) 2024/1689 Article 6(1) turns.
 
@@ -42,15 +45,14 @@ The layer I have assessed does none of that. It reads network and operational da
 
 Reading the German instruments together, each of them **excludes the intersection the others leave open**:
 
-- the DZSF-commissioned ATO-RISK work sets risk-acceptance criteria for automated driving but states expressly that **cyber security is not within scope**, and handles human performance in a separate project;
+- the **ATO-RISK** work you commissioned sets risk-acceptance criteria for automated driving but states expressly, as a scope condition, that **cyber security is not within scope**, and handles human performance separately in ATO-SENSE;
 - **DIN SPEC 92005** (uncertainty quantification in machine learning) expressly **excludes uncertainty criteria for safety functions and for assistance systems**;
 - the Fraunhofer IAIS AI assessment catalogue is a thorough generic instrument with **no rail content at all**, and predates the adopted AI Regulation.
 
 Each exclusion is defensible on its own terms. Taken together, they mean **the safety-critical, human-facing, security-relevant case — which is where an oversight layer for railway operational communications actually sits — falls between every instrument, and no one appears to be composing them.** I may simply be unaware of work that closes this; if so I would be glad to be pointed at it. If not, it seemed worth saying out loud.
 
-**3. Two smaller observations, offered in case they are useful.**
+**3. One smaller observation, offered in case it is useful.**
 
-- Your published TSI chronology notes that TSIs marked "repealed" may remain applicable to projects in progress. For a migration spanning Reg (EU) 2016/919, 2023/1695 and 2026/693, **determining which regime governs a given work package is not obvious from the published material**, and I have not been able to resolve it from the texts alone.
 - My working planning assumption is **coexistence to at least 2035**, informed by the national switch-off plan, the ERA obsolescence window and operator positioning. **I do not treat any of these as a legal end-date, since GSM-R remains a Class A radio system without one** — a distinction I initially got wrong in my own notes and corrected.
 
 I am conscious that unsolicited letters create work. **Nothing here needs a response, and no part of my assessment waits on one** — it will conclude on its evidence and state its limits either way. If any of the above is mistaken, a single line saying so would be more valuable to me than a long reply. And if this would be better directed elsewhere, I would welcome being told where.
@@ -72,3 +74,13 @@ Minute whatever comes back, including **"no response by [date]"** — which is a
 - **No reply** → nothing happens. The assessment concludes as planned.
 
 **What must never follow from any reply:** treating an acknowledgement, a meeting, or a courteous non-answer as concurrence, endorsement or a mandate. It is none of those, whatever its tone.
+
+## Held for a possible EBA letter (not sent, not drafted)
+
+Removed from the DZSF letter because the DZSF does not authorise anything and cannot answer them. **Parked, not abandoned** — if an EBA letter is ever written it starts here, and it would need the same standing declaration in its opening lines.
+
+- **Which TSI regime governs a given work package.** The EBA's published TSI chronology notes that TSIs marked "repealed" may remain applicable to projects in progress. Across a migration spanning Reg (EU) 2016/919, 2023/1695 and 2026/693, this is not resolvable from the published material alone (E-2026-08-18-06).
+- **Whether an FRMCS on-board or trackside retrofit constitutes "major upgrading or renewal"** of a structural subsystem requiring authorisation for putting into service — from rev. 2, and still unresolved. For a fleet of roughly 16,000–21,000 vehicles it materially changes the programme's shape (ADR-009).
+- **Where the CSM-RA Art 4(2) significance test bites, and the NoBo scope** for the CCS TSI conformity element (ADR-011).
+
+⚠️ **All three are authorisation questions, and an independent assessment with no client cannot ask them without inviting exactly the inference this rewrite exists to prevent.** If they are ever put to the EBA it must be as *"here is what I could not resolve from the published texts"* — an observation about the accessibility of the regime, not a request for a ruling on a programme.
