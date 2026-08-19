@@ -1,0 +1,84 @@
+# ADR-002: Agentic decision & oversight layer for the FRMCS transition
+
+**Status:** Accepted (ARB 2026-08-15) — **settled internally; no external validation sought or available**
+**Ratified:** ARB-2026-08-15, Resolution 4 — see `project/07-arb-minute-2026-08-15.md`. **Not usable in a safety case, conformance submission or any statement to a regulator.** ⚠️ **Reworded 2026-08-19 — this previously read "NSA concurrence outstanding", which was wrong in a way that mattered: it implied a pending act by a body that has no relationship to this work and never has had one.** No safety authority has been asked to concur, none will be, and the qualifier described a validation that was never available. **What is true instead:** this is an independent assessment with **no client and no authorising body** (`project/00-charter.md` §Standing), ratified by a **working session chaired by the engagement lead** rather than a convened board of the named deciders (`project/07-arb-minute-2026-08-15.md`). The decision is settled **internally** — it is no longer provisional for the purposes of this assessment — and it carries **no external standing whatsoever**. **The practical limit is unchanged and is not weakened by the rewording: nothing here may be presented to a regulator, an operator or an assessor as an authorised or endorsed position.** Findings may be shared as contributions from an independent party; concurrence is never requested.
+**Decision:** an agentic decision & oversight layer governed by decision class with a human-in-the-loop gate — **agents advise and never actuate; human-in-command for safety-critical actuation.** Binding architecture, not aspiration.
+**Operative when:** ADR-004 is ratified — the SIL-4 boundary definition is a **dependency, not a precondition** (ARB-2026-08-15 R4).
+**Date:** 2026-06-24
+**Deciders:** Infrastructure Manager CTO · ERTMS Programme · AI Governance / Risk · National Safety Authority interface · Architecture Review Board
+**Last read back against evidence:** 2026-08-15 · **Next review due: 2026-11-15** (quarterly; load-bearing, and had gone 7 weeks without a read-back — see `linkedin-post-decision-drift.md`)
+**Depends on:** ADR-001 (GSM-R → FRMCS transition)
+**Downstream / related ADRs (added 2026-08-15 — this ADR previously referenced NONE of them):** ADR-003 (EU AI Act classification — **resolves this ADR's action item 1**) · ADR-004 (SIL-4 boundary / freedom-from-interference — polices the guardrail this ADR sets) · ADR-007 (testing & canary) · ADR-010 (eval strategy — the evaluation this ADR requires) · ADR-011 (migration change-control) · ADR-012 (cybersecurity conformance — the oversight layer is itself a product with digital elements)
+**Tags:** agentic AI · NIST AI RMF · EU AI Act · human-in-the-loop · SIL-4 · governance
+
+## Context
+
+ADR-001 commits to FRMCS (5G SA + MCX) as a resilient, bearer-flexible transport. It does not, by itself, govern *decisions* — neither decisions about the architecture (the ADR, the RFP evaluation, the risk register) nor decisions within the running network (fault detection, fail-soft, bearer fallback). Today both are episodic, human, and slow: the 23–24 June 2026 DB GSM-R outage (incident-annex.md) was a roughly two-hour standstill in which a known, recurring risk had no agent watching it and no system authorised to act on it. That is a decision-and-governance gap, not only a radio gap.
+
+A critical clarification carried from ADR-001: **5G/FRMCS is an enabler of autonomy, not autonomy itself.** The bearer provides the bandwidth, latency, and mission-critical services that make ATO and agentic decisions possible; autonomy is a separate layer riding on top, with its own governance. Conflating the two is how a programme buys "5G" and assumes resilience and autonomy arrived in the box.
+
+## Decision
+
+Introduce an **agentic decision & oversight layer** over the FRMCS bearer, split into two planes, with human oversight bounded by the reversibility and safety-impact of each action and a named human accountable for every decision class. Keep the SIL-4 safety kernel deterministic and outside the learning agents.
+
+### Two planes
+
+Decision plane — governs the architecture:
+- `Risk Sentinel` — continuously ingests obsolescence signals, incident telemetry, supplier/market and spectrum/regulatory changes; maintains a live risk register; raises a decision-ready alert before a threshold is crossed. (Closes the "why nobody knew" gap — R12.)
+- `Architecture Decision Agent` — re-evaluates ADR options when inputs move; drafts the delta; routes to the ARB.
+- `Bid/Procurement Agent` — scores RFP responses against weighted criteria; flags vendor concentration/lock-in; attaches source-trust tiers to ingested claims. (R8.)
+- `Assurance Agent` — maps each decision to CCS TSI, CENELEC, NIST AI RMF, EU AI Act; emits the audit/evidence chain.
+
+Runtime plane — governs the live network:
+- `Anomaly/Fault Agent` — detects the central-SPOF signature (nationwide-simultaneous ≠ RF) faster than a human duty manager. (R3.)
+- `Resilience Orchestration Agent` — proposes fail-soft/degraded mode and multi-bearer fallback; does not actuate safety-critical state autonomously. (R4.)
+- `Intent Agents (BIA/SIA/RIA)` — compile operational intent to CAMARA/network actions for reversible, non-safety actions.
+
+### Human-in-the-loop model (oversight by decision class)
+
+| Decision class | Example | Autonomy | Human role |
+|---|---|---|---|
+| Reversible, no safety impact | Re-score an RFP claim; refresh risk register | Autonomous | On-the-loop (audit) |
+| Reversible, operational | Draft ADR delta; propose capacity slice | Human-on-the-loop | Can intervene; periodic review |
+| Irreversible / financial | Award recommendation; fallback to public bearer | Human-in-the-loop | Approves before action |
+| Safety-critical actuation | Movement authority; emergency stop; degraded-mode entry | Human-in-command | Human initiates; agent advises only — never autonomous |
+
+### Non-negotiables
+
+- The **SIL-4 safety kernel stays deterministic and outside the learning agent** (CENELEC EN 50126/28/29). The agent optimises and advises around a certified safety core; it does not become the safety core. (R11.)
+- **Automation bias** is a designed-against failure: a human rubber-stamping agent proposals is not oversight. The model must make dissent cheap and the rationale legible.
+- **Accountability does not transfer.** The agent never owns the decision; a person does.
+
+## Options considered
+
+### Option A — No agentic layer (status quo)
+Episodic human decisions, reactive incident response.
+**Pros:** nothing new to assure. **Cons:** reproduces the 23–24 Jun failure mode — known risk unwatched, no authorised fast action. Rejected as the target.
+
+### Option B — Agentic layer, advisory-only across all classes
+Agents propose; humans execute everything.
+**Pros:** simplest assurance; no autonomous action. **Cons:** loses the speed benefit where it is safe and valuable (audit/operational classes); humans remain the bottleneck for reversible actions. Partial.
+
+### Option C — Agentic layer with oversight bounded by decision class (recommended)
+Autonomy where reversible and safe; human-in-the-loop where irreversible/financial; human-in-command for safety actuation.
+**Pros:** speed where safe, control where it matters; certifiable core preserved; closes the awareness gap. **Cons:** requires a real AI management system (NIST AI RMF / ISO 42001) and eval/drift monitoring. ~~and an EU AI Act high-risk compliance posture~~ — **CORRECTED 2026-08-15: this ADR asserted a high-risk compliance posture as a settled cost. It is not. ADR-003 verified against primary law (Reg (EU) 2024/1689) on 2026-06-24 — the same day this ADR was written — that the layer AS ARCHITECTED HERE (oversight not control, non-actuating, human-in-command) sits OUTSIDE the high-risk perimeter: not high-risk as designed, conditional on the Art 3(14) safety-component test. See ADR-003 §Verification findings; evidence E-2026-06-24-07 (tier A).** Recommended.
+
+## Trade-off analysis
+
+The dominant trade is **speed of proposal vs autonomy of action**. The agent's value is fast, well-evidenced *proposals*, not autonomous safety action. Bounding autonomy by decision class captures the speed (replaying the outage: anomaly flagged in seconds, fallback proposed with predicted impact, duty manager approves a bounded action in one click) while the safety-critical halt/restart stays human-in-command. The two-hour standstill becomes a supervised, minutes-long degraded mode.
+
+## Consequences
+
+**Easier:** anticipation replaces *fassungslos*-after-the-fact (R12); fast, bounded resilience response (R3/R4); decision-ready briefs with named accountability.
+**Harder:** a genuine AI management system, agent evaluation, drift and automation-bias metrics. **CORRECTED 2026-08-15 — the original text read "and EU AI Act high-risk obligations (Art 14 oversight, logging, transparency, risk-management system)", asserting high-risk as fact in breach of this project's standing rule that it must not be asserted until verified. ADR-003 verified it: NOT high-risk as designed. The Art 14 / logging / transparency / risk-management obligations therefore do NOT attach automatically — they attach only if the layer becomes a safety component. Adopting them anyway would be a self-inflicted conformity programme. What DOES remain binding is the design constraint that keeps it that way (ADR-003 action item 5): the layer must stay non-actuating and advisory, and any move toward actuation re-triggers the Art 6(1)(a) test.**
+**To revisit:** the coupling/autonomy boundary per decision class as 3GPP MCX and model capabilities mature; ~~EU AI Act classification once verified against Annex I and the CCS TSI interface~~ — **VERIFIED 2026-06-24 in ADR-003 (Annex I §B item 17 via Rail Dir (EU) 2016/797; Art 6(1) two-part test; Annex III(2) covers road traffic NOT rail, so no independent trigger). Outcome: not high-risk as designed, conditional on the safety-component test. What remains to revisit is the CONDITION, not the classification — any design change toward actuation.**
+
+## Action items
+
+1. [x] ~~Verify EU AI Act high-risk classification for rail-control AI against Annex I + CCS TSI interface (load-bearing — do not assert until verified).~~ — **DONE 2026-06-24 in ADR-003, closed here 2026-08-15.** This item sat open for seven weeks after it had already been completed in a downstream ADR that this one did not reference. Outcome: **not high-risk as designed**, conditional on the Art 3(14) safety-component test. **Successor obligation (do not drop): carry the safety-component boundary as a verified design constraint — ADR-003 action item 5 — and re-run the Art 6(1)(a) test on any change that moves the layer toward actuation.**
+2. [ ] `[I]` Adopt NIST AI RMF (Govern/Map/Measure/Manage) as the operating spine; wrap with ISO/IEC 42001 + 23894.
+3. [ ] `[I]` Specify each agent's intended use, inputs, and decision class; bind to the HITL table. **Framing constraint (NEW 2026-08-18, E-2026-08-18-08 — EBA/DZSF Tag der Sicherheitskultur):** the sector's own conclusion is that internal controls strengthen safety culture **only where they serve improvement and shared learning rather than pure monitoring**, and that acceptance turns on the *form* of the control and on how its purpose is communicated. **An oversight layer that reads to staff as surveillance will be rejected by the safety culture it depends on, however technically sound.** Specify intended use, communication and introduction accordingly. Note also the closest real-world comparator: **DB InfraGO's "Fachreferent:in Betriebssicherheit"** — an *independent human instance* doing systematic digital data collection and uniform analysis to surface deviations and track long-term developments. **Treat the agentic layer as augmenting that role, not substituting for it**; it is also the obvious first integration point and stakeholder. **Human-autonomy teaming constraints (NEW 2026-08-19, E-2026-08-19-01 — ERA/DZSF *Automation Myth #4*):** **(i) Do NOT scope the agent set by the "left-over principle"** — automating everything the machine does better and leaving the residue to the human produces passive, monotonous residual work and, documented in air traffic control's Arrival Manager, operators who feel **disenfranchised**, check the machine's output passively, and lose motivation and performance. **The ADR-002 ladder is structurally that shape and must be designed against it deliberately.** **(ii) Interface obligations:** the agent's **behaviour, mode and intentions** must be transparent, it must **explain the reasons behind a recommendation comprehensibly**, and human and agent must share an explicit understanding of the **overall work target**. **(iii) The human must hold system knowledge — the agents' logic, capabilities AND limitations** — which is a training and documentation obligation, not only an interface one. **(iv) Function allocation must be flexible and situationally adjustable, including deliberately handing tasks BACK to the human in low-load periods for the purpose of regular practice** (skill retention against automation-induced decay). **(v)** Rieth's identified gap in current rail automation — insufficient **communication of planned and next executed actions** — is a requirement the layer should meet from the outset rather than inherit.
+4. [ ] `[D]` **HELD BY ADR-004 — dependency, not precondition (ARB-2026-08-15 R4).** Define the SIL-4 boundary: what the agent may read/advise vs what only the certified kernel may actuate.
+5. [ ] `[I]` Build eval harness: accuracy, drift, automation-bias / dissent-rate metrics; incident-replay tests.
+6. [ ] `[D]` **CONSTRAIN THE AGENTS' IMPLEMENTATION CLASS — decision-shaped, and currently unmade (NEW 2026-08-19, E-2026-08-19-02).** DZSF's position is that the approvability of an AI system turns on whether it is **"vollständig prüfbar"** — fully verifiable before entry into service, i.e. **decision rules traceable, or decision behaviour verifiable as correct across all input parameters.** On that reading, fully-verifiable systems ("usually simply called software") are **approvable within the existing legal framework**, while systems whose behaviour is learned from training data — **expressly deep neural networks** — are not, because they escape complete verification. **This ADR specifies agents and ADR-010 an eval harness, but neither constrains what the agents are BUILT FROM. Decide explicitly: either (a) require fully-verifiable implementations for any agent whose output reaches a safety-relevant decision class, accepting the capability ceiling that imposes; or (b) permit learned components and accept that their approvability is unresolved, in which case they must be confined to decision classes where no such route is needed.** **Do not leave this to implementation — it determines whether the layer is approvable under existing law, and it interacts directly with ADR-003 (an unverifiable component is harder to argue outside the safety perimeter) and with ADR-010 item 5 (a completeness argument is only meaningful against a verifiable system).** **A THREE-PART TEST INSTEAD OF A BINARY (added 2026-08-19, E-2026-08-19-09/-10).** This item asks whether the agents must be "fully verifiable". **DIN SPEC 92005 §3.25** decomposes model transparency into **algorithmic transparency · decomposability · simulatability**, and notes that **a white-box model is not necessarily transparent** — a 10-million-weight white-box network over machine-encoded features fails all three. **Score a candidate implementation on the three, rather than asking a yes/no question that has no answer.** **DIN SPEC 92001-3** then reframes the question again, and more sharply: **opacity is a RELATION between a system, a stakeholder and that stakeholder's information needs at a lifecycle stage — not a property of the model.** **So the question this item should be asking is not "are the agents explainable" but "explainable TO THE SIGNALLER, AT THE MOMENT OF THE ALERT, sufficiently to act on" — a materially harder bar than explainable to a developer in validation, and one the HITL ladder has never been assessed against.** ⚠️ **And per §6.6, explanation is itself failure-capable: it can cause an expert to override a correct recommendation, or an operator to over-trust a wrong one. It is not the mitigation for automation bias; it is another thing to measure (ADR-010).**
+7. [ ] `[I]` Define the evidence chain the Assurance Agent emits for ARB and NSA.
