@@ -23,7 +23,7 @@
 
 ---
 
-## Draft letter — rev. 4 (2026-08-19, findings-sharing, addressed to DZSF)
+## Draft letter — rev. 5 (2026-08-19, findings-sharing, addressed to DZSF; finding 2 extended to four instruments)
 
 **Subject:** Findings from an independent assessment — FRMCS transition and an advisory, non-actuating oversight layer
 
@@ -47,9 +47,16 @@ Reading the German instruments together, each of them **excludes the intersectio
 
 - the **ATO-RISK** work you commissioned sets risk-acceptance criteria for automated driving but states expressly, as a scope condition, that **cyber security is not within scope**, and handles human performance separately in ATO-SENSE;
 - **DIN SPEC 92005** (uncertainty quantification in machine learning) expressly **excludes uncertainty criteria for safety functions and for assistance systems**;
-- the Fraunhofer IAIS AI assessment catalogue is a thorough generic instrument with **no rail content at all**, and predates the adopted AI Regulation.
+- the Fraunhofer IAIS AI assessment catalogue is a thorough generic instrument with **no rail content at all**, and predates the adopted AI Regulation;
+- and the one piece of work I have found that **does** compose the two at runtime — Markus Heinrich's TU Darmstadt dissertation on security engineering in safety-critical railway signalling, whose later research you went on to commission — **expressly places secure update out of scope**, treating it as a supervised maintenance-phase concern.
 
-Each exclusion is defensible on its own terms. Taken together, they mean **the safety-critical, human-facing, security-relevant case — which is where an oversight layer for railway operational communications actually sits — falls between every instrument, and no one appears to be composing them.** I may simply be unaware of work that closes this; if so I would be glad to be pointed at it. If not, it seemed worth saying out loud.
+**Every one of these exclusions is defensible on its own terms**, and I want to be clear that I am not criticising any of them — a scope boundary honestly declared is better practice than a scope quietly overreached, and each of these documents declares its boundary plainly.
+
+**The difficulty is the composite.** Taken together, they mean the safety-critical, human-facing, security-relevant case — which is where an oversight layer for railway operational communications actually sits — **falls into the space between every instrument, and I cannot find anyone whose remit is to close it.**
+
+The fourth item is the one I find most telling, and it is why I am writing rather than filing this away. Heinrich's methodology **does** solve the composition problem at runtime, and elegantly: the security control expresses its reaction in the safety layer's existing hazard vocabulary, so an attack reaches the safety core as something it is already designed to handle. **And it still leaves the update seam open.** So the gap is not simply that nobody has looked — the work that comes closest looks directly at it and stops at the same edge as everything else.
+
+I may be unaware of work that closes this, and if so I would be genuinely glad to be pointed at it — that would be the most useful reply this letter could get. If there is none, then it seemed worth saying out loud to the people best placed to know.
 
 **3. One smaller observation, offered in case it is useful.**
 
