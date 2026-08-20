@@ -14,6 +14,29 @@
 
 > **Correction retained from 2026-08-18 (E-2026-08-18-02).** An earlier draft cited "31 December 2040 as the outer bound implied by the Class B funding provision". That conflated Class A and Class B: **GSM-R is a Class A radio system without an end-date**; the 2040 date governs legacy Class B national systems. **The EBA administers precisely this distinction.** The error is recorded here rather than quietly removed — it is the reason the letter below now leads with its own limits.
 
+## ⚠️ SEQUENCING — DECIDED 2026-08-20: THE FORUM COMES FIRST, THE LETTER FOLLOWS
+
+**Do not send this letter before 2 September 2026.** (E-2026-08-20-01.)
+
+**DZSF is holding its 2nd Forum "Wissenschaft und Praxis" on 2 September 2026, 13:00–15:00, by Webex, open, on ATO, with Q&A and discussion.** Three talks: **Pavel Klasek** (annotated sensor data for object recognition), **Dr.-Ing. Christian Klotz** (*Anforderungen, Test und Nachweis von KI für Perzeptionssysteme*), **Dr. rer. nat. Kristin Mühl** (*Berufsbild Tele-Tf — Teleoperation für einen sicheren automatisierten Bahnbetrieb*).
+
+**Why this changes the order.**
+
+1. **The addressee and a second speaker are co-authors of the paper this letter argues with.** *Test und Nachweis KI-basierter Perzeptionssysteme bei GoA 3+* (Signal+Draht 6/2026, E-2026-08-18-07) is by **Klotz · Mühl · Balaji · Hofmann**. **Finding 1 draws its central contrast against that paper and is addressed to one of its authors, while another presents it.**
+2. **An open forum with Q&A is the cleanest possible peer exchange** — attend, contribute, ask, claim nothing. It is exactly what `00-charter.md` §Standing permits and nothing about it can be mistaken for an approach seeking authorisation.
+3. **Finding 1 can be tested for free, in the room, by its own author.** It is the conclusion in the whole assessment **most likely to be wrong** — the letter says so itself. Two sentences in a Q&A resolve more than a page of correspondence, and if the contrast does not hold, the letter should not go out carrying it.
+4. **A cold letter spends the one first impression available. A follow-up does not.** Opening with *"following your presentation on 2 September…"* converts an unsolicited approach into the continuation of a conversation — the single largest available lift to the chance of a reply.
+
+**The letter does not decay.** It is finished, in German, signed and addressed. Waiting thirteen days costs nothing and buys all of the above.
+
+**Before the forum:** confirm date, time and joining details **at dzsf.bund.de** — the announcement reached the register relayed from social media, not read at source. Prepare finding 1 as a **two-sentence question**, not a speech.
+
+**After the forum, revise before sending:** open with the reference to the session; fold in anything learned; and **if teleoperation is discussed, add it** — ADR-002 action 8 is now open on exactly that question and Dr. Mühl's talk is directly on it.
+
+⚠️ **What the forum does not change:** attending, asking a question and being answered is **peer exchange, not concurrence.** Nothing said in a Q&A ratifies anything, and no ADR status moves on it. See §"On return".
+
+---
+
 ## Before sending — seven checks
 
 1. **The standing declaration is not optional and belongs in the first paragraph.** Independent assessment · no client · no mandate · nothing requested. A letter that lets a regulator infer a mandate that does not exist is the single most damaging thing this engagement could send — and burying the disclaimer at the bottom is the same error with better manners.
