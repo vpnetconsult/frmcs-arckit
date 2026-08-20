@@ -1,0 +1,84 @@
+# ADR-009: Fleet-scale FRMCS rolling-stock retrofit — feasibility & funding as a managed external dependency
+
+**Status:** Proposed
+**Date:** 2026-06-24
+**Deciders:** ERTMS Programme · Infrastructure Manager (DB InfraGO interface) · Rolling-stock owners / EVUs · Bund/BMV funding liaison · EBA/NSA approval interface · Vpnet engagement lead
+**Depends on:** ADR-001 (GSM-R → FRMCS transition; phased dual-network parallel run)
+**Affects requirements:** R13 (make fleet-scale FRMCS retrofit feasible & funded), with bearing on R2 (no break in live safety service — coexistence depends on rolling-stock readiness)
+
+## Context
+
+ADR-001 commits to a phased dual-network **parallel run** (R2): GSM-R and FRMCS coexist for a decade-plus. That coexistence is only real if rolling stock is actually equipped for FRMCS on a compatible timeline. R13 captures the scale of that precondition: on the order of **16,000–21,000 DE vehicles**, plus **~40,000 mobile and ~3,500 stationary** GSM-R devices, to migrate by **~2035**.
+
+The decisive feature of this requirement is that **most of the levers sit outside the architecture team's control**:
+
+- **Funding** — no programme of this size proceeds without it. The sector proposes a Bund *Förderrichtlinie* (up to 100%); cost is estimated at **€1.2–2.4bn**, with the **approval/authorisation burden ~30% of cost** (E-13).
+- **Approval throughput** — EBA *Serienzulassung* (type/series approval) and an *Umbaucluster* reform are needed; today approval of a new retrofit can take **≥1 year**, and there is a candid **shortage of qualified rail-specific planners and approvers** (E-21).
+- **Supply** — chipset / 3GPP Release availability gates when retrofit can even begin at volume (E-13).
+- **No fit-obligation today** — there is **no EU or national legal mandate** to fit FRMCS now (*Bestandsschutz*); retrofit pace is funding- and incentive-driven, not compelled (E-13).
+
+What *has* moved: the **Bund ERTMS Koordinierungsstelle is now established** and FRMCS/ATO pre-equipping funding is planned — but only **20.13% of 2025 funds were drawn**, which is itself a feasibility signal (E-17). The DKS pilot shows the pattern that works at vehicle level: a **multi-mode, two-stage retrofit** at only a **few €k per EMU** within an "aus einem Guss" approach, federally-funded for **333 regional EMUs**, plus **FRMCS-ready new builds** (130 Alstom Coradia Max + 28 Siemens Mireo) (E-21).
+
+So the real decision for this programme is **not** "can we fund and approve the national fleet" — alone, we cannot — but **how the architecture and programme treat this dependency** so that the ADR-001 parallel-run plan does not silently rest on an unfunded, unapproved assumption.
+
+## Decision
+
+**Proposed:** Treat fleet-scale rolling-stock FRMCS readiness as an **explicit, tracked external dependency and a precondition** for the R2 coexistence plan — not an assumption — and apply the architecture's leverage where it genuinely has it:
+
+1. **Adopt a multi-mode, two-stage on-board retrofit pattern** (stage 1: antennas / cabling / netboxes during any vehicle touch; stage 2: modems / filters + software update near FRMCS availability) to minimise per-vehicle cost and the number of approval-triggering interventions — following the DKS "aus einem Guss" precedent (E-21). Links ADR-001 action item #4 (on-board / TOBA architecture).
+2. **Require FRMCS-readiness in new rolling-stock procurements** so the retrofit population shrinks through fleet renewal (precedent: Coradia Max + Mireo, E-21).
+3. **Carry funding flow, approval throughput, and chipset/Release supply as named programme risks** (risk register), with the Bund *Förderrichtlinie*, the sector coordinating body, and EBA *Serienzulassung* reform recorded as the mitigations — **owned outside** the architecture but **tracked by it** and tied to gates.
+4. **Do not assume a fit-obligation.** Plan the parallel-run window (to ~2035) on the basis that retrofit is incentive-driven (*Bestandsschutz*, E-13); the timeline in ADR-001 inherits this dependency explicitly.
+
+## Options considered
+
+### Option A — Managed external dependency + multi-mode two-stage retrofit (recommended)
+| Dimension | Assessment |
+|---|---|
+| Complexity | Moderate — two-stage retrofit + new-build clauses; dependency tracking |
+| Cost | Minimised per vehicle (few €k/EMU, E-21); national total still external |
+| Safety/assurance | Strong — fewer approval-triggering interventions; preserves ADR-001 coexistence integrity |
+| Reversibility | High — no irreversible commitment; dependency can be re-planned |
+
+Pros: keeps ADR-001's parallel-run honest; applies leverage where the team actually has it; shrinks the problem via fleet renewal. Cons: success still gated by funding/approval throughput we do not control.
+
+### Option B — Assume fleet readiness (carry it as a settled precondition)
+| Dimension | Assessment |
+|---|---|
+| Complexity | Lower up front |
+| Cost | Hidden — unfunded assumption |
+| Safety/assurance | Weak — coexistence plan rests on an unverified premise |
+| Reversibility | Poor — failure surfaces late |
+
+Pros: simplest plan. Cons: the 20.13% drawdown (E-17) shows funding flow is the live risk; assuming it away is exactly the awareness-gap failure mode the engagement exists to prevent.
+
+### Option C — Hard fit-mandate / accelerated big-bang retrofit
+| Dimension | Assessment |
+|---|---|
+| Complexity | Very high |
+| Cost | Concentrated, high contingency |
+| Safety/assurance | Risky — approval throughput + chipset supply cannot absorb it |
+| Reversibility | Low |
+
+Pros: shortest theoretical timeline. Cons: no legal basis today (*Bestandsschutz*); personnel/approval bottleneck (E-21) makes it undeliverable; not the architecture team's decision to mandate.
+
+## Trade-off analysis
+
+The governing trade is **control vs realism**. The architecture team cannot fund or approve the national fleet; a plan that pretends otherwise (B) or tries to force it (C) fails on contact with the funding/approval reality. Option A keeps ADR-001's parallel run defensible by making the dependency **explicit and tracked**, while minimising the burden on the one axis the team *does* control — the per-vehicle retrofit pattern and new-build readiness.
+
+## Consequences
+
+- **Easier:** ADR-001's parallel run rests on a tracked dependency, not an assumption; per-vehicle cost and approval burden minimised; fleet renewal shrinks the retrofit population over time.
+- **Harder:** delivery depends on Bund funding flow and EBA approval throughput outside the team's control; the ~2035 window is sensitive to the drawdown trend (E-17) and the planner/approver personnel shortage (E-21).
+- **To revisit:** if an EU/national fit-obligation is introduced, or funding/approval throughput materially changes, re-open this ADR and the parallel-run timeline in ADR-001.
+
+## Action items
+1. [ ] Stand up the fleet-readiness dependency in `03-risk-register.md` (funding flow, approval throughput, chipset/Release-19 supply) with owners and gate links.
+2. [ ] `[D]` **PATTERN RATIFIED ARB-2026-08-15 (Resolution 5)** as the working on-board baseline, separated from this ADR's external funding/approval dependencies; **ADR-009 itself remains `Proposed`.** Remaining: confirm with rolling-stock owners (link ADR-001 action item #4). **ARB-2026-08-15/03: raise as its own ADR-013 so it carries a status independent of the funding track.**
+3. [ ] Build an FRMCS-readiness clause into new rolling-stock procurement requirements.
+4. [ ] Track the Bund *Förderrichtlinie* and the sector coordinating body / EBA *Serienzulassung* reform; refresh E-13/E-17/E-21-class evidence quarterly.
+5. [ ] **Variant-spanning retrofit test coverage (NEW 2026-08-15, E-2026-08-15-54).** NS's on-train cyber retrofit lost **three weeks in series production** to "issues in IP plan with 4 coach trains — **not revealed during testing**": a **fleet-configuration variant** the test regime did not represent. Require that the pre-series test bench and the ADR-007 pre-change test gate **enumerate and cover fleet/configuration variants** (car count, wiring looms, switch/AP topology, coach-level addressing), not just the modal configuration. This is the 23-June failure mode — a change to live legacy estate failing on a condition testing did not represent — recurring in the retrofit domain.
+6. [ ] **Ground retrofit execution planning in an actual completed programme (NEW 2026-08-15, E-2026-08-15-54).** This ADR's evidence base has been funding-, approval- and supply-side only; NS supplies the first **executability** data point: ~1200-unit target, **first fleet retrofitted in 4 months** (final 08/2024), **1 train/day, 4 per week, 4 mechanics/day**, per-train package of 7 new cables + OT/IT switch updates + WAP updates + 2 new devices + testing, preceded by a pre-try-out and **4 try-outs**. Use it to size the FRMCS on-board retrofit rate, the try-out ladder and the second-line support model (NS found a **daily second-line support team** decisive). **Caveat: NL rolling stock, a different operator, fleet and regulatory context, and a cyber appliance rather than a radio/TOBA swap — treat as an order-of-magnitude planning basis, not a transferable rate.** Two further NS practices worth copying: designing the unit as a **field-replaceable unit with auto-detect-and-install** to fit existing mechanics processes, and escalating unresolvable design dilemmas ("hot potato") into a **steering-committee decision memo** — an ADR by another name.
+7. [ ] **Do not assume uniform security capability across the retrofit population (NEW 2026-08-19, E-2026-08-19-13).** The DZSF-commissioned sector survey finds cybersecurity maturity correlated with company size (**Spearman r = .42**, a medium relationship): **not one micro-enterprise reaches a mean of 2.0 on the 0–5 NIST-CSF scale**, the median stays **below 1** in the next size band, it rises only above **50 FTE**, and only companies above **10,000 FTE** reach 5.0 at all. **⚠️ This ADR's retrofit population includes the NE-Bahnen and small EVU, and they are measurably the least able to secure what they will be asked to fit. A migration plan that assumes uniform capability is assuming something this study measured and disproved.** Deliverable: state the capability spread as a named programme dependency alongside funding and approval throughput (action 4), and consider whether the two-stage pattern needs a supported variant for operators without an in-house security function. ⚠️ Carry the study's limits: ~8 % response rate, indicative values.
+8. [ ] **Reframe the approval dependency: the deficiency is PREDICTABILITY, not strictness (NEW 2026-08-20, E-2026-08-20-04 — STREAMLINE).** This ADR carries EBA *Serienzulassung* reform and approval throughput as an external dependency (R13) with no benchmark. STREAMLINE (DLR-TS + IKEM, client DMG) assesses the cross-border ETCS authorisation bottleneck across **test → certification/type examination → operating licence**, and takes **the Swiss model as best practice** on the ground that its procedure is clearly defined, its roles and rights proven, and the process **"planbar, deterministisch, kalkulierbar"** — planable, deterministic, calculable — **and therefore permits viable business models for operators.** **⚠️ That is the reframing this ADR needs: a retrofit business case is not defeated by a strict approval regime, it is defeated by one whose DURATION CANNOT BE FORECAST. Argue for predictability, not leniency — the second is not available and asking for it would misread the regulator.** **Also add RTO to the retrofit population:** *RemODtrAIn* builds a remote-train-operation prototype **explicitly for retrofit as well as new vehicles** (E-2026-08-20-05), so the ~16,000–21,000 vehicle estate may face FRMCS and RTO fitment against the same approval bottleneck.
+9. [ ] ARB to ratify; flip status from Proposed to Accepted.
