@@ -31,6 +31,30 @@
 
 **Before the forum:** confirm date, time and joining details **at dzsf.bund.de** — the announcement reached the register relayed from social media, not read at source. Prepare finding 1 as a **two-sentence question**, not a speech.
 
+### ⚠️ What to ask AT the forum — revised 2026-08-20 after the DLR project survey
+
+**The best question changed today, and so did who to ask it of.**
+
+**PRIMARY — to Dr. Mühl, on her own talk (*Berufsbild Tele-Tf*).** The register established two things on 2026-08-20 that make this the sharpest available question, and it is a question rather than a challenge:
+
+> Your work defines the Tele-Tf as the **fallback level** for ATO. Across eleven remote-operation programmes I could read at source — RemODtrAIn, IMoGer, GAIA-X 4 ROMS, ACT4Transformation, RemoteReadyMove, the DLR Remote Operation hub, TraCo, InTra, STADT:up, KIRA, AUTOGVZ — **I could not find a public statement of the assumed link availability, or of what the fallback becomes when the link drops.** Is that specified somewhere I have not found, and if so where?
+
+**Why this and not finding 1.** It is short, it is answerable in one sentence, it concerns *her* subject, and it asks about a gap in the public record rather than asserting a gap in the work. **If she answers it, the register gains the single fact ADR-002 item 8 is blocked on. If she cannot, that is itself the answer — and it belongs in the letter.**
+
+**SECONDARY — to Dr.-Ing. Klotz, on finding 1.** Two sentences, as drafted: the perception system initiates horn and braking at SIL 1–2; an advisory layer that never actuates and leaves the certified kernel untouched — does it sit outside the safety-component perimeter, or is that perimeter drawn differently in practice? **It remains the conclusion most likely to be wrong, and its author is in the room.**
+
+**DO NOT raise at the forum:** the Siemens concentration finding (E-2026-08-20-21b). It is accurate, it is load-bearing for R8, and it is a comment about the independence of other people's work made in a public session where those people are not present to answer. **It goes in writing, to a named person, or not at all.**
+
+### Staged for the post-forum revision — do not fold in before 2 September
+
+Three items are now stronger than parts of the current draft. **They are held out deliberately: the forum may answer or refute them, and a letter written before the answer would have to be corrected after it.**
+
+1. **The bearer null (E-2026-08-20-21a).** Eleven programmes, over €130 m between them, and no public statement of latency budget, QoS, coverage or link-failure behaviour. **This is the same shape as finding 2 and more forceful — everyone builds up to the seam, nobody publishes across it. If the forum does not answer it, it becomes finding 3, or replaces finding 3.**
+2. **The advisory/actuating split is already law (E-2026-08-20-20).** *Teleassistenz* under EU 2022/1426 + AFGBV versus *Telefahren* under StVFernLV, in force 1 December 2025. **This strengthens finding 1 considerably: the distinction the letter defends is not a consultant's construction, it is the line between two regulatory regimes in road law. Add it to finding 1 — but as the road analogue it is, with the comparability caveat the register applies to every cross-domain borrowing.**
+3. **DZSF's own DLR portfolio is five projects** — Teleoperation ATO · ATO-Sense · ATO-Einsatzszenarien · ForTeS · MKB. **Worth one sentence acknowledging the programme rather than the papers: it shows the letter is engaging with a body of work, not cherry-picking two articles.**
+
+⚠️ **What must NOT be added:** the corrections the survey forced on this register's own rows (STREAMLINE's date, RemODtrAIn's ODD, FASaN's attribution). **They are ours, not theirs, and a letter is not a changelog.**
+
 **After the forum, revise before sending:** open with the reference to the session; fold in anything learned; and **if teleoperation is discussed, add it** — ADR-002 action 8 is now open on exactly that question and Dr. Mühl's talk is directly on it.
 
 ⚠️ **What the forum does not change:** attending, asking a question and being answered is **peer exchange, not concurrence.** Nothing said in a Q&A ratifies anything, and no ADR status moves on it. See §"On return".
