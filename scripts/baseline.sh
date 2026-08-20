@@ -10,10 +10,18 @@ SRC="$ROOT/current"
 DATE="${1:-$(date +%F)}"
 DST="$ROOT/baselines/$DATE"
 
-# Allow re-baselining the same day without clobbering: suffix with time.
+# Allow re-baselining the same day without clobbering: suffix with time,
+# and with seconds if even that collides. A baseline is never overwritten.
 if [ -e "$DST" ]; then
   DST="$ROOT/baselines/${DATE}_$(date +%H%M)"
+  if [ -e "$DST" ]; then
+    DST="$ROOT/baselines/${DATE}_$(date +%H%M%S)"
+  fi
   echo "Note: $DATE baseline exists; writing $DST instead."
+fi
+if [ -e "$DST" ]; then
+  echo "Refusing to overwrite existing baseline: $DST" >&2
+  exit 1
 fi
 
 mkdir -p "$DST"
