@@ -1,5 +1,7 @@
 # DZSF findings-sharing letter — FRMCS transition and an advisory oversight layer
 
+**Sending version is GERMAN (Fassung 6, 2026-08-20).** The English text is retained below it as the reference version — keep both in step.
+
 *(Addressee changed to DZSF 2026-08-19. Filename is legacy — see the note below.)*
 
 **Drafted:** 2026-08-18 as a *consultation note* · **Corrected 2026-08-18 (E-2026-08-18-02)** · **REWRITTEN 2026-08-19 as a findings-sharing letter** · **Status: DRAFT — not sent**
@@ -12,7 +14,7 @@
 
 > **Correction retained from 2026-08-18 (E-2026-08-18-02).** An earlier draft cited "31 December 2040 as the outer bound implied by the Class B funding provision". That conflated Class A and Class B: **GSM-R is a Class A radio system without an end-date**; the 2040 date governs legacy Class B national systems. **The EBA administers precisely this distinction.** The error is recorded here rather than quietly removed — it is the reason the letter below now leads with its own limits.
 
-## Before sending — six checks
+## Before sending — seven checks
 
 1. **The standing declaration is not optional and belongs in the first paragraph.** Independent assessment · no client · no mandate · nothing requested. A letter that lets a regulator infer a mandate that does not exist is the single most damaging thing this engagement could send — and burying the disclaimer at the bottom is the same error with better manners.
 2. **No cc to any infrastructure manager, and no "we are supporting…" formulation.** The original carried `cc: [IM contact]` and opened by claiming to support an IM. Both are gone. Vpnet speaks for Vpnet.
@@ -24,11 +26,62 @@
    **That self-description is worth noting for how the letter is pitched: "human factors / safety-critical systems" is exactly the territory of finding 1 (an advisory layer that never actuates, and where the human sits in relation to it). She is not a general recipient who happens to work at DZSF — the letter's central question is her stated field.**
    **Salutation: `Dear Dr. Mühl`** — title and surname, the correct formal form in German correspondence (`Sehr geehrte Frau Dr. Mühl`). Use the umlaut form `Mühl` in prose; `muehlk@dzsf.bund.de` is the address.
 
-6. **Expect no reply, and design for that.** An unsolicited letter from an unknown independent party to a federal authority most likely receives nothing. **That is not a failure and blocks nothing** — the assessment concludes on its own evidence either way (`00-charter.md`, Track A). Do not build any dependency on a response.
+6. **The German text is the one that goes; the English is reference.** Any edit must be made in both, and **finding 2 is the passage most at risk of drifting apart** because it is the one that keeps growing. If the two ever disagree, the German is authoritative — it is what was sent.
+7. **Expect no reply, and design for that.** An unsolicited letter from an unknown independent party to a federal authority most likely receives nothing. **That is not a failure and blocks nothing** — the assessment concludes on its own evidence either way (`00-charter.md`, Track A). Do not build any dependency on a response.
 
 ---
 
-## Draft letter — rev. 5 (2026-08-19, findings-sharing, addressed to DZSF; finding 2 extended to four instruments)
+## Anschreiben — Fassung 6 (2026-08-20, **DEUTSCH — dies ist die zu versendende Fassung**)
+
+> **Warum Deutsch.** Empfängerin ist eine deutsche Bundeseinrichtung in Dresden; die Quellen, auf die sich der Brief stützt, sind ganz überwiegend deutschsprachig. Ein englischer Brief hätte entweder nachlässig gewirkt oder wie das Anschreiben einer internationalen Beratung — und genau das ist die Außenwirkung, die dieses Schreiben vermeiden soll. **Die englische Fassung (rev. 5) bleibt darunter als Referenz erhalten; bei Änderungen sind beide Fassungen nachzuführen.**
+
+**Betreff:** Ergebnisse einer unabhängigen Untersuchung — GSM-R/FRMCS-Migration und eine beratende, nicht eingreifende Aufsichtsebene
+
+Sehr geehrte Frau Dr. Mühl,
+
+ich schreibe Ihnen als unabhängiger Dritter, nicht im Auftrag eines Eisenbahnverkehrs- oder Eisenbahninfrastrukturunternehmens, und ich wende mich bewusst an das DZSF und nicht an eine Aufsichtsbehörde: Es geht hier um keinerlei Zulassungsfragen, und ich möchte nicht, dass mein Schreiben als eine solche Anfrage missverstanden wird. **Hinter diesem Brief steht kein Auftraggeber, ich habe kein Mandat von irgendeiner Stelle des Sektors, und ich bitte weder um eine Entscheidung noch um eine Stellungnahme oder eine wie auch immer geartete Zustimmung.** Ich teile Ihnen die Ergebnisse einer Untersuchung mit, die ich aus öffentlich zugänglichen Quellen erarbeitet habe — zum einen, weil zwei davon Ihre Arbeit unmittelbar berühren, zum anderen, weil ich es vorziehe, einen Irrtum zu erfahren, statt ihn zu veröffentlichen. **Ihre veröffentlichten Forschungsarbeiten sind die mit Abstand umfangreichste Quelle dessen, was ich erarbeitet habe** — das ist zugleich der Anlass dieses Schreibens und der Grund, weshalb Sie meine Schlussfolgerungen lieber von mir erfahren sollten als später anderswo.
+
+In den vergangenen Monaten habe ich eine evidenzbasierte Architekturuntersuchung zur Migration von GSM-R zu FRMCS erstellt sowie zum Einsatz einer agentischen KI-Ebene für die Aufsicht — ausschließlich beratend, zu keinem Zeitpunkt eingreifend. Sie stützt sich vollständig auf veröffentlichtes Material: Primärrechtstexte, Veröffentlichungen von ERA und ERJU, **Ihre eigenen Forschungspublikationen und die von Ihnen beauftragten Arbeiten** sowie die Darstellung des Betreibers zur GSM-R-Störung vom Juni 2026. Drei Ergebnisse erscheinen mir mitteilenswert.
+
+**1. Eine Gegenüberstellung aus Ihren eigenen Veröffentlichungen — und die Grenze, die daraus folgt.**
+
+Ihre Arbeiten zur Prüfung und Validierung KI-basierter Perzeptionssysteme für GoA 3+ beschreiben ein System, das Sensordaten verarbeitet, die Befahrbarkeit der Strecke bewertet und **Signalhorn, Betriebs- oder Schnellbremsung auslöst** — es wirkt auf den Zug ein und erhält dementsprechend Sicherheitsanforderungen auf SIL 1 bis SIL 2.
+
+Die von mir untersuchte Ebene tut nichts davon. Sie wertet Netz- und Betriebsdaten aus und **berät menschliche Bedienende**; sie besitzt **keinen Pfad, über den eine sicherheitskritische Funktion ausgelöst werden könnte**, und der zertifizierte deterministische Kern bleibt von ihr unberührt. Meine Untersuchung kommt zu dem Ergebnis, dass eine solche Ebene **außerhalb** des Sicherheitskomponenten-Perimeters des Teilsystems Zugsteuerung, Zugsicherung und Signalgebung liegt und dass hiervon ihre Einordnung nach Artikel 6 Absatz 1 der Verordnung (EU) 2024/1689 abhängt.
+
+**Ich verstehe das als eine Lesart, nicht als gesicherte Position — und es ist diejenige Schlussfolgerung der gesamten Untersuchung, bei der ich mich am ehesten irre.** Sollte der Perimeter in der Praxis anders gezogen werden, oder sollte die Unterscheidung zwischen beratend und eingreifend nicht tragen, was ich ihr aufbürde, kehrt sich ein wesentlicher Teil meiner Arbeit um — und das würde ich gerne wissen.
+
+**2. Eine Lücke, mit der ich nicht gerechnet hatte — und aus meiner Sicht der Punkt, der Ihre Aufmerksamkeit am ehesten verdient.**
+
+Liest man die deutschen Instrumente nebeneinander, so **schließt jedes von ihnen genau den Schnittbereich aus, den die übrigen offenlassen**:
+
+- die von Ihnen beauftragte Arbeit **ATO-RISK** entwickelt Risikoakzeptanzkriterien für das automatisierte Fahren, hält jedoch als Randbedingung ausdrücklich fest, dass **Cyber Security nicht im Betrachtungsumfang liegt**, und behandelt die menschliche Leistungsfähigkeit gesondert in ATO-SENSE;
+- die **DIN SPEC 92005** (Quantifizierung von Unsicherheiten im maschinellen Lernen) **nimmt Anforderungen an Unsicherheitskriterien für Sicherheitsfunktionen und für Assistenzsysteme ausdrücklich aus**;
+- der KI-Prüfkatalog des Fraunhofer IAIS ist ein sorgfältiges generisches Instrument **ohne jeden Bahnbezug** und liegt zeitlich vor der verabschiedeten KI-Verordnung;
+- und die einzige mir bekannte Arbeit, die beides zur Laufzeit tatsächlich **zusammenführt** — die Dissertation von Markus Heinrich an der TU Darmstadt zur Security in der sicherheitskritischen Leit- und Sicherungstechnik, dessen spätere Forschung Sie beauftragt haben — **nimmt das sichere Update ausdrücklich aus dem Betrachtungsumfang** und behandelt es als überwachte Frage der Instandhaltungsphase.
+
+**Jeder dieser Ausschlüsse ist für sich genommen gut begründet**, und mir ist wichtig zu betonen, dass ich keinen davon kritisiere: Eine offen erklärte Abgrenzung des Betrachtungsumfangs ist die bessere Praxis gegenüber einem stillschweigend überdehnten — und jedes dieser Dokumente benennt seine Grenze klar.
+
+**Die Schwierigkeit liegt in der Zusammenschau.** Zusammengenommen führen sie dazu, dass der sicherheitskritische, auf den Menschen bezogene und zugleich securityrelevante Fall — und genau dort liegt eine Aufsichtsebene für die betriebliche Bahnkommunikation — **in den Zwischenraum zwischen allen Instrumenten fällt, und ich finde niemanden, in dessen Zuständigkeit es fiele, ihn zu schließen.**
+
+Der vierte Punkt erscheint mir dabei am aufschlussreichsten, und er ist der Grund, weshalb ich schreibe, statt die Sache abzulegen. Heinrichs Methodik **löst** das Kompositionsproblem zur Laufzeit, und zwar elegant: Die Security-Maßnahme kleidet ihre Reaktion in das bereits vorhandene Gefährdungsvokabular der Sicherungsebene, sodass ein Angriff den Sicherheitskern als etwas erreicht, womit dieser konstruktiv bereits umgehen kann. **Und dennoch bleibt die Update-Nahtstelle offen.** Die Lücke besteht also nicht schlicht darin, dass niemand hingesehen hätte — die Arbeit, die am nächsten herankommt, sieht unmittelbar hin und endet an derselben Kante wie alles Übrige.
+
+Möglicherweise ist mir eine Arbeit unbekannt, die diese Lücke schließt; in diesem Fall wäre ich für einen Hinweis aufrichtig dankbar — das wäre die nützlichste Antwort, die dieses Schreiben erhalten könnte. Gibt es sie nicht, so schien es mir richtig, den Punkt gegenüber denjenigen auszusprechen, die ihn am besten beurteilen können.
+
+**3. Eine kleinere Anmerkung, für den Fall, dass sie nützlich ist.**
+
+- Meine Planungsannahme ist eine **Koexistenz mindestens bis 2035**, gestützt auf den nationalen Abschaltplan, das von der ERA genannte Obsoleszenzfenster und die Positionierung der Betreiber. **Keine dieser Angaben behandle ich als rechtliches Enddatum, da GSM-R ein Klasse-A-Funksystem ohne ein solches bleibt** — eine Unterscheidung, die ich in meinen eigenen Notizen zunächst falsch hatte und korrigiert habe.
+
+Mir ist bewusst, dass unaufgefordert zugesandte Schreiben Arbeit verursachen. **Nichts hiervon bedarf einer Antwort, und kein Teil meiner Untersuchung wartet darauf** — sie wird auf Grundlage ihrer Belege abgeschlossen und benennt ihre Grenzen in jedem Fall. Sollte etwas davon unzutreffend sein, wäre mir eine einzige Zeile, die das feststellt, wertvoller als eine ausführliche Antwort. Und sollte dieses Anliegen anderswo besser aufgehoben sein, bin ich für einen entsprechenden Hinweis dankbar.
+
+Mit freundlichen Grüßen
+
+**Dr. Roland Karl Pfeifer** — Vpnet Cloud Solutions Sdn. Bhd.
+*Unabhängige Untersuchung; kein Auftraggeber, kein Mandat, keine Bitte um Stellungnahme.*
+
+---
+
+## English reference version — rev. 5 (2026-08-19, findings-sharing, addressed to DZSF; finding 2 extended to four instruments)
 
 **Subject:** Findings from an independent assessment — FRMCS transition and an advisory, non-actuating oversight layer
 
