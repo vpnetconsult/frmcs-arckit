@@ -1,0 +1,150 @@
+# ADR-007: Testing & canary strategy — prove R3/R4 by test, not assertion
+
+**Status:** Proposed
+**Date:** 2026-06-27
+**Deciders:** Architecture Review Board · Infrastructure Manager (DB InfraGO interface) · NSA / safety authority liaison · Vpnet engagement lead (test & assurance)
+**Depends on:** ADR-001 (FRMCS transition; R3/R4 resilience), ADR-002 (agentic oversight layer; autonomy ladder), ADR-004 (SIL-4 boundary — no actuation); relates to ADR-008 (autonomy-ladder authorisation)
+**Affects requirements:** R3 (eliminate central SPOF), R4 (fail-soft), with bearing on R12 (awareness/detection), R9/R10/R11 (the oversight agents under test), and R5/R2 via the MCX feature-parity surface (PR15)
+
+## Context
+
+The 23 June outage is now DB-confirmed (E-2026-06-27-01, corroborated by -02/-03): during planned maintenance a network-distribution component was swapped, which triggered a single software fault that **raised no alarm** — so the automatic failover to the (fully functional) redundant GSM-R **never engaged**, and recovery took ~90 minutes of manual work. The redundancy existed and worked; its **trigger had never been exercised against a fault that stays silent**.
+
+That is the whole lesson for assurance: **R3 (no central SPOF) and R4 (fail-soft) cannot be asserted — they must be proven by test.** Specifically, the test must show that redundancy *triggers* under a hidden fault, not merely that it *exists*. Calculated availability is not evidence: DB's own 2019 Stuttgart study showed very high calculated GSM-R availability (E-2026-06-25-02 §2.2.4, Tables 27–28) for the same estate that then failed on an untriggered failover.
+
+A second force: the agentic oversight agents (ADR-002; R9–R12) must be validated before they touch anything. The autonomy ladder's lowest rung — **shadow / observe-only** — is realisable on GSM-R/2G **today**, so the agents can accrue evidence before FRMCS exists, within the ADR-004 no-actuation boundary.
+
+## Decision
+
+Adopt a **four-surface testing strategy feeding Gate G3**:
+
+**(a) Incident-replay.** Offline replay of the silent-fault cascade (component swap → silent software fault → no alarm → failover not triggered). Proves the Risk Sentinel would flag it and the proposed FRMCS failover design triggers. Non-production. *Caveat (PR8): replay is inference-based until DB/EBA publish full telemetry — broaden the corpus when it lands.*
+
+**(b) Shadow-on-legacy.** Oversight agents run **read-only** on the live GSM-R network/NMS; their outputs are **compared against reality, not acted on**. This is the autonomy ladder's **shadow rung**, available on 2G today — agents earn evidence with no actuation and no control (R9/R11 boundary; ADR-004).
+
+**(c) Silent-fault / failover injection.** Deliberately inject **alarm-less** faults and verify that **detection-driven failover actually engages — driven by INDEPENDENT out-of-band monitoring (ITU-T Q.752-style signalling probes, E-2026-06-30-03), not the element's self-report** — the exact gap from 23 June. Run in lab / test-ring; on production **only on the inactive redundancy side** (mirroring DB's own countermeasure: maintenance 00:00–04:00 on inactive redundancy, E-2026-06-27-02/-03). This is the core test: prove the trigger fires, not that the backup exists. **Extend the injection catalogue with a common-mode class:** a bad software/config push to a redundancy running **identical code/config** defeats both sides at once, *independent of the trigger* (the 2024 CrowdStrike monoculture pattern — a framing analogy, not logged evidence). Verify the staged / inactive-side rollout (ADR-011) actually prevents simultaneous defeat — i.e. test not only that failover triggers, but that one change cannot reach both redundancy sides together (config/version diversity or staging).
+
+**(d) Canary-by-segment.** Staged **geographic** rollout of the bearer with a **manual safety gate per segment**; advance only on green criteria; rollback = revert that segment to GSM-R / parallel-run (ADR-001).
+
+**(e) MCX feature-parity regression.** Verify each GSM-R safety feature is faithfully reproduced by MCX — REC/Notruf (Railway Emergency Call), VGCS/VBS group calls, eMLPP pre-emption, functional & location-dependent addressing — and **stays** reproduced after any MCX or GSM-R↔MCX interworking change; bar set by Ril 481.0205 (E-2026-06-24-18) plus the European normative bar: the (MI)-marked requirements of UIC EIRENE FRS 8.1.0 + SRS 16.1.0 (E-2026-07-02-30/-31, CCS TSI Annex A mandatory pair — the certification-relevant set). This surface covers the **functional** failure mode (**PR15** / R5 / R2) — distinct from the resilience surfaces (a)–(c). Per the first FRMCS lab tests (E-2026-06-29-01) MCX REC/interconnection is still 3GPP-evolving, so equivalence is *validated-in-progress*, not mature. A Kontron / DB Netze (DSD) FRMCS-MCX design study (E-2026-07-01-10, Feb 2021) enumerates the concrete gaps the regression must track: rail group affiliation (Rel-16 / 3GPP CT1 in progress), functional-alias termination side, and E2E encryption/security (optional, to-be-defined).
+
+**Explicit constraint — no probabilistic canary on safety-critical traffic.** Classic percentage-of-traffic canary is **not permitted**: there is no SIL-4 rollback tolerance (you cannot expose a fraction of live movement-authority traffic to an unproven path and "roll back" after harm), and the central blast radius means a "small" probabilistic exposure is not small. **Canary here means canary-by-segment** with manual gates, under the parallel run so every segment retains its GSM-R fallback.
+
+**Core principle: test that redundancy *triggers* under a hidden fault — not that it *exists*.**
+
+## The surface definitions — the items 1–5 and 7 artefact
+
+**Written 2026-08-20 (directed by the 2026-08-20 readiness assessment, agenda item 4). These are *definitions* — what each surface proves, how its cases are derived, what it measures, and what it feeds Gate G3 — not test plans. Building and running them is the items' remaining `[I]` work.**
+
+**Four rules shared by every surface, stated once:**
+
+1. **Derivation is ODD-relative (E-2026-08-20-07):** each surface states the operational design domain it covers → derives scenarios by a fixed methodology → generates test cases as concrete parameterisations → argues coverage **relative to that ODD**. The hedge is kept verbatim: this argues *a certain* completeness, never completeness. A surface defined by enumeration instead of derivation is not defensible and not permitted.
+2. **Data discipline (E-2026-08-19-05):** severity and event-probability estimates (D2/D3) steer what gets collected and tested (D1) — the risk model drives the data, not the reverse. Per DIN SPEC 13266, a separate held-out test set is used **once**, on the final configuration.
+3. **Simulation is not self-admitting (ADR-010 item 11, open):** any surface leaning on simulated or synthetic evidence carries the fidelity flag — the simulation's trustworthiness is itself a proof obligation, currently undischarged. Log-driven replay of real events does not carry the flag; synthetic extension of it does.
+4. **Detection independence (E-2026-06-30-03, § 31 Abs. 2 BSIG n.F.):** no surface accepts an element's self-report as the only witness of that element's health — including the diagnostics layer itself (E-2026-08-20-25). Self-diagnosis systems are components **under** test, never part of the harness.
+
+### Surface 1 — Incident replay
+
+- **Claim proved:** the oversight layer detects the 23-June failure class — silent fault, healthy-but-untriggered failover — and does so with usable lead time (R3/R4, R12).
+- **Corpus:** the DB-confirmed mechanism (E-2026-06-27-01/-02/-03) reconstructed as a timeline; benign stretches of the same period retained as negative cases; every event carries provenance, and inference-based segments are marked in-corpus (PR8). Broaden when DB/EBA telemetry lands.
+- **Measures:** detection (yes/no per injected replay), lead time before the historical failure point, false-alarm rate on the benign stretches. **Reference-system benchmark (CSM-RA §2.4 route, E-2026-08-18-07): the recorded human/manual performance of 23 June — ~90 minutes to manual recovery — is the quantified baseline the layer must beat.**
+- **Exit criterion fed to G3:** detection of every catalogued replay case with positive lead time and a false-alarm rate below the G3-set threshold.
+- **Limit, stated:** replay proves detection of *known* incidents. It supports no claim about unknown fault classes — that is surface 3's job, under its own hedge.
+
+### Surface 2 — Shadow-on-legacy
+
+- **Claim proved:** the agents' advice is accurate on live traffic, and measurably so, before anything depends on it (R9/R10; the ADR-008 shadow rung; feeds every ADR-010 metric).
+- **Setup:** read-only agents on the GSM-R NMS **plus the independent Q.752-style out-of-band feed** — the no-write path is the ADR-004 boundary, verified as a standing condition of the surface, not assumed.
+- **Cases:** not derived — shadow takes what live operation supplies. The surface instead states its **ODD** (segments, hours, traffic conditions observed) and reports coverage against it, so quiet weeks cannot masquerade as evidence.
+- **Measures:** agreement/dissent vs adjudicated reality; accuracy per agent role; **the adjudication stream doubles as the ground-truth label stream, with the anchoring hazard measured beside it** (a reviewer shown the agent's finding first is biased toward it — E-2026-08-20-15/-16; sample adjudications blind).
+- **Exit criterion fed to G3:** dissent and accuracy stable within G3-set thresholds over a defined dwell period; zero boundary violations for the whole dwell.
+- **Limit, stated:** shadow evidence is only as broad as the period's ODD; it cannot manufacture rare events — surfaces 1 and 3 exist for those.
+
+### Surface 3 — Silent-fault / failover injection
+
+- **Claim proved:** detection-driven failover **engages** under faults that raise no alarm — the direct falsification target of 23 June; and no single change can defeat both redundancy sides at once (R3/R4).
+- **Catalogue derivation (the ODD-relative route applied to fault space):** fault-mode ODD → functional fault classes → concrete parameterised injections. Named classes the catalogue must span: component-fails-silent (the 23-June class); failover-partner-healthy-but-untriggered; degraded-not-failed (slow drift below alarm thresholds); **common-mode config/software push reaching both redundancy sides** (staging/diversity must provably prevent simultaneous defeat); and **failure of the diagnostics/self-monitoring layer itself** (E-2026-08-20-25 — the surface tests the diagnoser too).
+- **Environment ladder:** lab/test-ring first (the DSD MIL→SIL→HIL ladder, E-2026-07-02-12); on production estate **only** on the inactive redundancy side, 00:00–04:00, under the full ADR-011 gate — the binding DB countermeasure, inherited as a rule.
+- **Measures:** per class — detection rate by the *independent* monitor, time-to-detect, failover engagement (binary), recovery behaviour, **and availability cost** (R4's currency: what legitimate service the reaction consumed — E-2026-08-19-12f).
+- **Exit criterion fed to G3:** **100% failover engagement on every catalogued class — any miss is a G3 blocker by definition**, because an unengaged failover under test is the incident re-run with witnesses.
+- **Limit, stated:** coverage is relative to the fault-mode ODD, hedge verbatim; the catalogue is versioned and grows — a passed G3 binds to the catalogue version it passed against.
+
+### Surface 4 — Canary-by-segment
+
+- **Claim proved:** in-service behaviour holds segment-by-segment with exposure bounded and reversible at all times (R2).
+- **Definition:** geographic segments only — the binding no-probabilistic-canary rule restated: segment boundaries are operational, never statistical percentages of safety-critical traffic. Each segment: green criteria (set at G3 from surfaces 1–3 and 5 measures) → **manual safety gate, decision recorded with a name on it** → dwell → next segment. Rollback to GSM-R parallel-run is **rehearsed per segment before entry, not assumed** — a rollback that has never been executed is a hypothesis.
+- **Variant coverage (E-2026-08-15-54):** the segment sequence must span fleet/configuration variants (car counts, wiring looms, network topologies) — enumerated in the canary plan up front; the NS three-week loss came from exactly the variant testing skipped.
+- **Exit criterion fed to G3-onward gates:** all segments green over their dwell, with rollback-drill evidence per segment on file.
+- **Limit, stated:** canary evidences the segments actually traversed under the conditions that occurred; it is the last check, not the proof strategy.
+
+### Surface 5 — MCX feature-parity regression
+
+- **Claim proved:** every GSM-R operational safety feature is faithfully reproduced by MCX **and stays reproduced after every change** (PR15, R5, R2).
+- **Suite derivation:** the normative checklist is **Ril 481.0205 plus the (MI)-marked EIRENE FRS 8.1.0 / SRS 16.1.0 requirements** (the certification-relevant set) — one test case per feature per condition: nominal, degraded bearer, and GSM-R↔MCX interworking/handover, border behaviour included. Tracked known gaps stay pinned in the suite until closed upstream: rail group affiliation (Rel-16), functional-alias termination side, E2E encryption status (E-2026-07-01-10).
+- **Run cadence:** at every ADR-011 change gate touching MCX or interworking, and before each surface-4 segment entry.
+- **Measures:** pass/fail per feature and condition; call-setup/pre-emption times against the Ril/EIRENE bars.
+- **Exit criterion fed to G3:** suite green in the current bearer configuration; any red is a change-gate blocker for the touching change.
+- **Limit, stated:** parity of specified features — the suite detects regression against the checklist, not absence of unlisted behaviours.
+
+### Surface 6 — Security (item 7)
+
+- **Claim proved:** the estate withstands, **detects, and responds to** deliberate attack without spending R3/R4's availability unknowingly (R12, R14, feeds ADR-012's gate).
+- **Case derivation:** use cases → **abuse cases → attack graphs** (the DZSF-published method, open tooling; **two teams analyse independently and reconcile** — E-2026-08-19-04). Seed classes: the three published semantic attacks — point switched under a train, occupancy confusion toward same-section collision, signal-protection bypass (E-2026-08-19-12e, with the published adversarial-dataset generation method) — plus the bearer-level classes from the 5G-core evidence (protocol tunneling, PFCP abuse, identifier prediction — E-2026-07-24-01), plus the diagnostics API surface (SOVD-class, TLS mandated — E-2026-08-20-25).
+- **The two register-specific rules, binding:** (i) **test Respond hardest** — every case measures not only detection but that something happens next, in time, by a named role; Respond is the sector's measured weakest function at 1.58/5 (E-2026-08-19-13), and 23 June was detection failing *into* a 90-minute manual response. (ii) **availability cost is measured beside detection rate** — a fail-safe security reaction consumes exactly the currency R3/R4 are short of (E-2026-08-19-12f).
+- **Structure:** a **security regression suite** running at the same gate as surface 5; **independent adversarial testing as a standing function**, external party alongside internal; **design-stage testing before metal exists** (digital twin/testbed — fidelity flag applies); **a security finding is a change** and re-enters the ADR-011 gate — no urgency bypass, expedited path sized to the CRA 14-day clock (ADR-012 item 3).
+- **Floor rule:** TS 50701 / IEC 62443 are gap-analysed against expected threats, never treated as a conformance ceiling.
+- **Exit criterion fed to G3:** regression suite green **and** a response drill executed against at least one case per seed class — detection without a timed, named response does not count.
+- **Limit, stated:** attack-graph coverage is relative to the abuse-case set; the set is versioned, grows with the threat picture, and its reconciliation record (two-team) is part of the evidence.
+
+### Gate G3 criteria — drafted skeleton (item 8; numbers deliberately absent)
+
+**Entry:** surfaces 1–3 and 5–6 built and producing measures; each surface's ODD statement and catalogue/suite version frozen; **thresholds proposed with rationale from the measured baselines — thresholds are set from data at G3 entry, not invented in this document.**
+**Exit (G3 passed → surface-4 canary authorised):** surface 1 all-catalogued detection with positive lead time; surface 2 dwell completed within thresholds, zero boundary violations; surface 3 **100% failover engagement** (hard blocker); surface 5 green; surface 6 green including response drills; no open Class-A finding at the ADR-011 gate. **The ARB ratifies the thresholds and the pass — that ratification is item 8's remaining `[D]` content.**
+
+## Options considered
+
+### Option A — Assert resilience from design / availability calculations (status quo)
+| Dimension | Assessment |
+|---|---|
+| Complexity | Low |
+| Cost | Low |
+| Safety/assurance | Weak — this *is* the failure that occurred |
+| Reversibility | n/a |
+Pros: no test programme. Cons: exactly the 23 June mode — high calculated availability (E-2026-06-25-02 §2.2.4), but the silent-fault trigger never fired. **Rejected.**
+
+### Option B — Four-surface test strategy feeding G3 (recommended)
+| Dimension | Assessment |
+|---|---|
+| Complexity | High |
+| Cost | Medium–High |
+| Safety/assurance | Strong — produces evidence the safety case + NSA can rely on |
+| Reversibility | High — segment-level rollback to GSM-R parallel-run |
+Pros: proves R3/R4 by test; shadow rung accrues agent evidence on 2G now; fault-injection-on-inactive-redundancy is live-compatible. Cons: build effort; replay fidelity limited until telemetry is published (PR8).
+
+### Option C — Probabilistic canary (percentage of live traffic)
+| Dimension | Assessment |
+|---|---|
+| Complexity | Medium |
+| Cost | Medium |
+| Safety/assurance | Unacceptable — no SIL-4 rollback tolerance; central blast radius |
+| Reversibility | False — harm to live movement-authority traffic cannot be "rolled back" |
+Pros: familiar from IT/cloud. Cons: impermissible for safety-critical traffic. **Rejected.**
+
+## Trade-off analysis
+
+The governing trade is **assurance strength vs cost/lead-time**. Asserting resilience (A) is cheapest and is precisely what failed on 23 June. Probabilistic canary (C) is operationally familiar but unacceptable for SIL-4 traffic. The four-surface strategy (B) costs more but is the only one that yields evidence a safety case and the NSA can rely on — and it front-loads value: the **shadow rung lets the agents earn evidence on 2G now**, and **fault-injection borrows DB's own inactive-redundancy safeguard**, so it is compatible with live infrastructure rather than waiting for FRMCS. In-domain methodology grounding (E-2026-07-02-12 — DSD's own V&V leadership, 11/2024): DSD's GoA-4 strategy uses a staged test-environment ladder (MIL → data replay vs annotated ground truth → SIL with fault injection → HIL/mock-ups → field test last) explicitly to escape rail's field-test cost trap, and aims to **certify the test environments for CENELEC-compliant lab V&V** — with **qualified synthetic data for safety-critical functions** named as the key open challenge. If that certification lands, this ADR's proof obligations gain a repeatable lab path; until then, DSD's own candour stands: field tests remain indispensable, and replay without annotated ground truth is only informal evidence.
+
+## Consequences
+
+- **Easier:** R3/R4 move from *asserted* to *test-evidenced*; Gate G3 gets concrete entry/exit criteria; oversight agents (R9–R12) accrue evidence safely via shadow on 2G; aligns with ADR-004 (no actuation) and ADR-008 (autonomy ladder).
+- **Harder:** building a representative replay corpus (PR8 — inference-based until DB/EBA telemetry); fault-injection needs a lab/test-ring plus strict inactive-redundancy discipline; canary-by-segment is slower than probabilistic rollout.
+- **To revisit:** replay fidelity once DB/EBA publish telemetry; per-rung promotion criteria (ADR-008); the former ADR-007 *eval scope* (accuracy/drift/automation-bias) is now homed in **ADR-010** (drift → PR6; automation-bias → ADR-004/PR4; accuracy → ADR-010).
+
+## Action items
+1. [ ] `[I]` Build the incident-replay corpus from the confirmed mechanism (E-2026-06-27-01/-02/-03); flag inference gaps (PR8); broaden when DB/EBA telemetry lands. **Definition written 2026-08-20 — §Surface 1; remaining: build.**
+2. [ ] `[I]` Stand up shadow-on-legacy: read-only agents on the GSM-R NMS + output-compare harness; ~~define the shadow-rung exit criteria~~ — links ADR-008. **Definition incl. exit-criteria shape written 2026-08-20 — §Surface 2; thresholds set from measured baselines at G3 entry; remaining: stand up.**
+3. [ ] `[I]` ~~Define~~ the silent-fault / failover-injection catalogue; lab/test-ring first; production only on the inactive redundancy side (per DB countermeasure). **Class-level definition written 2026-08-20 — §Surface 3 (five named classes incl. common-mode and the diagnostics layer itself); remaining: parameterise the concrete injections and build.**
+4. [ ] `[I]` ~~Define~~ canary-by-segment gates: per-segment green criteria, manual safety gate, segment-level rollback; no-probabilistic-canary rule binding. **Definition written 2026-08-20 — §Surface 4 (incl. rehearsed-rollback and variant-spanning segment rules); remaining: the concrete segment plan.**
+5. [ ] `[I]` ~~Define~~ the MCX feature-parity regression suite (bar = Ril 481.0205 + (MI)-marked EIRENE FRS/SRS) — covers PR15. **Definition written 2026-08-20 — §Surface 5; remaining: build the suite.**
+7. [ ] `[I]` **DEFINITION WRITTEN 2026-08-20 — §Surface 6** (abuse-case → attack-graph derivation, two-team reconciliation, three semantic seed classes + bearer classes + diagnostics API, respond-hardest and availability-cost rules binding, regression at the surface-5 gate, standing independent adversarial function, finding-is-a-change). **Remaining: build.** *Original item retained for the trail:* **Add a SECURITY test surface — this ADR currently has none (NEW 2026-08-15, prompted by E-2026-08-15-55, gap confirmed by reading items 1-6).** Items 1-6 are reliability and functional-parity testing: incident replay, shadow-on-legacy, silent-fault/failover injection, canary-by-segment, MCX parity. **ADR-012 makes cybersecurity a first-class governed dimension and routes its security-update change gate through this ADR — but there is no penetration testing, no red-team, no independent adversarial tester and no security regression suite defined here, so the two ADRs do not meet.** Define, at minimum: (a) a **security regression suite** run at the same gate as the MCX parity suite (item 5); (b) **independent adversarial testing as a standing function**, not a one-off acceptance activity — an external party alongside internal testing; (c) **design-stage testing before metal exists** (digital-twin / testbed), so findings land while they are still cheap; (d) **variant coverage** carried over from ADR-009 item 5 (E-2026-08-15-54: a fleet variant not represented in test cost three weeks in series production); (e) the **rule that a security finding is a change** and re-enters the item-4 canary gate rather than bypassing it on urgency (CRA Art 14 expedited-but-gated path, ADR-012 item 3). **CONCRETE METHOD NOW AVAILABLE (added 2026-08-19, E-2026-08-19-04) — this item no longer needs inventing.** The DZSF-financed project "Prognose Securitybedarf" published a rail-specific approach: **forecast how digital technologies will be used, derive ABUSE CASES (how each use case can be misused by attack), and perform software-supported threat analysis by ATTACK GRAPHS**, the tool collecting all abuse cases for a given use case into a graph. **The tooling is open-source** (`incyde-gmbh/drawio-plugin-attackgraphs`, `INCYDE-GmbH/attackgraphs`) and the method has a separate write-up in Signal+Draht 05/2022 (**obtain — not in this register**). Adopt this as the (a) security-regression basis and pair it with the ODD/scenario/completeness frame at ADR-010 item 5: **abuse cases are the security analogue of DZSF's functional→logical→concrete scenarios, and the same completeness argument applies.** Two further transplants from the same source: **two expert teams should analyse separately and reconcile** (inter-rater, cheap and defensible), and **treat TS 50701/IEC 62443 as a FLOOR to be gap-analysed against expected future threats rather than a conformance ceiling** — consider existing standards, identify gaps, develop targeted measures, reassess iteratively. **Caveat on provenance: the prompt for this item was a tier-B consultancy deck that sells penetration testing; the item is justified by the internal inconsistency between ADR-007 and ADR-012, not by that deck's authority.** **Funding route (2026-08-15, E-2026-08-15-56):** the EU funds this instrument class directly — DEP topic **DIGITAL-ECCC-2024-DEPLOY-CYBER-07-LARGEOPER** (€35M, grants €3-5M at a **100% funding rate**) targeted NIS2 critical-infrastructure sectors and explicitly covered **penetration-testing scenario development, testing of operating CI for vulnerabilities, threat assessment and continuous attack-surface monitoring**, with compulsory Financial Support to Third Parties. **That 2024 round closed 21.01.2025** — before adopting a build-it-ourselves cost assumption, check the **current** DEP work programme (ECCC, dep@eccc.europa.eu) for a LARGEOPER successor and for the CYBER-07-SOC/SOCPLAT national- and cross-border-SOC track, which bears on whether the operator builds an OT SOC or consumes national-SOC early warnings (see R12 and E-2026-08-15-54). **⚠️ THREE NAMED, IN-DOMAIN ATTACK CLASSES TO BUILD AGAINST (added 2026-08-19, E-2026-08-19-12 — Heinrich, TU Darmstadt): this item has been open and undefined since 15 August; it now has a published starting point.** The most critical semantic attacks on railway signalling are identified as **(1) switch a point before or below a train; (2) confuse track occupancy so as to provoke two trains in the same section; (3) set signals to bypass protection of the following section.** Both detectors in that work were validated against all three, the learned one via a **purpose-built artificial attack dataset** — **so the method for generating the adversarial test data is published too, which is the part this ADR would otherwise have had to invent.** ⚠️ **Carry the availability consequence into the test design, not just the detection rate: a prevention control with a false-positive rate above zero drops legitimate messages, and the whole approach works by making security reactions indistinguishable from transmission faults. Every security test surface here must therefore measure the AVAILABILITY cost alongside the detection rate — R3/R4 are the requirements this ADR exists to prove, and they are the ones a fail-safe security control spends.** **⚠️ AND TEST *RESPOND* HARDEST — IT IS THE SECTOR'S MEASURED WEAKEST FUNCTION (added 2026-08-19, E-2026-08-19-13).** The DZSF-commissioned NIST-CSF survey puts the sector's **Respond at 1.58 / 5**, its worst discipline, and the **infrastructure managers at 0.69** — against Recover at 2.36. **So the sector is comparatively better at restoring service than at reacting while an incident is live, which is exactly the window this ADR's failover and canary surfaces exercise.** Design the security test surface accordingly: **not only can the attack be detected, but does anything happen next, in time, by a named role** — the 23-June pattern was detection failing and response defaulting to ~90 minutes of manual work. **Detection rate alone would test the function the sector is second-worst at and miss the one it is worst at.** **⚠️ AND A NAMED ROUTE FOR THE SURFACES GENERALLY (added 2026-08-20, E-2026-08-20-07 — DZSF *ATO-Einsatzszenarien*, 05/2024–04/2027).** This ADR's five test surfaces have been undefined since it was written. The safety authority's research centre is building the route: **ODD first → scenarios derived by a fixed methodology and description means → software generating TEST CASES as concrete parameterisations of scenarios → an argument for coverage RELATIVE TO THE ODD.** **Adopt the sequence, and adopt its hedge unaltered — the project builds the case for "eine gewisse Vollständigkeit", A CERTAIN completeness, not completeness. Surfaces defined this way are defensible; surfaces defined by enumeration are not.** Approach carried over from the automotive PEGASUS lineage. Outputs due 04/2027.
+8. [ ] `[D]` Set G3 entry/exit criteria from the surfaces; ARB to ratify; flip ADR-007 to Accepted. **Criteria skeleton drafted 2026-08-20 — §Gate G3 criteria. Deliberately without numbers: thresholds are proposed from measured baselines at G3 entry, then ratified. Remaining `[D]` content: the threshold ratification and the status flip — an ARB act. (NSA named in Deciders is not available under the charter's standing; any acceptance is settled internally.)**
