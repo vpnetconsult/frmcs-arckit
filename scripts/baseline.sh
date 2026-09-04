@@ -17,7 +17,11 @@ if [ -e "$DST" ]; then
   if [ -e "$DST" ]; then
     DST="$ROOT/baselines/${DATE}_$(date +%H%M%S)"
   fi
-  echo "Note: $DATE baseline exists; writing $DST instead."
+  # stderr, not stdout: this redirection notice must survive `baseline.sh >/dev/null`.
+  # Silenced on stdout it once caused the freeze to be read from the WRONG directory
+  # (the earlier same-day baseline), and the stale numbers to be mistaken for a script
+  # defect. The note is the only thing telling you where the freeze actually went.
+  echo "Note: $DATE baseline exists; writing $DST instead." >&2
 fi
 if [ -e "$DST" ]; then
   echo "Refusing to overwrite existing baseline: $DST" >&2
