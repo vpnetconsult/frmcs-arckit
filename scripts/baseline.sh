@@ -29,7 +29,58 @@ if [ -e "$DST" ]; then
 fi
 
 mkdir -p "$DST"
-cp -r "$SRC/." "$DST/"
+# Copy structure first, then every file byte-for-byte with `cat` (added 2026-09-04).
+# NOT `cp -r`: on this workspace cp silently produced correct-SIZE, all-NUL files for
+# anything recently rewritten — cp and `cp --sparse=never` both yielded 0 non-NUL
+# bytes from a 29 kB source, while cat and tar yielded it intact. That points at cp's
+# copy_file_range/reflink fast path reporting success without moving data. tar was
+# tried and trips its own "Directory renamed before its status could be extracted"
+# quirk here, so the copy is done explicitly with the one method proven to work.
+( cd "$SRC" && find . -mindepth 1 -type d -print ) | while IFS= read -r d; do
+  mkdir -p "$DST/${d#./}"
+done
+( cd "$SRC" && find . -type f -print ) | while IFS= read -r f; do
+  cat "$SRC/${f#./}" > "$DST/${f#./}"
+done
+sync 2>/dev/null || true
+
+# --- Verify the copy before anything is computed over it (added 2026-09-04) ---
+# On 2026-09-04 thirteen files across six baselines were frozen as the correct SIZE
+# but entirely NUL bytes: the copy's metadata landed and its data did not. The
+# corruption was NON-DETERMINISTIC, survived `sync`, and hit whichever files had just
+# been rewritten. It was invisible because every counter below reads the FROZEN copy —
+# so a zeroed ADR silently scored zero action items and no status, and the decision-
+# health block reported drift that had not happened.
+# A silently corrupt baseline is worse than no baseline: this verifies, retries, and
+# ABORTS rather than freezing bad data.
+VERIFY_TRIES=3
+attempt=1
+MISMATCH=""
+while [ "$attempt" -le "$VERIFY_TRIES" ]; do
+  MISMATCH=$( cd "$SRC" && find . -type f | sed 's|^\./||' | sort | while IFS= read -r rel; do
+      cmp -s "$SRC/$rel" "$DST/$rel" 2>/dev/null || printf '%s\n' "$rel"
+    done )
+  [ -z "$MISMATCH" ] && break
+  echo "Note: baseline copy verification failed for $(printf '%s\n' "$MISMATCH" | grep -c .) file(s); re-copying (attempt $attempt/$VERIFY_TRIES)." >&2
+  printf '%s\n' "$MISMATCH" | while IFS= read -r rel; do
+    [ -n "$rel" ] || continue
+    mkdir -p "$DST/$(dirname "$rel")"
+    cat "$SRC/$rel" > "$DST/$rel"   # not cp — see the note above the tar copy
+  done
+  sync 2>/dev/null || true
+  attempt=$((attempt+1))
+done
+
+if [ -n "$MISMATCH" ]; then
+  {
+    echo "ERROR: baseline copy could not be verified after $VERIFY_TRIES attempts."
+    echo "Files still differing from $SRC:"
+    printf '%s\n' "$MISMATCH" | sed 's/^/  /'
+    echo "Refusing to write a corrupt baseline. $DST is left in place for inspection —"
+    echo "delete it once you have looked, then re-run. current/ is unaffected."
+  } >&2
+  exit 2
+fi
 
 # --- Manifest: file, sha256, lines, bytes ---
 MAN="$DST/MANIFEST.tsv"
@@ -49,8 +100,11 @@ while IFS= read -r a; do
   ADR_TOTAL=$((ADR_TOTAL+1))
   st=$(grep -m1 '^\*\*Status:\*\*' "$a" 2>/dev/null || true)
   case "$st" in *Accepted*) ADR_ACC=$((ADR_ACC+1)) ;; *Proposed*) ADR_PROP=$((ADR_PROP+1)) ;; esac
-  o=$(grep -c '^[0-9]\{1,\}\. \[ \]' "$a" 2>/dev/null) || o=0
-  d=$(grep -c '^[0-9]\{1,\}\. \[x\]' "$a" 2>/dev/null) || d=0
+  # Lettered items (0b, 0c, 2b, 9b …) are real action items and were invisible to
+  # the original pattern, which under-reported BOTH columns. Found 2026-09-04 when
+  # closing item 0c moved the true count but not the reported one.
+  o=$(grep -c '^[0-9]\{1,\}[a-z]\{0,1\}\. \[ \]' "$a" 2>/dev/null) || o=0
+  d=$(grep -c '^[0-9]\{1,\}[a-z]\{0,1\}\. \[x\]' "$a" 2>/dev/null) || d=0
   AI_OPEN=$((AI_OPEN+o)); AI_DONE=$((AI_DONE+d))
 done <<EOF
 $(find "$DST" -type f -name 'ADR-0*.md' | sort)
