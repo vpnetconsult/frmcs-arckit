@@ -27,7 +27,9 @@ This repo is a living architecture-decision record set for the GSM-R → FRMCS t
 
 - Never assert the EU AI Act high-risk classification as fact until verified vs Annex I + CCS TSI (it is seeded `watch`).
 - Never blur the guardrail: this is autonomous **oversight, not control** — safety-critical actuation stays human-in-command.
-- Never edit files under `baselines/`.
+- Never edit files under `baselines/`. **Additive annotation is the exception and the only one** — a `CORRUPTED.md` marker beside a damaged freeze preserves the trail; silently repairing or re-cutting one destroys it (precedent: the 2026-09-04 markers).
+- **Never rewrite a register file with a scripted whole-file write** — no `python … open(p,'w').write(s)`, no `sed -i`, no shell redirection over an existing file. **Use the Edit tool.** On 2026-09-04 scripted rewrites of `ADR-010`, `ADR-011`, `03-risk-register.md` and `06-ratification-readiness.md` were the exact files that `cp` then froze as correct-size, all-NUL: **15 zeroed files across 7 baselines, and the decision-health block reported ADRs drifting 9 → 7 → 8 of 11 when nothing had moved.** `current/` survived; the audit trail did not. A targeted edit is also reviewable in a way a regenerated file is not.
+- **Never quote a decision-health number without knowing the freeze is clean.** Every counter reads the *frozen* copy, so a zeroed file scores zero silently — and `MANIFEST.tsv` hashes the corrupt bytes, so **verifying a baseline against its own manifest passes**. `scripts/baseline.sh` now verifies and aborts rather than freezing what it cannot vouch for; if it aborts, that is the control working.
 
 ## Daily loop
 
