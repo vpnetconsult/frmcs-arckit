@@ -38,10 +38,13 @@ This repo is a living architecture-decision record set for the GSM-R → FRMCS t
 3. End of day → freeze: `bash scripts/baseline.sh` (writes `baselines/<date>/` with MANIFEST, a status snapshot, a **decision-health block**, and a diff vs the previous baseline).
 4. **Read the decision-health block.** If `revise rate` sits near 5%, or `ADRs Accepted` stays at 0, the wire between evidence and decisions is disconnected — a full log is not evidence of health.
 
+⚠️ **`baselines/<date>/` is the day's FIRST freeze, not its last.** `scripts/baseline.sh` writes the plainly-named `<date>` directory once; every later freeze that day goes to `<date>_HHMM/`. So on any multi-freeze day, the directory whose name looks canonical holds the **morning** state, and the latest state is the highest-numbered `_HHMM` sibling. **To read a day's end state, take `ls -d baselines/<date>* | tail -1`, never `baselines/<date>/`.** This is documented rather than fixed on purpose: making `<date>/` track the latest freeze would mean writing into an existing baseline directory, which the §Never rule forbids and which is exactly the operation that produced the 2026-09-04 corruption. **Worked example of the gap: on 2026-09-06, `baselines/2026-09-06/` is the 14:45 cut — six open queue entries and an uncorrected ADR-001 — while `2026-09-06_1910` has the queue empty and the correction in. Same day, two very different registers.**
+
 **Why (2026-08-15).** At 338 rows the register had **0 of 9 ADRs ratified**, 55 open action items, 4 closed, and a 5% revise rate. Both founding ADRs had drifted: ADR-001 carried a GSM-R switch-off date the evidence log had itself marked superseded **on day one**, and ADR-002 asserted an EU AI Act high-risk posture that ADR-003 disproved **the same day it was written**. Both were visible in the log the entire time; nothing forced anyone to look. See `current/linkedin-post-decision-drift.md` and `current/project/06-ratification-readiness.md`.
 
 ## Commands
 
-- `bash scripts/baseline.sh` — cut today's baseline.
+- `bash scripts/baseline.sh` — cut today's baseline. **First cut of the day lands in `baselines/<date>/`; later cuts land in `baselines/<date>_HHMM/` and the script says so on stderr — read that line rather than assuming where it went.**
+- `ls -d baselines/<date>* | tail -1` — **the day's LATEST freeze.** Use this, not `baselines/<date>/`, whenever you want end-of-day state (see §Daily loop).
 - `bash scripts/baseline.sh 2026-06-25` — cut for a specific date.
 - Compare two days: open the two `baselines/<date>/BASELINE.md` files, or `diff` the matrices.
