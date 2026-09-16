@@ -103,8 +103,12 @@ while IFS= read -r a; do
   # Lettered items (0b, 0c, 2b, 9b …) are real action items and were invisible to
   # the original pattern, which under-reported BOTH columns. Found 2026-09-04 when
   # closing item 0c moved the true count but not the reported one.
-  o=$(grep -c '^[0-9]\{1,\}[a-z]\{0,1\}\. \[ \]' "$a" 2>/dev/null) || o=0
-  d=$(grep -c '^[0-9]\{1,\}[a-z]\{0,1\}\. \[x\]' "$a" 2>/dev/null) || d=0
+  # Indented items ("  1. [ ]" — ADR-014 writes its list two spaces in) were likewise
+  # invisible; found 2026-09-16 when a hand count read 27 open against the block's 25.
+  # Leading whitespace is now allowed. Only numbered items count — "- [ ]" bullets are
+  # sub-notes, not action items, and stay excluded.
+  o=$(grep -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[ \]' "$a" 2>/dev/null) || o=0
+  d=$(grep -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[x\]' "$a" 2>/dev/null) || d=0
   AI_OPEN=$((AI_OPEN+o)); AI_DONE=$((AI_DONE+d))
 done <<EOF
 $(find "$DST" -type f -name 'ADR-0*.md' | sort)
