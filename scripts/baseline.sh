@@ -98,7 +98,13 @@ ADR_TOTAL=0; ADR_ACC=0; ADR_PROP=0; AI_OPEN=0; AI_DONE=0
 while IFS= read -r a; do
   [ -n "$a" ] || continue
   ADR_TOTAL=$((ADR_TOTAL+1))
-  st=$(grep -m1 '^\*\*Status:\*\*' "$a" 2>/dev/null || true)
+  # -a (text mode) on every grep below. On hosts where grep is ugrep, a Status line
+  # longer than ~9 KB inside the first buffer makes the file "binary" when stdout is
+  # not a tty: `grep -m1` then prints nothing and the ADR is counted as neither
+  # Accepted nor Proposed. Found 2026-09-19 when the block read 8 of 11 for a
+  # register with 9 Accepted (ADR-012's amended Status line was 9,531 chars).
+  # `grep -c` was unaffected, so the item counts were right; the ADR count was not.
+  st=$(grep -a -m1 '^\*\*Status:\*\*' "$a" 2>/dev/null || true)
   case "$st" in *Accepted*) ADR_ACC=$((ADR_ACC+1)) ;; *Proposed*) ADR_PROP=$((ADR_PROP+1)) ;; esac
   # Lettered items (0b, 0c, 2b, 9b …) are real action items and were invisible to
   # the original pattern, which under-reported BOTH columns. Found 2026-09-04 when
@@ -107,15 +113,15 @@ while IFS= read -r a; do
   # invisible; found 2026-09-16 when a hand count read 27 open against the block's 25.
   # Leading whitespace is now allowed. Only numbered items count — "- [ ]" bullets are
   # sub-notes, not action items, and stay excluded.
-  o=$(grep -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[ \]' "$a" 2>/dev/null) || o=0
-  d=$(grep -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[x\]' "$a" 2>/dev/null) || d=0
+  o=$(grep -a -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[ \]' "$a" 2>/dev/null) || o=0
+  d=$(grep -a -c '^[[:space:]]*[0-9]\{1,\}[a-z]\{0,1\}\. \[x\]' "$a" 2>/dev/null) || d=0
   AI_OPEN=$((AI_OPEN+o)); AI_DONE=$((AI_DONE+d))
 done <<EOF
 $(find "$DST" -type f -name 'ADR-0*.md' | sort)
 EOF
 
 EVF="$DST/evidence-log.md"
-EV_TOTAL=$(grep -c '^| E-' "$EVF" 2>/dev/null) || EV_TOTAL=0
+EV_TOTAL=$(grep -a -c '^| E-' "$EVF" 2>/dev/null) || EV_TOTAL=0
 # Tolerate bold/whitespace around the action value: rows are hand-written and
 # "| **revise** |" is as common as "| revise |". The 2026-08-18 baseline missed
 # five rows for exactly this reason and under-reported the revise rate.
@@ -130,7 +136,7 @@ RATE=0
 # Read only the status column (field 6) of requirement rows, not the whole row.
 MX="$DST/traceability-matrix.md"
 ROWS=$(awk -F'|' '$2 ~ /R[0-9]/ {print $6}' "$MX" 2>/dev/null || true)
-count() { printf '%s\n' "$ROWS" | grep -c "$1" 2>/dev/null || true; }
+count() { printf '%s\n' "$ROWS" | grep -a -c "$1" 2>/dev/null || true; }
 
 {
   echo "# Baseline $DATE"
