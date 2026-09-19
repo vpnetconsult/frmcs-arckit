@@ -225,7 +225,7 @@ The **backward lineage** (§2) is now authoritative too: **VGCS/VBS** (Rel-7/11,
 |---|---|---|---|
 | FRMCS service requirements | TS 22.289 (SA1) | Rel-15 initial → Rel-17; **re-issued unchanged at Rel-18 and Rel-19 — no technical CR since Dec 2019** | ✓ V17.0.0 (E-2026-07-31-02) · ✓ V19.0.1 (E-2026-09-19-02, diffed: body identical) |
 | MC common / **functional alias** | TS 23.280 (SA6) | Rel-15 → Rel-20 | ✓ V18.11.0 front matter (E-2026-07-26-16) · **✓ V20.4.0 clause-level — §8.1.5, §10.13, §5.2.11/12, §10.18 recording (E-2026-09-19-13)** |
-| MCPTT (voice) | TS 23.379 / 24.379 | Rel-13 → 15 (3.0) → 16 (4.0) | ✓ 23.379 V18.9.0 **front matter only** (E-2026-07-26-17) — ⚠️ the one Stage-2 text still unread at clause level (multi-talker procedures); the file supplied as `23279-j00` is TS 23.279 (CS/IMS combining), not 23.379 · ✓ 24.379 V20.0.0 clause (E-2026-09-19-10) |
+| MCPTT (voice) | TS 23.379 / 24.379 | Rel-13 → 15 (3.0) → 16 (4.0) | ✓ 23.379 V18.9.0 front matter (E-2026-07-26-17) · **✓ V20.3.0 clause-level — floor control / multi-talker §10.9, functional alias, IWF-1 (E-2026-09-19-14)**; the MCX Stage-2 set is now clause-read at Rel-20 end to end · ✓ 24.379 V20.0.0 clause (E-2026-09-19-10) |
 | MCData | TS 23.282 / 24.282 | Rel-14 → 15 (2.0) → 16 → 20 | ✓ 23.282 V18.9.0 (E-2026-07-26-18) · V20.2.0 by change history/keyword (E-2026-09-19-13; MCData recording removed from Rel-19) · 24.282 V20.0.0 (E-2026-09-19-10) |
 | MCVideo | TS 23.281 / 24.281 | Rel-14/15 → 20 | ✓ 23.281 V18.9.0 (E-2026-07-26-19) · V20.4.0 by change history/keyword (E-2026-09-19-13) · 24.281 V20.0.0 (E-2026-09-19-10) |
 | 5G security architecture | TS 33.501 (SA3) | Rel-15 → 18 → 19 | ✓ V18.6.0/V19.6.0 (E-26-14, E-31-04) |
