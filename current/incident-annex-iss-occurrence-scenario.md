@@ -127,75 +127,89 @@ Two sets, kept apart because the ISS `Recommendation` is normally an investigati
 | REC-ADR011 | Change control for live-core interventions | Vital managed objects excluded from maintenance intents; a change to a vital object enters change control as a request, never as an intent; producer-created assurance loops are configuration items (ADR-011 mechanism clause) | BB1 |
 | REC-ADR012-5b | Build the post-incident record before the incident | TS 22.280 §6.15.4 metadata incl. bearer-side events (pre-emption, loss of signal, failed registration) and TS 33.180 §10.1 security content, specified at procurement since UIC V2 mandates only REC metadata — so that a future record fills §2–§3 of this document from logs, not from press | §2–§3 gaps |
 
-## 8. Turtle sketch (illustrative; not validated against `iss-shacl/`)
+## 8. Turtle sketch — **validated 2026-09-19 against `iss_ontology` v1.0.0 `iss-shacl/shapes/` (30 shape files) with pyshacl 0.40.1** (E-2026-09-19-44)
+
+**Result: conforms, after two corrections to the sketch and with one class of violation that is ERA's, not ours.** (1) Every ISS text property is constrained `sh:datatype xsd:string` (81 such constraints; no `rdf:langString`, no `sh:languageIn` anywhere) — language-tagged literals (`"…"@en`) are violations, so the sketch now carries plain strings. (2) The RCM function is not a free string: `iss:riskControlMeasureFunction` takes a concept from the published scheme `…/iss/concepts/risk-control-measure-functions/` — nine codes, **each function split by who performs it: RCMF.1.1 detect–technical system / 1.2 detect–human; 2.1 diagnose–technical / 2.2 diagnose–human; 3.1 act–technical / 3.2 act–human** (x.0 = "none"). The sketch now cites those codes. (3) **Three defects in ERA's v1.0.0 artefacts, found by running them:** the gate shapes require `sh:class era:InputAndGate` / `era:InputOrGate` while the ontology defines the classes in the `iss:` namespace, so every conformant gate node is reported as a violation; the shape `RiskControlMeasureFunctionSKOSinScheme` demands scheme `…/safety-measure-function-types/RiskControlMeasureFunctionTypes` while the published SKOS file puts the concepts in `…/risk-control-measure-functions/RiskControlMeasureFunctions`; six shapes still point at the *deprecated* `safety-event-types/SafetyEventTypes` scheme. Reported as an act (A11 in `14-next-acts.md`); the sketch uses the ontology's IRIs and the published scheme, so the final run (sketch + the two SKOS files as data, `ontology.ttl` as ontology graph, 348 triples) reports exactly five violations, all upstream: the two AND-gate nodes (namespace) and the three `riskControlMeasureFunction` values (scheme IRI). Nothing else. Runner: `python3 -m pyshacl -s <concat of iss-shacl/shapes/*.ttl> -e iss_ontology/ontology.ttl <this sketch + era-skos-riskControlMeasureFunctions.ttl + era-skos-systemicFactors.ttl>`.
 
 ```turtle
 @prefix iss:  <http://data.europa.eu/949/iss/> .
 @prefix era:  <http://data.europa.eu/949/> .
 @prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
 @prefix ex:   <https://frmcs-arckit.example/incident/2026-06-23/> .
+@prefix iss-rcmf: <http://data.europa.eu/949/iss/concepts/risk-control-measure-functions/> .
+@prefix iss-sf:   <http://data.europa.eu/949/iss/concepts/systemic-factors/> .
+# Strings are plain xsd:string throughout: the ISS shapes reject language-tagged literals.
 
 ex:record a iss:Record ;
-  iss:recordTitle "Nationwide loss of GSM-R train radio, Germany, 23–24 June 2026"@en ;
+  iss:recordTitle "Nationwide loss of GSM-R train radio, Germany, 23–24 June 2026" ;
   iss:recordDatetime "2026-09-19T00:00:00"^^xsd:dateTime ;
   iss:recordVersionNumber "4" ;
   iss:hasInfoInRecord ex:simple , ex:detailed .
 
 ex:simple a iss:SimpleReportSafetyRelatedEvent ;
-  iss:occurrenceTitle "Nationwide loss of GSM-R train radio, 23–24 June 2026"@en ;
-  iss:generalOccurrenceNarrative "Planned swap of a network distribution component → singular software fault → no alarm → automatic failover not triggered → nationwide loss ≈2 h → manual recovery after mandatory cyber-attack exclusion."@en ;
+  iss:occurrenceTitle "Nationwide loss of GSM-R train radio, 23–24 June 2026" ;
+  iss:generalOccurrenceNarrative "Planned swap of a network distribution component → singular software fault → no alarm → automatic failover not triggered → nationwide loss ≈2 h → manual recovery after mandatory cyber-attack exclusion." ;
   iss:isADangerousGoodsEvent false .
 
 ex:detailed a iss:DetailedReportSafetyRelatedEvent ;
-  iss:damageOperationServicesNarrative "Safety-mandated nationwide standstill ≈2 h; residual delays past 06:00; counts and costs not published."@en ;
+  iss:damageOperationServicesNarrative "Safety-mandated nationwide standstill ≈2 h; residual delays past 06:00; counts and costs not published." ;
   iss:hasOccurrenceScenario ex:scenario .
 
 ex:scenario a iss:OccurrenceScenario ;
-  iss:occurrenceScenarioNarrative "Two gates in series: technical (silent fault, failover not triggered) and organisational (cyber-exclusion before manual switch-over)."@en ;
+  iss:occurrenceScenarioNarrative "Two gates in series: technical (silent fault, failover not triggered) and organisational (cyber-exclusion before manual switch-over)." ;
   iss:hasOccurrenceScenarioBlock ex:bb1 , ex:bb2 , ex:bb3 , ex:bb4 , ex:bb5 , ex:bb6 , ex:bb7 , ex:bb8 .
 
 ex:bb3 a iss:OccurrenceScenarioBuildingBlock ;
-  iss:buildingBlockNarrative "Software fault raises no automatic alarm."@en ;
+  iss:buildingBlockNarrative "Software fault raises no automatic alarm." ;
   iss:hasFailedRiskControlMeasure ex:frcm1 ;
   iss:hasContributingSystemicFactor ex:csf-monitoring .
 
 ex:bb4 a iss:OccurrenceScenarioBuildingBlock ;
-  iss:buildingBlockNarrative "Automatic failover to existing redundancy not triggered."@en ;
+  iss:buildingBlockNarrative "Automatic failover to existing redundancy not triggered." ;
   iss:inputAndgate [ a iss:InputAndGate ; iss:inputAndGateBuildingBlock ex:bb2 , ex:bb3 ] ;
   iss:hasFailedRiskControlMeasure ex:frcm2 .
 
 ex:bb7 a iss:OccurrenceScenarioBuildingBlock ;
-  iss:buildingBlockNarrative "Rules require cyber-attack exclusion before manual switch-over."@en ;
+  iss:buildingBlockNarrative "Rules require cyber-attack exclusion before manual switch-over." ;
   iss:hasFailedRiskControlMeasure ex:frcm4 .
 
 ex:bb8 a iss:OccurrenceScenarioBuildingBlock ;
-  iss:buildingBlockNarrative "Manual switch-over; service restored ≈00:30."@en ;
+  iss:buildingBlockNarrative "Manual switch-over; service restored ≈00:30." ;
   iss:inputAndgate [ a iss:InputAndGate ; iss:inputAndGateBuildingBlock ex:bb4 , ex:bb7 ] .
 
 ex:frcm1 a iss:FailedRiskControlMeasure ;
   iss:failedInBlock ex:bb3 ;
-  iss:failureMode "silent fault — self-report only"@en ;
+  iss:failureMode "silent fault — self-report only" ;
   iss:correspondsToRiskControlMeasure ex:rcm-detect .
 ex:rcm-detect a iss:RiskControlMeasure ;
-  iss:riskControlMeasureName "Fault detection / automatic alarming of GSM-R core element"@en ;
-  iss:hasRiskControlMeasureFunction [ a iss:RiskControlMeasureFunction ; iss:riskControlMeasureFunctionName "detect" ] .
+  iss:riskControlMeasureName "Fault detection / automatic alarming of GSM-R core element" ;
+  iss:riskControlMeasureFunction iss-rcmf:11 .   # RCMF.1.1 Detect function - Technical system
 
 ex:frcm2 a iss:FailedRiskControlMeasure ;
   iss:failedInBlock ex:bb4 ;
-  iss:failureMode "act function conditioned on failed detect function"@en ;
+  iss:failureMode "act function conditioned on failed detect function" ;
   iss:correspondsToRiskControlMeasure ex:rcm-failover .
 ex:rcm-failover a iss:RiskControlMeasure ;
-  iss:riskControlMeasureName "Automatic core switch-over (ETSI TS 103 147 §4.2)"@en ;
-  iss:hasRiskControlMeasureFunction [ a iss:RiskControlMeasureFunction ; iss:riskControlMeasureFunctionName "act" ] .
+  iss:riskControlMeasureName "Automatic core switch-over (ETSI TS 103 147 §4.2)" ;
+  iss:riskControlMeasureFunction iss-rcmf:31 .   # RCMF.3.1 Act function - Technical system
 
 ex:frcm4 a iss:FailedRiskControlMeasure ;
   iss:failedInBlock ex:bb7 ;
-  iss:failureMode "security control on the availability recovery path, unbounded"@en ;
+  iss:failureMode "security control on the availability recovery path, unbounded" ;
   iss:correspondsToRiskControlMeasure ex:rcm-cyber-exclusion .
 ex:rcm-cyber-exclusion a iss:RiskControlMeasure ;
-  iss:riskControlMeasureName "Mandatory cyber-attack exclusion before manual failover"@en ;
-  iss:hasRiskControlMeasureFunction [ a iss:RiskControlMeasureFunction ; iss:riskControlMeasureFunctionName "diagnose" ] ;
-  iss:additionalExplanationRiskControlMeasureThreats "Introduces a threat to event mitigation: delays recovery from loss of train radio."@en .
+  iss:riskControlMeasureName "Mandatory cyber-attack exclusion before manual failover" ;
+  iss:riskControlMeasureFunction iss-rcmf:22 ;   # RCMF.2.2 Diagnose function - Human
+  iss:additionalExplanationRiskControlMeasureThreats "Introduces a threat to event mitigation: delays recovery from loss of train radio." .
+
+# Blocks elided above, typed so the scenario's block list validates; factor coded from the published scheme.
+ex:bb1 a iss:OccurrenceScenarioBuildingBlock ; iss:buildingBlockNarrative "Planned swap of a network distribution component in the GSM-R core, in operating hours." .
+ex:bb2 a iss:OccurrenceScenarioBuildingBlock ; iss:buildingBlockNarrative "The swap triggers a singular software fault in the component." .
+ex:bb5 a iss:OccurrenceScenarioBuildingBlock ; iss:buildingBlockNarrative "GSM-R voice and data lost nationwide, ~2 h." .
+ex:bb6 a iss:OccurrenceScenarioBuildingBlock ; iss:buildingBlockNarrative "Safety-mandated standstill; fallback bearer barred from Notruf/group calls." .
+ex:csf-monitoring a iss:ContributingSystemicFactor ;
+  iss:systemicFactor iss-sf:SF-5-1 ;   # Monitoring (performance evaluation)
+  iss:contributingSystemicFactorNarrative "No independent supervision of the central element; detection depended on self-report." .
 ```
 
 ## 9. What the exercise found — the gaps are the result
@@ -204,7 +218,7 @@ ex:rcm-cyber-exclusion a iss:RiskControlMeasure ;
 2. **Four fields the public record cannot fill** — delayed-train counts, delay minutes, disruption cost, the failed element's identity. DB has published none; the register holds none. These are exactly the fields the 22.280 §6.15.4 / 33.180 §10.1 logs would supply if they existed on the operator's side (ADR-012 item 5) — and, on V2 products, only REC metadata is mandatory (E-2026-09-19-19).
 3. **The organisational gate becomes a first-class object.** In the annex, the cyber-exclusion rule was a corrected sentence. In the ISS it is a declared `RiskControlMeasure` with function *diagnose* and a documented `introducesThreatToEventMitigation`. The ISS vocabulary has a property for precisely the adverse-effect class ADR-012 item 5 enumerates — which is the strongest external confirmation yet that the enumeration duty is the right instrument.
 4. **The fault tree is two ANDs.** Outage = fault ∧ undetected; recovery = redundancy ∧ gate-passed. Every register position on this incident (PR11, R3, R4, ADR-012 items 4–5, ADR-011) attaches to one of those four leaves, and nothing attaches anywhere else. The reconstruction is complete in the regulator's sense *for the mechanism*; it is incomplete *for the consequences*, and that incompleteness is the operator's, not the register's.
-5. **FRMCS appears in an ERA vocabulary for the first time** — `railwaySystemFunctions` RSYS.4.1.2.4 / RSYS.4.1.3.1.3 (on-board voice / data). The ISS can name the system that will replace GSM-R; RINF and the RCC still cannot (E-2026-09-19-25/-26). Recorded on the legal-chain note.
+5. **FRMCS appears in an ERA vocabulary for the first time** — `railwaySystemFunctions` RSYS.4.1.2.4 / RSYS.4.1.3.1.3 (on-board voice / data). The ISS can name the system that will replace GSM-R; RINF and the RCC still cannot (E-2026-09-19-25/-26). Recorded on the legal-chain note. **Corrected in degree 2026-09-19 (E-2026-09-19-44, full scheme read — 126 codes):** FRMCS is named *on-board only*. The trackside branch is **RSYS.4.2.1 "GSM-R Trackside Voice/Data"** with exactly three children — 4.2.1.1 Dispatcher Terminal, 4.2.1.2 Base Station (BTS/BSC), 4.2.1.3 Mobile Switching Center (MSC) — a 2G decomposition. **This incident's failed element (a core "network distribution component") codes at best as RSYS.4.2.1.3 MSC; an FRMCS trackside failure — gNB, 5G core, IMS, MCX server — has no code at all.** So the first FRMCS-era core outage would be reported not only under "other" for its cause (finding 1) but under a GSM-R function code for its system. Third ISS taxonomy gap; the legal-chain note §4 carries it.
 6. **No prior record to link.** The recurrence the press asserts (heise) has no record in this register; `isRelatedToRecord` is empty. An acquisition target: earlier German GSM-R outages as dated events.
 
 *Anchors:* `incident-annex.md` · E-2026-06-24-16/-18/-26 · E-2026-06-25-01 · E-2026-06-27-01/-02/-03 · E-2026-06-30-03 · E-2026-07-01-09 · E-2026-09-15-01 · E-2026-09-19-05/-11/-19/-25/-26 · ADR-011, ADR-012 items 4–5, PR11, R3, R4.
