@@ -123,8 +123,8 @@ The core mapping. Read left-to-right: each FRMCS layer, who owns it, the spec, a
 | **Service security** | 3GPP **TS 33.180** (MC security — KMS/SAKKE, IdMS, SRTP, XML) | GSM-R: minimal; no E2E MC key mgmt | E-2026-07-26-20. Fills the "E2E encryption optional/TBD" gap (E-2026-07-01-10) |
 | **Railway cybersecurity** | CEN/CENELEC **CLC/TS 50701** (zones/conduits, on IEC 62443) | *(none formalised for GSM-R era)* | E-2026-07-26-15; corroborated E-2026-07-29-11 |
 | **Functional safety** | CENELEC **EN 5012x** (RAMS/SIL-4) | EN 5012x (same family) | ADR-004. FRMCS "SIL-4 certifiable" (E-2026-07-29-09) |
-| **Spectrum** | CEPT/ECC **RMR** — 1900 MHz (+900 MHz), **ECC(20)02** | ECC: **876–880 / 921–925 MHz** (GSM-R, dedicated for railway) | E-2026-08-01-06 (primary), E-2026-07-29-09 (bands). Dedicated rail spectrum retained + moved/expanded — **non-exclusive** designation (national implementation decides exclusivity); RMR not a safety service (ITU RR 1.59) |
-| **Interworking** | ETSI TC-RT **TS 103 792** (GSM-R ↔ FRMCS) | *(n/a)* | E-2026-07-26-13. Enables the decade-long dual-run (R2) |
+| **Spectrum** | CEPT/ECC **RMR** — 1900 MHz (+900 MHz), **ECC(20)02** | ECC: **876–880 / 921–925 MHz** (GSM-R, dedicated for railway) | E-2026-08-01-06 (primary), E-2026-07-29-09 (bands). Dedicated rail spectrum retained + moved/expanded — **non-exclusive** designation (national implementation decides exclusivity); RMR not a safety service (ITU RR 1.59). **3GPP RAN4 side now held (E-2026-09-19-16): TS 38.101-1 / 38.104 V20.0.0 — n100 (874.4–880 / 919.4–925 FDD) and n101 (1900–1910 TDD), "applicable only in countries subject to ECC Decision (20)02, for the FRMCS application"; the FRMCS cab radio as a named PC1 UE class with mandatory declared post-connector antenna gain (Annex M)** |
+| **Interworking** | ETSI TC-RT **TS 103 792** (GSM-R ↔ FRMCS) — IWF internals and GSM-R side | 3GPP **TS 23.283** (SA6) — reference points IWF1–4, MC-side flows, GSM-R-named procedures from Rel-17 (E-2026-09-19-15) | E-2026-07-26-13, E-2026-09-19-15. Enables the decade-long dual-run (R2). Two-sided: 3GPP owns the MC-side interface, ETSI the IWF; alias resolution happens in the home system of the alias |
 | **Regulatory** | ERA **CCS TSI** (FRMCS Class A) + CRA/NIS-2 | ERA **CCS TSI** (GSM-R Class A) | E-2026-07-25-05; R14 (CRA/NIS-2 new) |
 | **Validation** | **MORANE-2** (FRMCS Edition 1) | **MORANE** (EIRENE/GSM-R) | E-2026-07-02-15 |
 
@@ -228,12 +228,12 @@ The **backward lineage** (§2) is now authoritative too: **VGCS/VBS** (Rel-7/11,
 | MCPTT (voice) | TS 23.379 / 24.379 | Rel-13 → 15 (3.0) → 16 (4.0) | ✓ 23.379 V18.9.0 front matter (E-2026-07-26-17) · **✓ V20.3.0 clause-level — floor control / multi-talker §10.9, functional alias, IWF-1 (E-2026-09-19-14)**; the MCX Stage-2 set is now clause-read at Rel-20 end to end · ✓ 24.379 V20.0.0 clause (E-2026-09-19-10) |
 | MCData | TS 23.282 / 24.282 | Rel-14 → 15 (2.0) → 16 → 20 | ✓ 23.282 V18.9.0 (E-2026-07-26-18) · V20.2.0 by change history/keyword (E-2026-09-19-13; MCData recording removed from Rel-19) · 24.282 V20.0.0 (E-2026-09-19-10) |
 | MCVideo | TS 23.281 / 24.281 | Rel-14/15 → 20 | ✓ 23.281 V18.9.0 (E-2026-07-26-19) · V20.4.0 by change history/keyword (E-2026-09-19-13) · 24.281 V20.0.0 (E-2026-09-19-10) |
-| 5G security architecture | TS 33.501 (SA3) | Rel-15 → 18 → 19 | ✓ V18.6.0/V19.6.0 (E-26-14, E-31-04) |
+| 5G security architecture | TS 33.501 (SA3) | Rel-15 → 18 → 19 → 20 | ✓ V18.6.0/V19.6.0 (E-26-14, E-31-04) · V20.2.0 by change history (E-2026-09-19-17: N32 not-allowed-message discard) · 33.117 V20.1.0, 33.210 V19.3.0 (TLS 1.2 AEAD-only) same row |
 | MC service security | TS 33.180 (SA3) | Rel-15+ | ✓ V18.2.0 front matter (E-2026-07-26-20); **V20.0.0 clause-level — logging §10, interworking §11, IOPS §12, SeGy Annex L (E-2026-09-19-11)** |
 | MC-over-5GC | TR 23.783 | Rel-16/17 study → normative Rel-17/18 | study-vintage (Kontron) |
 | IMS ↔ 5GC (CUPS-for-IMS) | TR 23.794 | Rel-16 study | study-vintage (Kontron) |
 | MBMS → 5G-MBS multicast | TS 23.479 → 5G MBS | Rel-16 → Rel-17 | via Kontron §7 |
-| GSM-R interworking | TS 22.280 → ETSI profiling | Rel-16 | ✓ via TS 103 792 (E-2026-07-26-13) |
+| GSM-R interworking | TS 22.280 → **TS 23.283 (SA6, LMR/GSM-R IWF Stage 2)** → ETSI TS 103 792 | Rel-16 → Rel-17 GSM-R CRs → Rel-19 private call with GSM-R | ✓ via TS 103 792 (E-2026-07-26-13) · ✓ TS 23.283 V20.1.0 (E-2026-09-19-15) |
 
 **The FRMCS requirements are spread across releases**, and the apex reqs spec (TS 22.289) is refreshed each release — so "FRMCS Edition 1" is not one release but a *selected profile across Rel-15→17*, with Edition 2 pulling in Rel-18 (5G-Advanced) features. This is precisely why no single "FRMCS is done at Rel-N" statement holds.
 
