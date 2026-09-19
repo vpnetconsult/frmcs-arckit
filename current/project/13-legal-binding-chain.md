@@ -132,7 +132,8 @@ Every seam in this diagram is grounded on both sides by a text on file (`sdo-map
 2. **Indices 96 / 97** — reserved placeholders for the FRMCS profile FFFIS and the FRMCS test specifications. When filled (V3), they become the legal hook for MORANE-2 D1.1 / UIC T-8900 (ADR-007 item 5). Until then the demonstrator's test specification has no legal status.
 3. **ERA recommendation #2** — the final NoBo list of interoperability requirements for V3. Until it exists, "MI candidate" in TOBA-7510 Annex A is an indication to the reader, not a certification object.
 4. **Decision (EU) 2021/1730** — cited by the SRS, not held as text; ECC(20)02 stands in for it. Low priority: the two say the same bands.
-5. **"v2.2"** — MORANE-2's stated basis (E-2026-09-06-03) versus the held v2.1 (E-2026-09-19-19). Unverified whether a v2.2 maintenance release exists.
+5. **"v2.2"** — MORANE-2's stated basis (E-2026-09-06-03) versus the held v2.1 (E-2026-09-19-19). **Now named by UIC itself** as "the FRMCS V2.2 specification set" under large-scale test in MORANE-2 (E-2026-09-19-22, conference invitation, tier B) — so a v2.2 release exists; it is not held and the v2.1→v2.2 delta is unknown.
+7. **"V3p — November 2026"** (E-2026-09-19-22, `watch`). UIC's invitation names a "V3p" delivery in November 2026; the governance texts on file give V3.0 in September 2027 (E-2026-09-06-07). Reconcile before either date is used. If a preliminary V3 appears in November it is the first text that can carry the (M-V3) content of §4 — and the point at which this note's "legally unowned" column gets re-read. The **5th UIC Global FRMCS Conference, 24–25 Nov 2026, Paris** is the acquisition venue for it and for MORANE-2 lessons-learned material.
 6. **AI Act** — stays `watch`; nothing above changes ADR-003.
 
 ---
