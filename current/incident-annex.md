@@ -2,7 +2,8 @@
 
 **Status:** Confirmed; cause AND cascade mechanism DB-confirmed at PRIMARY tier (DB official press statement, deutschebahn.com 24–26 Jun 2026, E-2026-06-27-03; corroborated by ZDF E-2026-06-27-01 and lok-report E-2026-06-27-02): a planned network-switch-component swap → singular software fault (no alarm) → automatic failover to the existing (functional) redundancy did not trigger → nationwide loss until manual recovery
 **Relevance:** validation evidence for R3 (central SPOF) and R4 (fail-soft) in traceability-matrix.md
-**Last revised:** 2026-06-27
+**Last revised:** 2026-06-27 (characterisation corrected 2026-09-15)
+**Companion (2026-09-19):** `incident-annex-iss-occurrence-scenario.md` — this annex re-expressed in the structure of the ERA ISS ontology (draft CSM ASLP): record, simple/detailed report, an eight-block fault tree with two AND gates, four failed risk control measures (detect / act / act / diagnose), systemic and contributing factors, recommendations, and the six gaps the exercise exposed. The facts stay here; the structure is there.
 
 ## What happened (confirmed)
 
