@@ -2,7 +2,7 @@
 
 **Date:** 2026-09-15 · **Method:** arcKit · **Status:** DRAFT v1
 **Outcome anchor:** *safe, continuous rail operations.*
-**Companions:** `sdo-mapping-frmcs-gsmr-5gsa.md` (which SDO owns which *layer* of the FRMCS stack — the technical view) · `05-stakeholders.md` (power/interest and mandate — the political view) · `traceability-matrix.md` · `evidence-log.md`.
+**Companions:** `sdo-mapping-frmcs-gsmr-5gsa.md` (which SDO owns which *layer* of the FRMCS stack — the technical view) · `13-legal-binding-chain.md` (how L7 law names the layers by index and version, and where it stops — the legal view) · `05-stakeholders.md` (power/interest and mandate — the political view) · `traceability-matrix.md` · `evidence-log.md`.
 
 > **What this is.** A roster of every standards, regulatory, research and sector body the register has actually met, sorted by **the function it performs in the GSM-R → FRMCS transition and in the oversight architecture** — not by how important it is. Built on 2026-09-15 by sweeping `evidence-log.md` (462 rows) for institution names and reading the anchoring rows; the *rows* column is the count of evidence rows mentioning the body, which measures **how much this register has read about it**, not the body's weight. Every entry cites the evidence rows it rests on. **A body that is not here is a body this register has not read — that is a fact about the register, not about the world** (§6 names the known gaps).
 >
