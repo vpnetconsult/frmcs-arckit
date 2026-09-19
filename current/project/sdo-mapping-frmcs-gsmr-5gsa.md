@@ -233,6 +233,7 @@ The **backward lineage** (§2) is now authoritative too: **VGCS/VBS** (Rel-7/11,
 | MC-over-5GC | TR 23.783 | Rel-16/17 study → normative Rel-17/18 | study-vintage (Kontron) |
 | IMS ↔ 5GC (CUPS-for-IMS) | TR 23.794 | Rel-16 study | study-vintage (Kontron) |
 | MBMS → 5G-MBS multicast | TS 23.479 → 5G MBS | Rel-16 → Rel-17 | via Kontron §7 |
+| Off-network (↔ GSM-R DMO) | **TS 23.304** (SA2, 5G ProSe / NR sidelink Stage 2; supersedes EPS TS 23.303) | Rel-17 → Rel-20 (multi-hop relays Rel-19) | ✓ V20.1.0 (E-2026-09-19-18): MC-class PQIs, MCX-subscription area-restriction exemption, no functional alias off-network (23.280 §10.13.1); TS 33.503 not held |
 | GSM-R interworking | TS 22.280 → **TS 23.283 (SA6, LMR/GSM-R IWF Stage 2)** → ETSI TS 103 792 | Rel-16 → Rel-17 GSM-R CRs → Rel-19 private call with GSM-R | ✓ via TS 103 792 (E-2026-07-26-13) · ✓ TS 23.283 V20.1.0 (E-2026-09-19-15) |
 
 **The FRMCS requirements are spread across releases**, and the apex reqs spec (TS 22.289) is refreshed each release — so "FRMCS Edition 1" is not one release but a *selected profile across Rel-15→17*, with Edition 2 pulling in Rel-18 (5G-Advanced) features. This is precisely why no single "FRMCS is done at Rel-N" statement holds.
