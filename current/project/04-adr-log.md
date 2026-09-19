@@ -17,7 +17,7 @@
 | ADR-009 | Fleet-scale FRMCS rolling-stock retrofit — feasibility & funding (managed external dependency) | Accepted (ARB 2026-08-20 R1) — settled internally | (assessment) |
 | ADR-010 | Agent evaluation strategy — accuracy, automation-bias, drift | Accepted (ARB 2026-08-20/2 R1) — settled internally; eval evidence outstanding | P2/P3 (G4) |
 | ADR-011 | Migration change-control policy — changes to live legacy/proprietary systems during the bridged parallel run | Accepted (ARB 2026-08-20/2 R2) — settled internally | G1–G3 |
-| ADR-012 | Cybersecurity regulatory conformance (CRA + NIS-2 + RED) — FRMCS PDEs & the agentic-oversight layer | Accepted (ARB 2026-08-20 R2) — settled internally | G1–G3 |
+| ADR-012 | Cybersecurity regulatory conformance (CRA + NIS-2 + RED) — FRMCS PDEs & the agentic-oversight layer | Accepted (ARB 2026-08-20 R2) — settled internally; amended ARB-2026-09-04 R1, 2026-09-05 R3, 2026-09-06 R2/R4, **2026-09-17 R1/R2** (recovery-path bound; model provenance evidence) | G1–G3 |
 | ADR-013 | Multi-mode, two-stage on-board FRMCS retrofit pattern (split from ADR-009 per ARB-2026-08-15 R5/#03) | Accepted (ARB 2026-08-15 R5) — settled internally | (assessment) |
 | ADR-014 | Two-plane governance — the register is the decision plane, terminating in NIS-2 (Track A) / NACSA (Track B, unevidenced — watch) | Accepted (ARB 2026-08-23 R2) — settled internally | (governance) |
 
