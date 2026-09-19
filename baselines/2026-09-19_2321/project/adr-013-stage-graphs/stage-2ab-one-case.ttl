@@ -1,0 +1,385 @@
+# Generated 2026-09-19 for ADR-013 item 3.2 (frmcs-arckit). Data graph for validation against ERA va-m2m shapes/2018-545. ILLUSTRATIVE identifiers.
+
+
+BASE <http://data.europa.eu/949/>
+PREFIX era: <http://data.europa.eu/949/>
+PREFIX era-sh: <http://data.europa.eu/949/shapes/>
+PREFIX eralex-sh: <http://data.europa.eu/949/shapes/requirements/>
+
+
+PREFIX erapod: <https://storage.inrupt.com/ea779a2c-b43d-4723-8b1a-aaa8990dd576/data/eradis/>
+
+
+PREFIX applicant: <https://uri-for-applicant.example/> 
+
+
+PREFIX as:    <https://www.w3.org/ns/activitystreams#>
+PREFIX cc:    <http://creativecommons.org/ns#>
+PREFIX dash:  <http://datashapes.org/dash#>
+PREFIX dcat:  <http://www.w3.org/ns/dcat#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dct:  <http://purl.org/dc/terms/>
+PREFIX dul:  <http://www.ontologydesignpatterns.org/ont/dul/DUL.owl#>
+PREFIX foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX geo:  <http://www.opengis.net/ont/geosparql#>
+PREFIX gr:   <http://purl.org/goodrelations/v1#>
+PREFIX locn: <http://www.w3.org/ns/locn#>
+PREFIX org:  <http://www.w3.org/ns/org#>
+PREFIX owl:  <http://www.w3.org/2002/07/owl#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX schema:  <http://schema.org/>
+PREFIX sh:   <http://www.w3.org/ns/shacl#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX unit: <http://qudt.org/vocab/unit/>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX vpa: <https://w3id.org/vpa#>
+PREFIX vs: <http://www.w3.org/2003/06/sw-vocab-status/ns#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+
+
+PREFIX era-evd: <http://data.europa.eu/949/evidence/>
+PREFIX era-cld: <http://data.europa.eu/949/evidence/cld/>
+PREFIX era-ecd: <http://data.europa.eu/949/evidence/ecd/>
+PREFIX era-perm: <http://data.europa.eu/949/permission/>
+
+PREFIX eralex: <http://data.europa.eu/949/requirement/>
+PREFIX eralex-pava: <http://data.europa.eu/949/requirement/pava/>
+
+
+PREFIX rorg: <http://data.europa.eu/949/body/organisation/>
+PREFIX lorg: <http://data.europa.eu/949/body/organisation/site/>
+PREFIX uorg: <http://data.europa.eu/949/body/organisation/unit/>
+PREFIX orgr: <http://data.europa.eu/949/body/organisation/role/>
+PREFIX orga: <http://data.europa.eu/949/body/organisation/address/>
+
+
+PREFIX eratv:     <http://data.europa.eu/949/vehicleType/>
+PREFIX era-vtc:   <http://data.europa.eu/949/vehicleType/configuration/>
+
+PREFIX era-vta:   <http://data.europa.eu/949/vehicleType/authorisation/>
+PREFIX era-vtacs: <http://data.europa.eu/949/vehicleType/authorisation/case/>
+PREFIX era-vtap:  <http://data.europa.eu/949/vehicleType/authorisation/application/>
+PREFIX era-vtck:  <http://data.europa.eu/949/vehicleType/authorisation/check/>
+PREFIX era-vtr:   <http://data.europa.eu/949/vehicleType/authorisation/restriction/>
+PREFIX era-pset:  <http://data.europa.eu/949/vehicleType/parameterSet/>
+PREFIX evr:       <http://data.europa.eu/949/vehicle/>
+PREFIX evrs:      <http://data.europa.eu/949/vehicleSet/>
+PREFIX evrss:     <http://data.europa.eu/949/vehicleSeries/>
+PREFIX era-vkm:   <http://data.europa.eu/949/vehicle/keeperMarking/>
+PREFIX era-vr:    <http://data.europa.eu/949/vehicle/registration/>
+PREFIX era-vrap:  <http://data.europa.eu/949/vehicle/registration/application/>
+PREFIX era-vracs: <http://data.europa.eu/949/vehicle/registration/case/>
+PREFIX era-vrck:  <http://data.europa.eu/949/vehicle/registration/check/>
+PREFIX era-nrp:   <http://data.europa.eu/949/vehicle/registration/additionalField/>
+PREFIX era-vrr:   <http://data.europa.eu/949/vehicle/registration/restriction/>
+
+
+PREFIX iss:       <http://data.europa.eu/949/iss/> 
+
+
+PREFIX eratv-act:  <http://data.europa.eu/949/vehicleType/activity/>
+PREFIX evr-act:    <http://data.europa.eu/949/vehicle/activity/>
+PREFIX ocr-act:    <http://data.europa.eu/949/body/organisation/activity/>
+PREFIX eradis-act: <http://data.europa.eu/949/evidence/activity/>
+PREFIX era-ent:    <http://data.europa.eu/949/entity/>
+
+
+
+PREFIX era-time:  <http://data.europa.eu/949/temporal/> 
+
+
+PREFIX era-skos:               <http://data.europa.eu/949/concepts/>
+PREFIX era-tsi:                <http://data.europa.eu/949/concepts/tsi-sections/>
+PREFIX era-bpt-eratv:          <http://data.europa.eu/949/concepts/brake-parking-type/eratv/>
+PREFIX era-cld-types:          <http://data.europa.eu/949/concepts/cld-types/>
+PREFIX era-ecd-types:          <http://data.europa.eu/949/concepts/ecd-types/>
+PREFIX era-cld-modules:        <http://data.europa.eu/949/concepts/cld-modules/>
+PREFIX era-organisation-roles: <http://data.europa.eu/949/concepts/organisation-roles/>
+PREFIX era-states:             <http://data.europa.eu/949/concepts/states/>
+PREFIX era-va-authcase:        <http://data.europa.eu/949/concepts/va-authcases/>
+PREFIX era-vr-regcase:         <http://data.europa.eu/949/concepts/vr-regcases/>
+PREFIX era-vehicle-types-eratv: <http://data.europa.eu/949/concepts/vehicle-types/eratv/>
+PREFIX era-vehicle-types:      <http://data.europa.eu/949/concepts/vehicle-types/>
+PREFIX era-ntg-rinf:           <http://data.europa.eu/949/concepts/nominal-track-gauges/rinf/>
+PREFIX era-ess-rinf:           <http://data.europa.eu/949/concepts/energy-supply-systems/rinf/>
+PREFIX era-ect-eratv:          <http://data.europa.eu/949/concepts/end-coupling-type/eratv/>
+PREFIX era-evidence-types:     <http://data.europa.eu/949/concepts/evidence-types/>
+PREFIX era-csm-eratv:          <http://data.europa.eu/949/concepts/contact-strip-materials/eratv/>
+PREFIX era-ri-eratv:           <http://data.europa.eu/949/concepts/rail-inclinations/eratv/>
+PREFIX era-tc-eratv:           <http://data.europa.eu/949/concepts/thermal-capacity/eratv/>
+PREFIX era-tpls-eratv:         <http://data.europa.eu/949/concepts/train-protection-legacy-systems/eratv/>
+PREFIX era-tpls-rinf:          <http://data.europa.eu/949/concepts/train-protection-legacy-systems/rinf/>
+PREFIX era-gaugings-rinf:      <http://data.europa.eu/949/concepts/gaugings/rinf/>
+PREFIX era-gsmrv-rinf:         <http://data.europa.eu/949/concepts/gsmr-versions/rinf/>
+PREFIX era-noic:               <http://data.europa.eu/949/concepts/noise-categories/NoiseCategories/>
+PREFIX era-va-trm:             <http://data.europa.eu/949/concepts/va-type-registration-methods/>
+PREFIX era-lclc:               <http://data.europa.eu/949/concepts/load-capability-line-categories/>
+PREFIX era-opcw-rinf:          <http://data.europa.eu/949/concepts/other-protection-control-warning/rinf/>
+PREFIX era-tds-eratv:          <http://data.europa.eu/949/concepts/train-detection/eratv/>
+PREFIX era-tds-rinf:           <http://data.europa.eu/949/concepts/train-detection/rinf/>
+PREFIX era-csm:                <http://data.europa.eu/949/concepts/contact-strip-materials/>
+PREFIX era-tr:                 <http://data.europa.eu/949/concepts/temperature-ranges/>
+PREFIX era-gsmr-rinf:          <http://data.europa.eu/949/concepts/gsmr-networks/rinf/>
+PREFIX era-mf:                 <http://data.europa.eu/949/concepts/maintenance-functions/>
+PREFIX era-gsmrv-eratv:        <http://data.europa.eu/949/concepts/gsmr-versions/eratv/>
+PREFIX era-ic-eratv:           <http://data.europa.eu/949/concepts/ice-conditions/eratv/>
+PREFIX era-rsf-eratv:          <http://data.europa.eu/949/concepts/rolling-stock-fire/eratv/>
+PREFIX era-permission-types:   <http://data.europa.eu/949/concepts/permission-types/>
+
+
+PREFIX era-esc-rinf: <http://data.europa.eu/949/concepts/etcs-system-compatibilities/rinf/>
+PREFIX era-rscd-rinf: <http://data.europa.eu/949/concepts/radio-system-compatibilities-data/rinf/>
+PREFIX era-rscv-rinf: <http://data.europa.eu/949/concepts/radio-system-compatibilities-voice/rinf/>
+
+ # WARNING: DO NOT (YET) EXIST
+PREFIX era-lex-sections: <http://data.europa.eu/949/concepts/requirements/sections/>
+PREFIX era-ecm-attestations: <http://data.europa.eu/949/concepts/ecm-attestations/>
+PREFIX era-pava-at: <http://data.europa.eu/949/concepts/va-authassessment-types/>
+PREFIX era-etcsmanspecset: <http://data.europa.eu/949/concepts/etcs-mandatory-specifications-set/>
+PREFIX erava-tsi-conforms: <http://data.europa.eu/949/concepts/tsi-conformities/>
+
+
+PREFIX iss-skos: <https://raw.githubusercontent.com/Interoperable-data/ISS_vocabulary/refs/heads/main/iss-skos/>
+PREFIX iss-rs:   <http://data.europa.eu/949/iss/concepts/record-statuses/>
+PREFIX iss-dcs: <http://data.europa.eu/949/iss/concepts/document-statuses/>
+
+
+PREFIX vac: <https://raw.githubusercontent.com/Interoperable-data/automate-va/refs/heads/dev-lws/TTL/>
+
+
+PREFIX update: <http://data.europa.eu/949/update/>
+
+
+# === template bodies.ttl (ERA va-m2m client/limited, illustrative organisations) ===
+# The main Organisations, Units
+rorg:Example a org:FormalOrganization ; 
+    foaf:name "Example Organisation" ;
+    rdfs:label "Example Organisation" ;
+    gr:taxID "EU123456789" ;
+    org:hasSubOrganization rorg:RailwayCompanyLille59777 ;
+    org:hasRegisteredSite lorg:ExampleHQ .
+
+rorg:RailwayCompanyLille59777  a era:Body , org:Organization ;
+    foaf:name "Example Sub-organisation (Lille Campus)"@en ;
+    org:hasUnit uorg:CompanyLilleUnit .
+
+uorg:CompanyLilleUnit a org:OrganizationalUnit ;
+    foaf:name "Example Unit (Lille campus)" ;
+    org:hasSite lorg:ExampleLilleSite-A .
+
+lorg:ExampleLilleSite-A a org:Site ;
+    foaf:name "Offices of the Example Unit Team in Lille"@en ;
+    rdfs:label "Offices of the Example Unit Team in Lille"@en ;
+    org:siteAddress 
+        lorg:ExampleLille12345-1 , 
+        lorg:ExampleLille12345-2 , 
+        lorg:ExampleLille12347-3 .
+
+lorg:ExampleLille12345-1 a locn:Address ;
+    locn:fullAddress "F-59777 Lille, France "@fr ;
+    locn:postName "Lille" ;
+    locn:postCode "59777" ;
+    locn:adminUnitL1 <http://publications.europa.eu/resource/authority/country/DEU> .
+
+### Data about the Authorising Entity can be skipped as it is to be provided by that Entity itself.
+
+# === template roles.ttl (ERA va-m2m client/limited, illustrative organisations) ===
+
+orgr:Lille_Applicant a era:OrganisationRole ; 
+    era:organisationCode "EXAM" ;
+    era:roleOf rorg:RailwayCompanyLille59777 ;
+    era:hasOrganisationRole era-organisation-roles:Applicant .
+
+orgr:EUAR_AuthorisingEntity a era:OrganisationRole ; 
+    era:organisationCode "EUAR" ; 
+    era:roleOf rorg:EUAR ; 
+    era:hasOrganisationRole era-organisation-roles:AuthorisingEntity .
+
+orgr:EBC_NoBo a era:OrganisationRole ; 
+    era:organisationCode "NB-0000" ; 
+    era:roleOf <http://data.europa.eu/949/organisations/bodies/eradis/DE-53175-6> ;
+    era:hasOrganisationRole era-organisation-roles:NOBO .
+
+orgr:EBC_DeBo a era:OrganisationRole ; 
+    era:roleOf <http://data.europa.eu/949/organisations/bodies/eradis/DE-53175-6> ;
+    era:hasOrganisationRole era-organisation-roles:DEBO .
+
+orgr:Sconrail_DeBo a era:OrganisationRole ; 
+    era:organisationCode "" ; 
+    era:roleOf <http://data.europa.eu/949/organisations/bodies/eradis/DE-81541-737> ;
+    era:hasOrganisationRole era-organisation-roles:DEBO .
+
+
+# === template agents.ttl (ERA va-m2m client/limited, illustrative organisations) ===
+# OSS Contact data
+
+applicant:alice a foaf:Agent ;
+    rdfs:label "(I) 6. Contact person information"@en ;
+    rdfs:comment "Contact person information (name, function, address, phone, email, languages) of Alice Allisson"@en ;
+    foaf:firstName "Alice"@en ;
+    foaf:lastName "Allisson"@en ;
+    foaf:mbox "mailto:Alice.Allisson@ExampleCompany.com" ;
+    foaf:phone "+1(123)45678910" ;
+    org:hasMembership applicant:GeneralContact .
+
+applicant:bob a foaf:Agent ;
+    rdfs:label "(I) 6. Billing Contact information"@en ;
+    rdfs:comment "Billing contact information (name, function, address, phone, email, languages) of Bob Bobson"@en ;
+    foaf:firstName "Bob"@en ;
+    foaf:lastName "Bobson"@en ;
+    foaf:mbox "mailto:Bob.Bobson@ExampleCompany.com" ;
+    foaf:phone "+1(123)098765432" ;
+    org:hasMembership applicant:FinancialContact .
+
+applicant:GeneralContactRole a org:Role ;
+    skos:prefLabel "General Contact" .
+
+applicant:FinancialContactRole a org:Role ;
+    skos:prefLabel "Financial Contact" .
+
+applicant:GeneralContact a org:Membership ;
+    org:member applicant:alice ;
+    org:role applicant:GeneralContactRole ;
+    org:organization rorg:RailwayCompanyLille59777 .
+
+applicant:FinancialContact a org:Membership ;
+    org:member applicant:bob ;
+    org:role applicant:FinancialContactRole ;
+    org:organization rorg:RailwayCompanyLille59777 .
+# === assessment body (NoBo) minimal organisation data for Annex I-8 ===
+<http://data.europa.eu/949/organisations/bodies/eradis/DE-53175-6> a era:Body , org:Organization ;
+    foaf:name "Notified Body (ERADIS DE-53175-6, illustrative)"@en ;
+    org:hasSite lorg:NoBoSite .
+lorg:NoBoSite a org:Site ; foaf:name "NoBo office"@en ; rdfs:label "NoBo office"@en ; org:siteAddress lorg:NoBoAddr .
+lorg:NoBoAddr a locn:Address ; locn:fullAddress "D-53175 Bonn, Germany"@de ; locn:postName "Bonn" ; locn:postCode "53175" ;
+    locn:adminUnitL1 <http://publications.europa.eu/resource/authority/country/DEU> .
+
+# === vehicle type and vehicles (ILLUSTRATIVE — ADR-013 case-study fleet; identifiers are placeholders in the ERATV/EVN form) ===
+eratv:11-000-0001-0-001 a era:VehicleType ;
+    dcterms:identifier "11-000-0001-0-001" ;
+    era:vehicleTypeNumber "11-000-0001-0" ;
+    rdfs:label "Illustrative electric multiple unit, GSM-R-equipped, FRMCS-prepared (ADR-013 stage 1 done)"@en ;
+    era:includedVersionsVariant "001" ;
+    era:vehicleTypeCategory era-vehicle-types-eratv:tractionVehicles ;
+    era:vehicleTypeSubCategory era-vehicle-types-eratv:multipleUnit ;
+    dcterms:issued "2019-06-30"^^xsd:date .
+evrs:vs-2ab1 a era:VehicleSet ; rdfs:member evr:94800000010-0 , evr:94800000011-8 .
+evr:94800000010-0 a era:Vehicle ; era:vehicleNumber "948000000100" .
+evr:94800000011-8 a era:Vehicle ; era:vehicleNumber "948000000118" .
+# predecessor authorisation (Annex I-12): the type's existing authorisation, replaced by the new one
+era-vta:V-2019-0001 a era:VehicleTypeAuthorisation ;
+    # dcterms:issued omitted: input.shapes.ttl forbids it on any VehicleTypeAuthorisation (conflicts with Annex II-11) — see findings
+    dcterms:isReplacedBy era-vta:V-2026-2ab1 ;
+    vpa:requestedIn era-vtap:va-2019-0001 .
+era-vtap:va-2019-0001 a era:VehicleTypeAuthorisationApplication ;
+    rdfs:label "Predecessor application (record only)"@en ; dcterms:identifier "V-2019-0001" ;
+    dcterms:creator orgr:Lille_Applicant ; dcterms:audience orgr:EUAR_AuthorisingEntity ;
+    era:preEngagementBaseline [ a era:PreEngagement ; era:hasPreEngagementBaseline false ] ;
+    vpa:constitutedBy era-vtacs:vac-2019-0001 ; vpa:requestFor era-vta:V-2019-0001 ; rdfs:comment ""@en .
+era-vtacs:vac-2019-0001 a era:VehicleTypeAuthorisationCase ; vpa:permissionType era-va-authcase:FA ; era:typeRegistrationMethod "New type"@en ; rdfs:label "Predecessor case"@en ;
+    era:areaOfUse <http://publications.europa.eu/resource/authority/country/DEU> ;
+    era:authorisingMemberState <http://publications.europa.eu/resource/authority/country/DEU> ;
+    vpa:concerns eratv:11-000-0001-0-001 ; vpa:constitutes era-vtap:va-2019-0001 .
+
+# === application ===
+era-vtap:va-2ab1 a era:VehicleTypeAuthorisationApplication ;
+    rdfs:label "Application — ADR-013 stage-2 graph 2ab1 (register exercise, not a submission)"@en ;
+    era:preEngagementBaseline [ a era:PreEngagement ; era:hasPreEngagementBaseline false ] ;
+    dcterms:creator orgr:Lille_Applicant ;
+    dcterms:audience orgr:EUAR_AuthorisingEntity ;
+    dcterms:identifier "V-2026-2ab1" ;
+    vpa:constitutedBy era-vtacs:vac-2ab1 ;
+    vpa:requestFor era-vta:V-2026-2ab1 ;
+    rdfs:comment "ADR-013 item 3.2 — FRMCS + ETCS combined intervention expressed as ERA va-m2m authorisation graph(s)"@en .
+era-vta:V-2026-2ab1 a era:VehicleTypeAuthorisation ;
+    dcterms:replaces era-vta:V-2019-0001 ;
+    vpa:requestedIn era-vtap:va-2ab1 .
+
+era-vtacs:vac-2ab1 a era:VehicleTypeAuthorisationCase ;
+    vpa:permissionType era-va-authcase:NEW ;
+    era:typeRegistrationMethod "New version of an existing vehicle type (Decision 2011/665/EU, Annex II)"@en ;
+    rdfs:label "New authorisation — FRMCS voice function of the cab radio (Variant 4a/4b) — MCX group/emergency call over FRMCS, GSM-R path retained + ETCS Variant 3 — Euroradio to OBAPP, RBC sessions over FRMCS, EDOR bypass retained"@en ;
+    era:areaOfUse <http://publications.europa.eu/resource/authority/country/DEU> ;
+    era:authorisingMemberState <http://publications.europa.eu/resource/authority/country/DEU> ;
+    vpa:concerns eratv:11-000-0001-0-001 , evrs:vs-2ab1 ;
+    dcterms:requires applicant:change-2a , applicant:change-2b ;
+    vpa:constitutes era-vtap:va-2ab1 .
+
+applicant:change-2a a vpa:EvidenceDocument ;
+    rdfs:label "(I) 13. Description of the changes — stage 2a"@en ;
+    dcterms:identifier "CHG-2a-2026" ;
+    dcterms:issued "2026-09-19"^^xsd:date ;
+    dcterms:creator orgr:Lille_Applicant ;
+    dcterms:description "Cab radio Variant 4a/4b (UIC TOBA-7540 v1.0.0 §8.3): the GSM-R cab radio gains an FRMCS voice function over the OBAPP interface (Variant 4a) or is replaced by a dual GSM-R/FRMCS cab radio (4b); MCX railway emergency call (Notruf) via FRMCS; FRMCS on-board gateway + radio module PC1 (31 dBm, TS 38.101-1 V20.0.0 Table 6.2.1-1 NOTE 8); declared post-connector antenna gain per TS 38.101-1 Annex M; strict separation from the ETCS radio kept (TOBA-7540 §8.1.1)."@en .
+# NoBo CCS on-board certificate (CLD) with the CCS additional function (Annex I-15) and the TSI sections checked (Annex I-16.1)
+era-vta:cab-2a-2ab1 a era:CABEvidence ;
+    rdfs:label "NoBo evidence — CCS on-board, stage 2a"@en ;
+    rdfs:member applicant:cld-2a-2ab1 ;
+    vpa:supportsCase era-vtacs:vac-2ab1 .
+applicant:cld-2a-2ab1 a era:CertificationLevelDocument ;
+    dcterms:identifier "CLD-CCS-OB-2a-2ab1" ;
+    dcterms:type era-cld-types:2 ;
+    dcterms:issued "2026-09-19"^^xsd:date ;
+    dcterms:creator orgr:EBC_NoBo ;
+    vpa:checkedCompliance applicant:check-2a-2ab1 .
+applicant:check-2a-2ab1 a era:CABAssessmentCheck ;
+    vpa:checkedRequirement <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    vpa:checkedSection era-tsi:ccs-2023-section-4.2.4 , era-tsi:ccs-2023-section-4.2.5.1 , era-tsi:ccs-2023-section-4.2.13.2 ;
+    era:isOptional false ;
+    vpa:withRestriction applicant:addition-2a-2ab1 .
+applicant:addition-2a-2ab1 a era:CABAddition ;
+    dcterms:type era-tsi:ccs-2023-section-4.2.4 ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    dcterms:description "FRMCS voice function of the cab radio (Variant 4a/4b) — MCX group/emergency call over FRMCS, GSM-R path retained"@en .
+
+applicant:change-2b a vpa:EvidenceDocument ;
+    rdfs:label "(I) 13. Description of the changes — stage 2b"@en ;
+    dcterms:identifier "CHG-2b-2026" ;
+    dcterms:issued "2026-09-19"^^xsd:date ;
+    dcterms:creator orgr:Lille_Applicant ;
+    dcterms:description "ETCS Variant 3 (UIC TOBA-7540 v1.0.0 §8.3): the ETCS on-board (EVC) Euroradio is modified to the OBAPP interface towards the FRMCS on-board gateway; CS/PS bypass to the GSM-R EDOR retained; RBC sessions over FRMCS (Subset-026 B4 packets 31/32); no change to the voice cab radio."@en .
+# NoBo CCS on-board certificate (CLD) with the CCS additional function (Annex I-15) and the TSI sections checked (Annex I-16.1)
+era-vta:cab-2b-2ab1 a era:CABEvidence ;
+    rdfs:label "NoBo evidence — CCS on-board, stage 2b"@en ;
+    rdfs:member applicant:cld-2b-2ab1 ;
+    vpa:supportsCase era-vtacs:vac-2ab1 .
+applicant:cld-2b-2ab1 a era:CertificationLevelDocument ;
+    dcterms:identifier "CLD-CCS-OB-2b-2ab1" ;
+    dcterms:type era-cld-types:2 ;
+    dcterms:issued "2026-09-19"^^xsd:date ;
+    dcterms:creator orgr:EBC_NoBo ;
+    vpa:checkedCompliance applicant:check-2b-2ab1 .
+applicant:check-2b-2ab1 a era:CABAssessmentCheck ;
+    vpa:checkedRequirement <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    vpa:checkedSection era-tsi:ccs-2023-section-4.2.6.2 , era-tsi:ccs-2023-section-4.2.5.1 ;
+    era:isOptional false ;
+    vpa:withRestriction applicant:addition-2b-2ab1 .
+applicant:addition-2b-2ab1 a era:CABAddition ;
+    dcterms:type era-tsi:ccs-2023-section-4.2.6.2 ;
+    dcterms:source <http://data.europa.eu/eli/reg_impl/2023/1695/oj> ;
+    dcterms:description "ETCS Variant 3 — Euroradio to OBAPP, RBC sessions over FRMCS, EDOR bypass retained"@en .
+
+# === national rules (NNTR) certificate by a DeBo and CSM risk assessment by an AsBo, Annex I-16.4 / I-8 ===
+era-vta:nntr-2ab1 a era:CABEvidence ; rdfs:label "DeBo evidence — national rules (Germany), stage 2ab1"@en ;
+    rdfs:member applicant:nntr-2ab1 ; vpa:supportsCase era-vtacs:vac-2ab1 .
+applicant:nntr-2ab1 a vpa:EvidenceDocument ; dcterms:type era-evidence-types:NNTRCertificate ;
+    dcterms:identifier "NNTR-DE-2ab1-2026" ; dcterms:issued "2026-09-19"^^xsd:date ; dcterms:creator orgr:EBC_DeBo .
+era-vta:csm-2ab1 a era:CABEvidence ; rdfs:label "AsBo evidence — CSM RA safety assessment report, stage 2ab1"@en ;
+    rdfs:member applicant:csm-2ab1 ; vpa:supportsCase era-vtacs:vac-2ab1 .
+applicant:csm-2ab1 a vpa:EvidenceDocument ; dcterms:identifier "CSM-RA-2ab1-2026" ; dcterms:issued "2026-09-19"^^xsd:date ; dcterms:creator orgr:AsBo_DE .
+
+orgr:AsBo_DE a era:OrganisationRole ; era:organisationCode "ASBO-0000" ;
+    era:roleOf <http://data.europa.eu/949/organisations/bodies/eradis/DE-53175-6> ; era:hasOrganisationRole era-organisation-roles:ASBO .
+orgr:EBC_DeBo era:organisationCode "DB-0000" .
+
+era-vr:prereserve-0 a era:VehicleRegistrationCase ; vpa:permissionType era-vr-regcase:PRERESERVE ; vpa:concerns evrs:vs-2ab1 .
+
+# === EC declaration of verification, CCS on-board subsystem, stage 2ab1 — requires the NoBo CLD(s), the DeBo NNTR certificate and the AsBo CSM report ===
+applicant:ecdov-2ab1-bag a vpa:Evidence ; rdfs:member applicant:ecdov-2ab1 ; vpa:supportsCase era-vtacs:vac-2ab1 .
+applicant:ecdov-2ab1 a era:ECDeclaration ; dcterms:type era-ecd-types:ECDoV ;
+    dcterms:identifier "DE/ECDOV/CCS-OB/2ab1/2026" ; dcterms:issued "2026-09-19"^^xsd:date ; dcterms:creator orgr:Lille_Applicant ;
+    dcterms:requires applicant:cld-2a-2ab1 , applicant:cld-2b-2ab1 , applicant:nntr-2ab1 , applicant:csm-2ab1 , era-vta:nntr-2ab1 , era-vta:csm-2ab1 .
