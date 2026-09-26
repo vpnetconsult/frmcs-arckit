@@ -1,0 +1,287 @@
+Validation Report
+Conforms: False
+Results (43):
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: [ sh:datatype xsd:string ; sh:maxCount Literal("1", datatype=xsd:integer) ; sh:minCount Literal("1", datatype=xsd:integer) ; sh:name Literal("taxID") ; sh:path gr:taxID ]
+	Focus Node: rorg1:Example
+	Result Path: gr:taxID
+	Message: Less than 1 values on rorg1:Example->gr:taxID
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-7-8c
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( org:hasSite org:hasRegisteredSite ( org:hasUnit org:hasSite ) ) ] org:siteAddress )
+	Message: The holder organisation should provide at least one site address, directly or through an organisational unit site.
+Constraint Violation in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-7-8c
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( org:hasSite org:hasRegisteredSite ( org:hasUnit org:hasSite ) ) ] org:siteAddress )
+	Message: The holder organisation should provide at least one site address, directly or through an organisational unit site.
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-1-info
+	Message: Vehicle type identification (http://data.europa.eu/949/vehicleType/11-000-0001-0-001): '11-000-0001-0-001' (I-10.1).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-5-info
+	Message: Vehicle type name (http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'Illustrative electric multiple unit, GSM-R-equipped, FRMCS-prepared (ADR-013 stage 1 done)' (I-10.5).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-1-info
+	Message: Vehicle type identification (http://data.europa.eu/949/vehicleType/11-000-0001-0-001): '11-000-0001-0-001' (I-10.1).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-5-info
+	Message: Vehicle type name (http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'Illustrative electric multiple unit, GSM-R-equipped, FRMCS-prepared (ADR-013 stage 1 done)' (I-10.5).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-2-3
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-2b-info
+	Message: Vehicle type (http://data.europa.eu/949/vehicleType/11-000-0001-0-001) is considered 4RP, with version/variant identifier '001' (I-10.2).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-2-3
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-2b-info
+	Message: Vehicle type (http://data.europa.eu/949/vehicleType/11-000-0001-0-001) is considered 4RP, with version/variant identifier '001' (I-10.2).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-4
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-4a
+	Message: If permissionType is FIRST, vehicle type (http://data.europa.eu/949/vehicleType/11-000-0001-0-001) must not have dcterms:issued. Found '2019-06-30' (Annex I-10.4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-4
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-4b-info
+	Message: (I) 10.4. Date of record in ERATV (not applicable for first authorisation) (http://data.europa.eu/949/vehicleType/11-000-0001-0-001): '2019-06-30' (I-10.4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-7-8
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-7-info
+	Message: 10.7.Category (specified according to Decision 2011/665/EU Annex II)(http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'http://data.europa.eu/949/concepts/vehicle-types/eratv/tractionVehicles' (I-10.7).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-7-8
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-10-8-info
+	Message: 10.8.Subcategory (specified according to Decision 2011/665/EU Annex II)(http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'http://data.europa.eu/949/concepts/vehicle-types/eratv/multipleUnit' (I-10.8).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-7-8
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-7-info
+	Message: 10.7.Category (specified according to Decision 2011/665/EU Annex II)(http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'http://data.europa.eu/949/concepts/vehicle-types/eratv/tractionVehicles' (I-10.7).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-10-7-8
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-10-8-info
+	Message: 10.8.Subcategory (specified according to Decision 2011/665/EU Annex II)(http://data.europa.eu/949/vehicleType/11-000-0001-0-001): 'http://data.europa.eu/949/concepts/vehicle-types/eratv/multipleUnit' (I-10.8).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-11
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-11-0
+	Message: No era:Vehicle could be resolved from vpa:concerns for this case (directly or via era:VehicleSet/rdfs:member). At least one concerned vehicle is expected (Annex I-11).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-11
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-11-2
+	Message: Vehicle (http://data.europa.eu/949/vehicle/94800000010-0, number '948000000100') is pre-reserved: a VehicleRegistrationCase in scope has `vpa:permissionType era-vr-regcase:PRERESERVE` (I-11.1).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-11
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-11-2
+	Message: Vehicle (http://data.europa.eu/949/vehicle/94800000011-8, number '948000000118') is pre-reserved: a VehicleRegistrationCase in scope has `vpa:permissionType era-vr-regcase:PRERESERVE` (I-11.1).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-13
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-13-1-info
+	Message: NEW authorisation case (http://data.europa.eu/949/vehicleType/authorisation/case/vac-2a) links description of changes resource 'https://uri-for-applicant.example/change-2a' via dcterms:requires (Annex I-13).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-15
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-15-1
+	Message: No reachable CABAddition was found on CertificationLevelDocuments linked either directly through supporting CABEvidence or indirectly through ECDeclarations and their required certification evidence (Annex I-15). This can indicate either missing CCS additional functions or incomplete ERADIS+ complementing.
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-15
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-15-2
+	Message: CAB additional function on CertificationLevelDocument (https://uri-for-applicant.example/cld-2a-2a, identifier: CLD-CCS-OB-2a-2a) via check https://uri-for-applicant.example/check-2a-2a, optional flag false, type http://data.europa.eu/949/concepts/tsi-sections/ccs-2023-section-4.2.4, source http://data.europa.eu/eli/reg_impl/2023/1695/oj, description 'FRMCS voice function of the cab radio (Variant 4a/4b) — MCX group/emergency call over FRMCS, GSM-R path retained' and conditions 'http://data.europa.eu/949/vehicleType/authorisation/case/vac-2a' (Annex I-15).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-1
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-1-3
+	Message: (I) 16.1. TSI requirement http://data.europa.eu/eli/reg_impl/2023/1695/oj found on CLD https://uri-for-applicant.example/cld-2a-2a in evidence http://data.europa.eu/949/vehicleType/authorisation/cab-2a-2a for authorising member state http://publications.europa.eu/resource/authority/country/DEU (Annex I-16-1).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-3
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-3-2
+	Message: (I) 16.3. Requirement http://data.europa.eu/eli/reg_impl/2023/1695/oj referenced by check https://uri-for-applicant.example/check-2a-2a on CLD https://uri-for-applicant.example/cld-2a-2a for authorising member state http://publications.europa.eu/resource/authority/country/DEU (Annex I-16-3).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-4
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-16-4-1
+	Message: (I) 16.4. No national-rules evidence document (NNTR certificate or CSM/AsBo-role document) was found directly supporting this case or referenced via an ECDeclaration (Annex I-16-4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-4
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-4-2
+	Message: (I) 16.4. National-rules evidence document https://uri-for-applicant.example/csm-2a (identifier: CSM-RA-2a-2026) in evidence http://data.europa.eu/949/vehicleType/authorisation/csm-2a: requirement {?req}, section {?section} (Annex I-16-4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-4
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-4-2
+	Message: (I) 16.4. National-rules evidence document https://uri-for-applicant.example/csm-2a (identifier: CSM-RA-2a-2026) in evidence https://uri-for-applicant.example/ecdov-2a-bag: requirement {?req}, section {?section} (Annex I-16-4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-4
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-4-2
+	Message: (I) 16.4. National-rules evidence document https://uri-for-applicant.example/nntr-2a (identifier: NNTR-DE-2a-2026) in evidence http://data.europa.eu/949/vehicleType/authorisation/nntr-2a: requirement {?req}, section {?section} (Annex I-16-4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-16-4
+	Focus Node: era-vtacs:vac-2a
+	Value Node: era-vtacs:vac-2a
+	Source Constraint: eralex-sh:AnnexI-16-4-2
+	Message: (I) 16.4. National-rules evidence document https://uri-for-applicant.example/nntr-2a (identifier: NNTR-DE-2a-2026) in evidence https://uri-for-applicant.example/ecdov-2a-bag: requirement {?req}, section {?section} (Annex I-16-4).
+Constraint Violation in SPARQLConstraintComponent (http://www.w3.org/ns/shacl#SPARQLConstraintComponent):
+	Severity: sh:Violation
+	Source Shape: eralex-sh:AnnexI-7
+	Focus Node: era-vtacs:vac-2019-0001
+	Value Node: era-vtacs:vac-2019-0001
+	Source Constraint: eralex-sh:AnnexI-7-2
+	Message: (I) 7: If permissionType is FA, EXT, RENEW or C2T, the requested authorisation must have a vehicleTypeAuthorisationHolder.
+Validation Result in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-6
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:hasOrganisationRole )
+	Message: (I) 7: Holder role should be set to organisation role Holder (era:hasOrganisationRole = era-organisation-roles:Holder).
+Validation Result in HasValueConstraintComponent (http://www.w3.org/ns/shacl#HasValueConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-6
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:hasOrganisationRole )
+	Message: (I) 7: Holder role should be set to organisation role Holder (era:hasOrganisationRole = era-organisation-roles:Holder).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-3
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder )
+	Message: (I) 7: The requested authorisation should provide a holder role (era:vehicleTypeAuthorisationHolder).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-3
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder )
+	Message: (I) 7: The requested authorisation should provide a holder role (era:vehicleTypeAuthorisationHolder).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-5
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf )
+	Message: (I) 7: Holder role should identify the holder organisation via era:roleOf.
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-5
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf )
+	Message: (I) 7: Holder role should identify the holder organisation via era:roleOf.
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-6
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:hasOrganisationRole )
+	Message: (I) 7: Holder role should be set to organisation role Holder (era:hasOrganisationRole = era-organisation-roles:Holder).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-6
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:hasOrganisationRole )
+	Message: (I) 7: Holder role should be set to organisation role Holder (era:hasOrganisationRole = era-organisation-roles:Holder).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-7
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:organisationCode )
+	Message: (I) 7: Holder role should provide an organisation code (era:organisationCode).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-7
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:organisationCode )
+	Message: (I) 7: Holder role should provide an organisation code (era:organisationCode).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-8a
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( foaf:name rdfs:label ) ] )
+	Message: The holder organisation should have at least one human-readable identifier (foaf:name or rdfs:label).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-8a
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( foaf:name rdfs:label ) ] )
+	Message: The holder organisation should have at least one human-readable identifier (foaf:name or rdfs:label).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-8b
+	Focus Node: era-vtacs:vac-2019-0001
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( org:hasSite org:hasRegisteredSite ( org:hasUnit org:hasSite ) ) ] )
+	Message: The holder organisation should expose at least one site, either directly (org:hasSite / org:hasRegisteredSite) or through an organisational unit (org:hasUnit/org:hasSite).
+Validation Result in MinCountConstraintComponent (http://www.w3.org/ns/shacl#MinCountConstraintComponent):
+	Severity: sh:Warning
+	Source Shape: eralex-sh:AnnexI-7-8b
+	Focus Node: era-vtacs:vac-2a
+	Result Path: ( vpa:constitutes vpa:requestFor era:vehicleTypeAuthorisationHolder era:roleOf [ sh:alternativePath ( org:hasSite org:hasRegisteredSite ( org:hasUnit org:hasSite ) ) ] )
+	Message: The holder organisation should expose at least one site, either directly (org:hasSite / org:hasRegisteredSite) or through an organisational unit (org:hasUnit/org:hasSite).
