@@ -48,4 +48,5 @@ This repo is a living architecture-decision record set for the GSM-R → FRMCS t
 - `bash scripts/baseline.sh` — cut today's baseline. **First cut of the day lands in `baselines/<date>/`; later cuts land in `baselines/<date>_HHMM/` and the script says so on stderr — read that line rather than assuming where it went.**
 - `ls -d baselines/<date>* | tail -1` — **the day's LATEST freeze.** Use this, not `baselines/<date>/`, whenever you want end-of-day state (see §Daily loop).
 - `bash scripts/baseline.sh 2026-06-25` — cut for a specific date.
+- `python3 scripts/standards-inventory.py` — **regenerate `current/project/18-standards-on-record.md`** from the two evidence logs (`--check` = dry run with the diff of spec ids against the file on disk). The pinning table (`PINNED`), the TR-normalisation set and the non-existent-number exclusions live in the script; add there, never in the generated file. Run it before every freeze that follows a spec fetch.
 - Compare two days: open the two `baselines/<date>/BASELINE.md` files, or `diff` the matrices.
