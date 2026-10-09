@@ -124,7 +124,7 @@ REL_LETTER = {"f": 15, "g": 16, "h": 17, "i": 18, "j": 19, "k": 20, "l": 21}
 
 # 3GPP numbers that are Technical Reports whatever the evidence row wrote ("TS 22.889" is a
 # mis-cite of TR 22.889).  Normalised so one document is one row.
-KNOWN_TR = {"21.905", "22.889", "22.989", "23.700-1", "23.790", "23.794", "28.909", "38.802",
+KNOWN_TR = {"21.905", "22.889", "22.989", "23.700-1", "23.790", "23.794", "28.908", "28.909", "38.802",
             "38.852", "38.853", "38.901"}
 
 # Numbers the evidence log names only to record that NO such deliverable exists
